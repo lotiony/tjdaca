@@ -1,0 +1,26 @@
+﻿@page "/students/{stu_idx}"
+@using tjdaca.Data
+
+
+<PageTitle>학생 관리</PageTitle>
+
+<h3>학생 관리</h3>
+
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">학생 추가 / 수정</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudTextField @bind-Value="student.StuName" Label="학생 이름" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+        <MudTextField @bind-Value="student.StudentPhone" Label="학생 연락처" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+        <MudTextField @bind-Value="student.Parent" Label="학부모 이름" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+        <br />
+        <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="Save">Save Customer</MudButton>
+    </MudCardContent>
+</MudCard>
+
+
+@code {
+}

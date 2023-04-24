@@ -1,0 +1,51 @@
+﻿@page "/option"
+@using tjdaca.Data
+@inject tjdaca.Services.IOptionService optionService
+@inject MudBlazor.ISnackbar snackBar
+
+<PageTitle>입력 옵션 관리</PageTitle>
+
+<h3>입력 옵션 관리</h3>
+
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">옵션 등록 / 수정</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudTextField @bind-Value="option.OptType" Label="옵션구분" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+        <MudTextField @bind-Value="option.OptValue" Label="옵션값" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+        <MudNumericField @bind-Value="option.OptOrder" Label="정렬순서" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
+        <br />
+        <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="Save">저장</MudButton>
+    </MudCardContent>
+</MudCard>
+<br />
+<MudTable Elevation="25" Items="GetOptionList()" Filter="new Func<Options, bool>(Search)" @bind-option="option">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">옵션 목록</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString" Placeholder="Search for Options..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+
+    <HeaderContent>
+        <MudTh>옵션 구분</MudTh>
+        <MudTh>옵션값</MudTh>
+        <MudTh>정렬순서</MudTh>
+        <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="OptType">@context.OptType</MudTd>
+        <MudTd DataLabel="OptValue">@context.OptValue</MudTd>
+        <MudTd DataLabel="OptOrder">@context.OptOrder</MudTd>
+        <MudTd DataLabel="">
+            <MudFab @onclick="@(()=>Edit(@context.OIdx))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
+            <MudFab @onclick="@(()=>Delete(@context.OIdx))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
+        </MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code {
+
+}

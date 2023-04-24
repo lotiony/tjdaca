@@ -1,0 +1,37 @@
+﻿@page "/students"
+@using tjdaca.Data
+@inject tjdaca.Services.IStudentService studentService
+@inject MudBlazor.ISnackbar snackBar
+
+<PageTitle>학생 관리</PageTitle>
+
+<h3>학생 관리</h3>
+
+<MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddStudent">신규학생 등록</MudButton>
+
+<MudTable Elevation="25" Items="GetStudentList()" Filter="new Func<Students, bool>(Search)">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">학생 목록</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString" Placeholder="Search for Students..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+
+    <HeaderContent>
+        <MudTh>학생 이름</MudTh>
+        <MudTh>학생 연락처</MudTh>
+        <MudTh>학부모 이름</MudTh>
+        <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="StuName">@context.StuName</MudTd>
+        <MudTd DataLabel="StudentPhone">@context.StudentPhone</MudTd>
+        <MudTd DataLabel="Parent">@context.Parent</MudTd>
+        <MudTd DataLabel="">
+            <MudFab @onclick="@(()=>Edit(@context.StuIdx))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
+            <MudFab @onclick="@(()=>Delete(@context.StuIdx))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
+        </MudTd>
+    </RowTemplate>
+</MudTable>
+
+@code {
+}
