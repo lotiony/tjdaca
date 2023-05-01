@@ -9,7 +9,6 @@ namespace tjdaca.Pages
     public partial class StudentDetail : ComponentBase
     {
         [Inject] NavigationManager NavManager { get; set; }
-        [Inject] IStudentService studentService { get; set; }
         [Inject] MudBlazor.ISnackbar snackBar { get; set; }
 
         [Parameter]

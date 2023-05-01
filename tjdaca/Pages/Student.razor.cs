@@ -2,6 +2,7 @@
 using MudBlazor;
 using System;
 using tjdaca.Data;
+using tjdaca.Services;
 
 namespace tjdaca.Pages
 {
@@ -35,7 +36,7 @@ namespace tjdaca.Pages
         }
         private void Edit(int id)
         {
-            NavManager.NavigateTo("/students/" + id);
+            NavManager.NavigateTo("/students/detail/" + id);
         }
         private async void Delete(int id)
         {
@@ -53,7 +54,7 @@ namespace tjdaca.Pages
 
         private void AddStudent()
         {
-            NavManager.NavigateTo("/students/0");
+            NavManager.NavigateTo("/students/detail/0");
         }
     }
 }
