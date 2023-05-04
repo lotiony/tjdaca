@@ -13,30 +13,31 @@ namespace tjdaca.Services
 
         public void DeleteStudent(int id)
         {
-            var student = _dbContext.Students.FirstOrDefault(x => x.StuIdx == id);
+            var student = _dbContext.AcaStudents.FirstOrDefault(x => x.StuIdx == id);
             if (student != null)
             {
-                _dbContext.Students.Remove(student);
+                _dbContext.AcaStudents.Remove(student);
                 _dbContext.SaveChanges();
             }
         }
 
-        public Students GetStudentById(int id)
+        public AcaStudents GetStudentById(int id)
         {
-            var student = _dbContext.Students.SingleOrDefault(x => x.StuIdx == id);
+            var student = _dbContext.AcaStudents.SingleOrDefault(x => x.StuIdx == id);
             return student;
         }
 
-        public List<Students> GetStudents()
+        public List<AcaStudents> GetStudents()
         {
-            return _dbContext.Students.ToList();
+            return _dbContext.AcaStudents.ToList();
         }
 
-        public void SaveStudent(Students students)
+        public void SaveStudent(AcaStudents students)
         {
-            if (students.StuIdx == 0) _dbContext.Students.Add(students);
-            else _dbContext.Students.Update(students);
+            if (students.StuIdx == 0) _dbContext.AcaStudents.Add(students);
+            else _dbContext.AcaStudents.Update(students);
             _dbContext.SaveChanges();
         }
+        
     }
 }

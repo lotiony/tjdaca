@@ -1,0 +1,55 @@
+﻿@page "/questions/{mode}/{q_idx}"
+@using tjdaca.Data
+@inject tjdaca.Services.IQuestionService questionService
+@inject IJSRuntime JS
+
+<PageTitle>자기주도학습Q&A</PageTitle>
+
+<h3>학생 질문</h3>
+
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">학습질문 추가 / 수정</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudGrid Spacing="2" Justify="Justify.Center">
+            <MudItem xs="2">
+                <MudTextField @bind-Value="Question.BaseDate" Label="일자" InputType="InputType.Date" Format="yyyy-MM-dd" Margin="Margin.Normal" />
+            </MudItem>
+
+            <MudItem xs="2">
+                <MudSelect @bind-Value="selectedTeacher" T="AcaTeachers" Label="담당선생님" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in teacherList)
+                    {
+                        <MudSelectItem Value="@type">@type.TName</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="2">
+                <MudSelect @bind-Value="selectedStudent" Label="학생이름" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in studentList)
+                    {
+                        <MudSelectItem Value="@type">@type.StuName</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="6">
+                <MudTextField @bind-Value="Question.QSubject" Label="질문연계단원" InputType="InputType.Text" Margin="Margin.Normal" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField @bind-Value="Question.Etc1" Label="기타전달사항" Lines="3" InputType="InputType.Text" Margin="Margin.Normal" />
+            </MudItem>
+
+        </MudGrid>
+        <br />
+        <MudButton Variant="Variant.Filled" Color="Color.Info" StartIcon="@Icons.Material.Filled.Save" OnClick="Save">학생 질문 저장</MudButton>
+        <MudButton Variant="Variant.Filled" Size="Size.Small" OnClick="Cancel">취소</MudButton>
+    </MudCardContent>
+</MudCard>
+
+
+@code {
+}
+

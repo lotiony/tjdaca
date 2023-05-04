@@ -14,6 +14,8 @@ builder.Services.AddMudServices();
 //builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IOptionService, OptionService>();
+builder.Services.AddScoped<IRawdataService, RawdataService>();
+builder.Services.AddScoped<IQuestionService, QuestionService>();
 
 var app = builder.Build();
 

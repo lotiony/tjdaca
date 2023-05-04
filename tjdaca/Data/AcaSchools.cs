@@ -5,11 +5,10 @@ using System.Collections.Generic;
 
 namespace tjdaca.Data
 {
-    public partial class Options
+    public partial class AcaSchools
     {
-        public int OIdx { get; set; }
-        public string OptType { get; set; }
-        public string OptValue { get; set; }
-        public int OptOrder { get; set; }
+        public int SchIdx { get; set; }
+        public string SchName { get; set; }
+        public DateTime? Regdate { get; set; }
     }
 }

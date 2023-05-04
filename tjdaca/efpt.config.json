@@ -15,27 +15,27 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "options",
+         "Name": "aca_options",
          "ObjectType": 0
       },
       {
-         "Name": "questions",
+         "Name": "aca_questions",
          "ObjectType": 0
       },
       {
-         "Name": "rawdata",
+         "Name": "aca_rawdata",
          "ObjectType": 0
       },
       {
-         "Name": "schools",
+         "Name": "aca_schools",
          "ObjectType": 0
       },
       {
-         "Name": "students",
+         "Name": "aca_students",
          "ObjectType": 0
       },
       {
-         "Name": "teachers",
+         "Name": "aca_teachers",
          "ObjectType": 0
       }
    ],

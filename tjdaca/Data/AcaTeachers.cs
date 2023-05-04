@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace tjdaca.Data
 {
-    public partial class Teachers
+    public partial class AcaTeachers
     {
         public int TIdx { get; set; }
         public string TName { get; set; }

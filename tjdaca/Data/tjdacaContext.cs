@@ -9,8 +9,6 @@ namespace tjdaca.Data
 {
     public partial class tjdacaContext : DbContext
     {
-        static public IConfigurationRoot Configuration { get; set; }
-
         public tjdacaContext()
         {
         }
@@ -20,18 +18,19 @@ namespace tjdaca.Data
         {
         }
 
-        public virtual DbSet<Options> Options { get; set; }
-        public virtual DbSet<Questions> Questions { get; set; }
-        public virtual DbSet<Rawdata> Rawdata { get; set; }
-        public virtual DbSet<Schools> Schools { get; set; }
-        public virtual DbSet<Students> Students { get; set; }
-        public virtual DbSet<Teachers> Teachers { get; set; }
+        public virtual DbSet<AcaOptions> AcaOptions { get; set; }
+        public virtual DbSet<AcaQuestions> AcaQuestions { get; set; }
+        public virtual DbSet<AcaRawdata> AcaRawdata { get; set; }
+        public virtual DbSet<AcaSchools> AcaSchools { get; set; }
+        public virtual DbSet<AcaStudents> AcaStudents { get; set; }
+        public virtual DbSet<AcaTeachers> AcaTeachers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql(Configuration.GetConnectionString("MysqlDbConnectionString"), Microsoft.EntityFrameworkCore.ServerVersion.Parse("5.7.38-mysql"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseMySql("server=m.teukjadan.net;database=teukjadan_mobile;uid=tjdaca;pwd=Qwer12345@", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.11.2-mariadb"));
             }
         }
 
@@ -40,12 +39,12 @@ namespace tjdaca.Data
             modelBuilder.UseCollation("utf8mb4_general_ci")
                 .HasCharSet("utf8mb4");
 
-            modelBuilder.Entity<Options>(entity =>
+            modelBuilder.Entity<AcaOptions>(entity =>
             {
                 entity.HasKey(e => e.OIdx)
                     .HasName("PRIMARY");
 
-                entity.ToTable("options");
+                entity.ToTable("aca_options");
 
                 entity.Property(e => e.OIdx)
                     .HasColumnType("int(11)")
@@ -68,12 +67,12 @@ namespace tjdaca.Data
                     .HasDefaultValueSql("'0'");
             });
 
-            modelBuilder.Entity<Questions>(entity =>
+            modelBuilder.Entity<AcaQuestions>(entity =>
             {
                 entity.HasKey(e => e.QIdx)
                     .HasName("PRIMARY");
 
-                entity.ToTable("questions");
+                entity.ToTable("aca_questions");
 
                 entity.Property(e => e.QIdx)
                     .HasColumnType("int(11)")
@@ -81,17 +80,23 @@ namespace tjdaca.Data
 
                 entity.Property(e => e.BaseDate)
                     .HasColumnName("base_date")
-                    .HasDefaultValueSql("'0000-00-00'");
+                    .HasDefaultValueSql("curdate()");
 
                 entity.Property(e => e.Etc1)
                     .HasMaxLength(500)
-                    .HasColumnName("etc1")
-                    .HasDefaultValueSql("'0'");
+                    .HasColumnName("etc1");
+                
+                entity.Property(e => e.TName)
+                    .HasMaxLength(20)
+                    .HasColumnName("t_name");
+                
+                entity.Property(e => e.StuName)
+                    .HasMaxLength(20)
+                    .HasColumnName("stu_name");
 
                 entity.Property(e => e.QSubject)
                     .HasMaxLength(500)
-                    .HasColumnName("q_subject")
-                    .HasDefaultValueSql("'0'");
+                    .HasColumnName("q_subject");
 
                 entity.Property(e => e.RegDate)
                     .HasColumnType("datetime")
@@ -99,21 +104,19 @@ namespace tjdaca.Data
 
                 entity.Property(e => e.StuIdx)
                     .HasColumnType("int(11)")
-                    .HasColumnName("stu_idx")
-                    .HasDefaultValueSql("'0'");
+                    .HasColumnName("stu_idx");
 
                 entity.Property(e => e.TIdx)
                     .HasColumnType("int(11)")
-                    .HasColumnName("t_idx")
-                    .HasDefaultValueSql("'0'");
+                    .HasColumnName("t_idx");
             });
 
-            modelBuilder.Entity<Rawdata>(entity =>
+            modelBuilder.Entity<AcaRawdata>(entity =>
             {
                 entity.HasKey(e => e.RIdx)
                     .HasName("PRIMARY");
 
-                entity.ToTable("rawdata");
+                entity.ToTable("aca_rawdata");
 
                 entity.Property(e => e.RIdx)
                     .HasColumnType("int(11)")
@@ -127,9 +130,7 @@ namespace tjdaca.Data
                     .HasMaxLength(1)
                     .HasColumnName("attendance");
 
-                entity.Property(e => e.BaseDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("base_date");
+                entity.Property(e => e.BaseDate).HasColumnName("base_date");
 
                 entity.Property(e => e.ClassGrade)
                     .HasMaxLength(50)
@@ -217,6 +218,10 @@ namespace tjdaca.Data
                     .HasColumnType("int(11)")
                     .HasColumnName("stu_idx");
 
+                entity.Property(e => e.StuName)
+                    .HasMaxLength(50)
+                    .HasColumnName("stu_Name");
+
                 entity.Property(e => e.TIdx)
                     .HasColumnType("int(11)")
                     .HasColumnName("t_idx");
@@ -230,12 +235,12 @@ namespace tjdaca.Data
                     .HasColumnName("textbook_source");
             });
 
-            modelBuilder.Entity<Schools>(entity =>
+            modelBuilder.Entity<AcaSchools>(entity =>
             {
                 entity.HasKey(e => e.SchIdx)
                     .HasName("PRIMARY");
 
-                entity.ToTable("schools");
+                entity.ToTable("aca_schools");
 
                 entity.Property(e => e.SchIdx)
                     .HasColumnType("int(11)")
@@ -250,12 +255,12 @@ namespace tjdaca.Data
                     .HasColumnName("sch_name");
             });
 
-            modelBuilder.Entity<Students>(entity =>
+            modelBuilder.Entity<AcaStudents>(entity =>
             {
                 entity.HasKey(e => e.StuIdx)
                     .HasName("PRIMARY");
 
-                entity.ToTable("students");
+                entity.ToTable("aca_students");
 
                 entity.Property(e => e.StuIdx)
                     .HasColumnType("int(11)")
@@ -286,11 +291,11 @@ namespace tjdaca.Data
                     .HasColumnName("cognitive_pathway");
 
                 entity.Property(e => e.Etc1)
-                    .HasMaxLength(100)
+                    .HasMaxLength(500)
                     .HasColumnName("etc1");
 
                 entity.Property(e => e.Etc2)
-                    .HasMaxLength(100)
+                    .HasMaxLength(500)
                     .HasColumnName("etc2");
 
                 entity.Property(e => e.Etc3)
@@ -398,12 +403,12 @@ namespace tjdaca.Data
                     .HasColumnName("zipcode");
             });
 
-            modelBuilder.Entity<Teachers>(entity =>
+            modelBuilder.Entity<AcaTeachers>(entity =>
             {
                 entity.HasKey(e => e.TIdx)
                     .HasName("PRIMARY");
 
-                entity.ToTable("teachers");
+                entity.ToTable("aca_teachers");
 
                 entity.Property(e => e.TIdx)
                     .HasColumnType("int(11)")
@@ -411,7 +416,8 @@ namespace tjdaca.Data
 
                 entity.Property(e => e.Regdate)
                     .HasColumnType("datetime")
-                    .HasColumnName("regdate");
+                    .HasColumnName("regdate")
+                    .HasDefaultValueSql("current_timestamp()");
 
                 entity.Property(e => e.TName)
                     .HasMaxLength(20)

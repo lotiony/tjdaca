@@ -1,0 +1,51 @@
+﻿@page "/questions"
+@using tjdaca.Class;
+@using tjdaca.Data
+@inject tjdaca.Services.IQuestionService questionService
+@inject MudBlazor.ISnackbar snackBar
+<style>
+    .mud-table-sticky-header * .mud-table-root .mud-table-head * .mud-table-cell {
+        height: 45px;
+        background: gainsboro;
+    }
+</style>
+
+<PageTitle>자기주도학습Q&A</PageTitle>
+
+<h3>자기주도학습Q&A</h3>
+
+<MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddQuestion"> 등록</MudButton>
+
+<MudTable Elevation="25" Items="GetQuestionList()" Filter="new Func<AcaQuestions, bool>(Search)" RowsPerPage="20" HorizontalScrollbar="true" FixedHeader="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">학생 검색</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString" Placeholder="Search for Students..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+
+    <HeaderContent>
+        <MudTh>수정/삭제</MudTh>
+        <MudTh>일자</MudTh>
+        <MudTh>담당선생님</MudTh>
+        <MudTh>학생 이름</MudTh>
+        <MudTh>질문 연계 단원</MudTh>
+        <MudTh>기타전달사항</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="수정/삭제">
+            <MudFab @onclick="@(()=>Edit(@context.QIdx))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
+            <MudFab @onclick="@(()=>Delete(@context.QIdx))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
+        </MudTd>
+        <MudTd DataLabel="일자">@context.BaseDate.ToString("yy/MM/dd")</MudTd>
+        <MudTd DataLabel="담당선생님">@context.TName</MudTd>
+        <MudTd DataLabel="학생 이름">@context.StuName</MudTd>
+        <MudTd DataLabel="질문 연계 단원">@context.QSubject</MudTd>
+        <MudTd DataLabel="기타전달사항">@context.Etc1.TextShorten(50);</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+@code {
+}

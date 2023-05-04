@@ -13,34 +13,40 @@ namespace tjdaca.Services
 
         public void DeleteOption(int id)
         {
-            var option = _dbContext.Options.FirstOrDefault(x => x.OIdx == id);
+            var option = _dbContext.AcaOptions.FirstOrDefault(x => x.OIdx == id);
             if (option != null)
             {
-                _dbContext.Options.Remove(option);
+                _dbContext.AcaOptions.Remove(option);
                 _dbContext.SaveChanges();
             }
         }
 
-        public Options GetOptionById(int id)
+        public AcaOptions GetOptionById(int id)
         {
-            var option = _dbContext.Options.SingleOrDefault(x => x.OIdx == id);
+            var option = _dbContext.AcaOptions.SingleOrDefault(x => x.OIdx == id);
             return option;
         }
 
-        public List<Options> GetOptions()
+        public List<AcaOptions> GetOptions()
         {
-            return _dbContext.Options.ToList();
+            return _dbContext.AcaOptions.ToList();
         }
-        public List<Options> GetOptions(string optType)
+        public List<AcaOptions> GetOptions(string optType)
         {
-            return _dbContext.Options.Where(x=> x.OptType.Equals(optType)).ToList();
+            return _dbContext.AcaOptions.Where(x=> x.OptType.Equals(optType)).OrderBy(x=> x.OptOrder).ToList();
         }
 
-        public void SaveOption(Options Options)
+        public void SaveOption(AcaOptions Options)
         {
-            if (Options.OIdx == 0) _dbContext.Options.Add(Options);
-            else _dbContext.Options.Update(Options);
+            if (Options.OIdx == 0) _dbContext.AcaOptions.Add(Options);
+            else _dbContext.AcaOptions.Update(Options);
             _dbContext.SaveChanges();
         }
+
+        public List<string> GetTeachers()
+        {
+            return _dbContext.AcaTeachers.Select(x=> x.TName).ToList();
+        }
+     
     }
 }

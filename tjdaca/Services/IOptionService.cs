@@ -4,10 +4,11 @@ namespace tjdaca.Services
 {
     public interface IOptionService
     {
-        List<Options> GetOptions();
-        List<Options> GetOptions(string optType);
-        Options GetOptionById(int id);
-        void SaveOption(Options option);
+        List<AcaOptions> GetOptions();
+        List<string> GetTeachers();
+        List<AcaOptions> GetOptions(string optType);
+        AcaOptions GetOptionById(int id);
+        void SaveOption(AcaOptions option);
         void DeleteOption(int id);
     }
 }

@@ -2,6 +2,7 @@
 @using tjdaca.Data
 @inject tjdaca.Services.IOptionService optionService
 @inject MudBlazor.ISnackbar snackBar
+@inject IDialogService DialogService
 
 <PageTitle>입력 옵션 관리</PageTitle>
 
@@ -22,7 +23,7 @@
     </MudCardContent>
 </MudCard>
 <br />
-<MudTable Elevation="25" Items="GetOptionList()" Filter="new Func<Options, bool>(Search)" @bind-option="option">
+<MudTable Elevation="25" Items="GetOptionList()" Filter="new Func<AcaOptions, bool>(Search)" @bind-option="option">
     <ToolBarContent>
         <MudText Typo="Typo.h6">옵션 목록</MudText>
         <MudSpacer />
@@ -33,13 +34,13 @@
         <MudTh>옵션 구분</MudTh>
         <MudTh>옵션값</MudTh>
         <MudTh>정렬순서</MudTh>
-        <MudTh>Actions</MudTh>
+        <MudTh>수정/삭제</MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="OptType">@context.OptType</MudTd>
-        <MudTd DataLabel="OptValue">@context.OptValue</MudTd>
-        <MudTd DataLabel="OptOrder">@context.OptOrder</MudTd>
-        <MudTd DataLabel="">
+        <MudTd DataLabel="옵션 구분">@context.OptType</MudTd>
+        <MudTd DataLabel="옵션값">@context.OptValue</MudTd>
+        <MudTd DataLabel="정렬순서">@context.OptOrder</MudTd>
+        <MudTd DataLabel="수정/삭제">
             <MudFab @onclick="@(()=>Edit(@context.OIdx))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
             <MudFab @onclick="@(()=>Delete(@context.OIdx))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
         </MudTd>

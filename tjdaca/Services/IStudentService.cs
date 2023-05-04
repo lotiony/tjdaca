@@ -4,9 +4,9 @@ namespace tjdaca.Services
 {
     public interface IStudentService
     {
-        List<Students> GetStudents();
-        Students GetStudentById(int id);
-        void SaveStudent(Students students);
+        List<AcaStudents> GetStudents();
+        AcaStudents GetStudentById(int id);
+        void SaveStudent(AcaStudents students);
         void DeleteStudent(int id);
     }
 }

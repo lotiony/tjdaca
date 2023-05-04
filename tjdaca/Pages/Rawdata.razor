@@ -1,0 +1,105 @@
+﻿@page "/rawdata/{tid}"
+@using tjdaca.Class;
+@using tjdaca.Data
+@inject tjdaca.Services.IRawdataService rawdataService
+@inject MudBlazor.ISnackbar snackBar
+
+<style>
+    .mud-table-sticky-header * .mud-table-root .mud-table-head * .mud-table-cell { height:45px; background: gainsboro;}
+</style>
+<PageTitle>상담일지 관리</PageTitle>
+
+<h3>상담일지 목록 관리</h3>
+
+<MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddRawdata"> 상담일지 등록</MudButton>
+
+<MudTable Elevation="25" Items="GetRawdataList()" Filter="new Func<AcaRawdata, bool>(Search)" RowsPerPage="20" HorizontalScrollbar="true" Breakpoint="Breakpoint.Sm" FixedHeader="true">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">학생 검색</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString" Placeholder="Search for Students..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+@*    <ColGroup>
+        <col style="width: 120px;" />
+        <col style="width: 200px;" />
+        <col style="width: 120px;" />
+        <col style="width: 140px;" />
+        <col style="width: 150px;" />
+        <col style="width: 80px;" />
+        <col />
+        <col style="width: 120px;" />
+    </ColGroup>*@
+    <HeaderContent>
+        <MudTh>수정/삭제</MudTh>
+        <MudTh>일자</MudTh>
+        <MudTh>반명</MudTh>
+        <MudTh>학생 이름</MudTh>
+        <MudTh>학교구분</MudTh>
+        <MudTh>학교명</MudTh>
+        <MudTh>학년</MudTh>
+        <MudTh>출석여부</MudTh>
+        <MudTh>결석사유</MudTh>
+        <MudTh>학교시험성적</MudTh>
+        <MudTh>수업내용</MudTh>
+        <MudTh>수업학년-학기</MudTh>
+        <MudTh>과제내용과 양</MudTh>
+        <MudTh>이전과제량</MudTh>
+        <MudTh>과제수행량</MudTh>
+        <MudTh>과제정답</MudTh>
+        <MudTh>과제이행정도</MudTh>
+        <MudTh>과제정답률</MudTh>
+        <MudTh>테스트단원</MudTh>
+        <MudTh>교재출처</MudTh>
+        <MudTh>난이도</MudTh>
+        <MudTh>일일테스트문항수</MudTh>
+        <MudTh>일일테스트정답수</MudTh>
+        <MudTh>일일테스트정답률</MudTh>
+        <MudTh>클리닉데이차수/학습내용</MudTh>
+        <MudTh>클리닉테스트문항수</MudTh>
+        <MudTh>클리닉테스트정답수</MudTh>
+        <MudTh>클리닉테스트정답률</MudTh>
+        <MudTh>월간 상담내용</MudTh>
+        <MudTh>특이사항</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="수정/삭제">
+            <MudFab @onclick="@(()=>Edit(@context.RIdx))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
+            <MudFab @onclick="@(()=>Delete(@context.RIdx))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
+        </MudTd>
+        <MudTd DataLabel="일자">@context.BaseDate.ToString("yy/MM/dd")</MudTd>
+        <MudTd DataLabel="반명">@context.ClassName</MudTd>
+        <MudTd DataLabel="학생이름">@context.StuName</MudTd>
+        <MudTd DataLabel="학교구분">@context.SchType</MudTd>
+        <MudTd DataLabel="학교명">@context.SchName</MudTd>
+        <MudTd DataLabel="학년">@context.Grade</MudTd>
+        <MudTd DataLabel="출석여부">@context.Attendance</MudTd>
+        <MudTd DataLabel="결석사유">@context.AbsenceReason.TextShorten(20)</MudTd>
+        <MudTd DataLabel="학교시험성적">@context.SchAchievement</MudTd>
+        <MudTd DataLabel="수업내용">@context.ClassSubject</MudTd>
+        <MudTd DataLabel="수업학년-학기">@context.ClassGrade</MudTd>
+        <MudTd DataLabel="과제내용과 양">@context.Homework</MudTd>
+        <MudTd DataLabel="이전과제량">@context.HomeworkPrev</MudTd>
+        <MudTd DataLabel="과제수행량">@context.HomeworkPerform</MudTd>
+        <MudTd DataLabel="과제정답">@context.HomeworkCorrect</MudTd>
+        <MudTd DataLabel="과제이행정도">@context.HomeworkProgress</MudTd>
+        <MudTd DataLabel="과제정답률">@context.HomeworkRatio</MudTd>
+        <MudTd DataLabel="테스트단원">@context.TestSubject</MudTd>
+        <MudTd DataLabel="교재출처">@context.TextbookSource</MudTd>
+        <MudTd DataLabel="난이도">@context.Difficulty</MudTd>
+        <MudTd DataLabel="일일테스트문항수">@context.DaliyCount</MudTd>
+        <MudTd DataLabel="일일테스트정답수">@context.DailyCorrect</MudTd>
+        <MudTd DataLabel="일일테스트정답률">@context.DailyScore</MudTd>
+        <MudTd DataLabel="클리닉데이차수/학습내용">@context.CliniqSubject</MudTd>
+        <MudTd DataLabel="클리닉테스트문항수">@context.CliniqCount</MudTd>
+        <MudTd DataLabel="클리닉테스트정답수">@context.CliniqCorrect</MudTd>
+        <MudTd DataLabel="클리닉테스트정답률">@context.CliniqScore</MudTd>
+        <MudTd DataLabel="월간 상담내용">@context.Counsel.TextShorten(50)</MudTd>
+        <MudTd DataLabel="특이사항">@context.Etc1.TextShorten(30)</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+@code {
+}
