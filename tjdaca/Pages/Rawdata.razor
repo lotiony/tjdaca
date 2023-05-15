@@ -13,7 +13,7 @@
 
 <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddRawdata"> 상담일지 등록</MudButton>
 
-<MudTable Elevation="25" Items="GetRawdataList()" Filter="new Func<AcaRawdata, bool>(Search)" RowsPerPage="20" HorizontalScrollbar="true" Breakpoint="Breakpoint.Sm" FixedHeader="true">
+<MudTable Elevation="25" Dense="true" Striped="true" Items="GetRawdataList()" Filter="new Func<AcaRawdata, bool>(Search)" RowsPerPage="20" HorizontalScrollbar="true" Breakpoint="Breakpoint.Sm" FixedHeader="true">
     <ToolBarContent>
         <MudText Typo="Typo.h6">학생 검색</MudText>
         <MudSpacer />

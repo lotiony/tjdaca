@@ -9,7 +9,7 @@
 
 <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddStudent">신규학생 등록</MudButton>
 
-<MudTable Elevation="25" Items="GetStudentList()" Filter="new Func<AcaStudents, bool>(Search)" RowsPerPage="20">
+<MudTable Elevation="25" Dense="true" Striped="true" Items="GetStudentList()" Filter="new Func<AcaStudents, bool>(Search)" RowsPerPage="20">
     <ToolBarContent>
         <MudText Typo="Typo.h6">학생 목록</MudText>
         <MudSpacer />
@@ -27,6 +27,7 @@
         <col style="width: 140px;" />
     </ColGroup>*@
     <HeaderContent>
+        <MudTh>학생번호</MudTh>
         <MudTh>담당선생님</MudTh>
         <MudTh>반명</MudTh>
         <MudTh>학생 이름</MudTh>
@@ -38,6 +39,7 @@
         <MudTh>관리자수정/삭제</MudTh>
     </HeaderContent>
     <RowTemplate>
+        <MudTd DataLabel="학생번호">@context.StuIdx</MudTd>
         <MudTd DataLabel="담당선생님">@context.Teacher</MudTd>
         <MudTd DataLabel="반명">@context.Class</MudTd>
         <MudTd DataLabel="학생 이름">@context.StuName</MudTd>
