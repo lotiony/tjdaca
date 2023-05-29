@@ -21,9 +21,49 @@ namespace tjdaca.Pages
 
 
         private AcaRawdata rdata;
-        private List<AcaStudents> studentList { get; set; }
-        private List<string> classGradeList { get; set; }
-        private List<float?> ratioList { get; set; }
+        private List<AcaStudents> studentList { get; set; } = new List<AcaStudents>();
+        private List<string> classGradeList { get; set; } = new List<string>();
+        private List<string> testGradeList { get; set; } = new List<string>();
+        private List<string> testSubjectList { get; set; } = new List<string>();
+        private List<string> cliniqSubjectList { get; set; } = new List<string>();
+        private List<AcaOptions> textbookSourceList { get; set; } = new List<AcaOptions>();
+        private List<float?> ratioList { get; set; } = new List<float?>();
+        private string selectedTestGrade
+        {
+            get { return testGradeList?.SingleOrDefault(x => x == rdata.TestGrade) ?? ""; }
+            set
+            {
+                this.rdata.TestGrade = value;
+                OnTestGradeChange(value);
+            }
+        }
+        private string selectedCliniqGrade
+        {
+            get { return testGradeList?.SingleOrDefault(x => x == rdata.CliniqGrade) ?? ""; }
+            set
+            {
+                this.rdata.CliniqGrade = value;
+                OnCliniqGradeChange(value);
+            }
+        }
+        private string selectedTestSubject
+        {
+            get { return testSubjectList?.SingleOrDefault(x => x == rdata.TestSubject) ?? ""; }
+            set
+            {
+                this.rdata.TestSubject = value;
+            }
+        }
+        private string selectedCliniqSubject
+        {
+            get { return cliniqSubjectList?.SingleOrDefault(x => x == rdata.CliniqSubject) ?? ""; }
+            set
+            {
+                this.rdata.CliniqSubject = value;
+            }
+        }
+
+
         protected override async Task OnInitializedAsync()
         {
             InitInputForm();
@@ -32,6 +72,7 @@ namespace tjdaca.Pages
             {
                 rdata = new AcaRawdata();
                 rdata.TIdx = tidx_int;
+                rdata.Attendance = "O";
             }
 
             else
@@ -55,8 +96,10 @@ namespace tjdaca.Pages
         private void InitInputForm()
         {
             studentList = rawdataService.GetStudentByTid(tidx_int);
+            textbookSourceList = optionService.GetOptions("교재출처");
             classGradeList = GetClassGradeList();
             ratioList = GetRatioList();
+            testGradeList = GetTestGradeList();
         }
 
         private AcaStudents selectedStudent
@@ -182,6 +225,12 @@ namespace tjdaca.Pages
             }
             return rtn;
         }
+        private List<string> GetTestGradeList()
+        {
+            List<string> rtn = new List<string>();
+            rtn = rawdataService.GetTestGradeList("수학");
+            return rtn;
+        }
         private List<float?> GetRatioList()
         {
             List<float?> rtn = new List<float?>();
@@ -191,5 +240,17 @@ namespace tjdaca.Pages
             }
             return rtn;
         }
+        private void OnTestGradeChange(string grade)
+        {
+            if (grade == "") return;
+            testSubjectList = rawdataService.GetSubjectListByGrade("수학", grade);
+        }
+
+        private void OnCliniqGradeChange(string grade)
+        {
+            if (grade == "") return;
+            cliniqSubjectList = rawdataService.GetSubjectListByGrade("수학", grade);
+        }
+
     }
 }

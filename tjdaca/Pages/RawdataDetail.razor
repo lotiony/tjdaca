@@ -73,19 +73,32 @@
                 <MudTextField @bind-Value="rdata.Homework" Label="과제내용과 양" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
             </MudItem>
             <MudItem xs="2">
-                <MudNumericField @bind-Value="selectedHomeworkPrev" Label="이전과제량" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
-            </MudItem>
-            <MudItem xs="2">
-                <MudNumericField @bind-Value="selectedHomeworkPerform" Label="과제수행량" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
-            </MudItem>
-            <MudItem xs="2">
-                <MudNumericField @bind-Value="selectedHomeworkCorrect" Label="과제정답" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
-   @*             <MudSelect @bind-Value="selectedHomeworkCorrect" Label="과제정답" Variant="Variant.Text" Margin="Margin.Normal" InputMode="InputMode.numeric">
+                @*<MudNumericField @bind-Value="selectedHomeworkPrev" Label="이전과제량" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>*@
+                <MudSelect @bind-Value="selectedHomeworkPrev" Label="이전과제량" Variant="Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in ratioList)
                     {
                         <MudSelectItem Value="@type">@type</MudSelectItem>
                     }
-                </MudSelect>*@
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="2">
+                @*<MudNumericField @bind-Value="selectedHomeworkPerform" Label="과제수행량" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>*@
+                <MudSelect @bind-Value="selectedHomeworkPerform" Label="과제수행량" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+
+            </MudItem>
+            <MudItem xs="2">
+                @*<MudNumericField @bind-Value="selectedHomeworkCorrect" Label="과제정답" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>*@
+                <MudSelect @bind-Value="selectedHomeworkCorrect" Label="과제정답" Variant="Variant.Text" Margin="Margin.Normal" InputMode="InputMode.numeric">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
             </MudItem>
             <MudItem xs="3">
                 <MudTextField @bind-Value="rdata.HomeworkProgress" Label="과제이행정도" ReadOnly="true" Variant="Variant.Filled" Adornment="Adornment.End" AdornmentText="%" Margin="Margin.Normal"></MudTextField>
@@ -98,11 +111,29 @@
             <br /><br />
 
 
-            <MudItem xs="6">
-                <MudTextField @bind-Value="rdata.TestSubject" Label="테스트단원" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+            <MudItem xs="2">
+                <MudSelect @bind-Value="selectedTestGrade" Label="테스트학기" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in testGradeList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="4">
+                <MudSelect @bind-Value="selectedTestSubject" Label="테스트단원" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in testSubjectList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
             </MudItem>
             <MudItem xs="6">
-                <MudTextField @bind-Value="rdata.TextbookSource" Label="교재출처" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                <MudSelect @bind-Value="rdata.TextbookSource" Label="교재출처" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in textbookSourceList)
+                    {
+                        <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
+                    }
+                </MudSelect>
             </MudItem>
             <MudItem xs="5">
                 <MudSelect @bind-Value="rdata.Difficulty" Label="난이도" Variant="Variant.Text" Margin="Margin.Normal">
@@ -112,17 +143,24 @@
                 </MudSelect>
             </MudItem>
             <MudItem xs="2">
-                <MudNumericField @bind-Value="selectedDailyCount" Label="일일테스트문항수" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
+                @*<MudNumericField @bind-Value="selectedDailyCount" Label="일일테스트문항수" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>*@
 
-        @*        <MudSelect @bind-Value="selectedDailyCount" Label="일일테스트문항수" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect @bind-Value="selectedDailyCount" Label="일일테스트문항수" Variant="Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in ratioList)
                     {
                         <MudSelectItem Value="@type">@type</MudSelectItem>
                     }
-                </MudSelect>*@
+                </MudSelect>
             </MudItem>
             <MudItem xs="2">
-                <MudNumericField @bind-Value="selectedDailyCorrect" Label="일일테스트정답수" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
+                @*<MudNumericField @bind-Value="selectedDailyCorrect" Label="일일테스트정답수" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>*@
+                <MudSelect @bind-Value="selectedDailyCorrect" Label="일일테스트정답수" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+
             </MudItem>
             <MudItem xs="3">
                 <MudTextField @bind-Value="rdata.DailyScore" Label="일일테스트정답률" ReadOnly="true" Variant="Variant.Filled" Adornment="Adornment.End" AdornmentText="%" Margin="Margin.Normal"></MudTextField>
@@ -132,14 +170,41 @@
             <br /><br />
 
 
-            <MudItem xs="5">
-                <MudTextField @bind-Value="rdata.CliniqSubject" Label="클리닉데이 차수와 학습내용" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+            <MudItem xs="2">
+                <MudSelect @bind-Value="selectedCliniqGrade" Label="클리닉 학기" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in testGradeList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="3">
+                <MudSelect @bind-Value="selectedCliniqSubject" Label="클리닉 단원" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in cliniqSubjectList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
             </MudItem>
             <MudItem xs="2">
-                <MudNumericField @bind-Value="selectedCliniqCount" Label="클리닉테스트문항수" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
+                @*<MudNumericField @bind-Value="selectedCliniqCount" Label="클리닉테스트문항수" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>*@
+                <MudSelect @bind-Value="selectedCliniqCount" Label="클리닉테스트문항수" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+
             </MudItem>
             <MudItem xs="2">
-                <MudNumericField @bind-Value="selectedCliniqCorrect" Label="클리닉테스트정답수" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
+                @*<MudNumericField @bind-Value="selectedCliniqCorrect" Label="클리닉테스트정답수" Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>*@
+                <MudSelect @bind-Value="selectedCliniqCorrect" Label="클리닉테스트정답수" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+
             </MudItem>
             <MudItem xs="3">
                 <MudTextField @bind-Value="rdata.CliniqScore" Label="클리닉테스트정답률" ReadOnly="true" Variant="Variant.Filled" Adornment="Adornment.End" AdornmentText="%" Margin="Margin.Normal"></MudTextField>

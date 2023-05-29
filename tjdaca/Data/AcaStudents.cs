@@ -36,6 +36,8 @@ namespace tjdaca.Data
         public DateTime? AcaOutdate { get; set; }
         public string Teacher { get; set; }
         public DateTime? TestDate { get; set; }
+        public string TestArea { get; set; }
+        public string TestScore { get; set; }
         public string TestResult { get; set; }
         public string Class { get; set; }
         public string Etc1 { get; set; }

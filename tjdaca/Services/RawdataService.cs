@@ -55,5 +55,24 @@ namespace tjdaca.Services
             return stuList;
         }
         
+        public List<string> GetTestGradeList(string subject)
+        {
+            var gradeList = _dbContext.AcaSubject
+                            .Where(s => s.Subject.Equals(subject))
+                            .GroupBy(s => s.Grade)
+                            .OrderBy(g => g.Min(s => s.MIdx))
+                            .Select(g => g.Key).ToList();
+
+            return gradeList;
+        }
+        public List<string> GetSubjectListByGrade(string subject, string grade)
+        {
+            var subjectList = _dbContext.AcaSubject
+                              .Where(s => s.Subject.Equals(subject) && ( !string.IsNullOrEmpty(grade) ? s.Grade.Equals(grade) : true ))
+                              .OrderBy(g => g.MIdx)
+                              .Select(g => g.Value).ToList();
+
+            return subjectList;
+        }
     }
 }

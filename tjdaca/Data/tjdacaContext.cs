@@ -19,6 +19,7 @@ namespace tjdaca.Data
         }
 
         public virtual DbSet<AcaOptions> AcaOptions { get; set; }
+        public virtual DbSet<AcaSubject> AcaSubject { get; set; }
         public virtual DbSet<AcaQuestions> AcaQuestions { get; set; }
         public virtual DbSet<AcaRawdata> AcaRawdata { get; set; }
         public virtual DbSet<AcaSchools> AcaSchools { get; set; }
@@ -65,6 +66,33 @@ namespace tjdaca.Data
                     .HasMaxLength(50)
                     .HasColumnName("opt_value")
                     .HasDefaultValueSql("'0'");
+            });
+
+            modelBuilder.Entity<AcaSubject>(entity =>
+            {
+                entity.HasKey(e => e.MIdx)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("aca_subject");
+
+                entity.Property(e => e.MIdx)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("m_idx");
+
+                entity.Property(e => e.Subject)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .HasColumnName("subject");
+
+                entity.Property(e => e.Grade)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("grade");
+
+                entity.Property(e => e.Value)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .HasColumnName("value");
             });
 
             modelBuilder.Entity<AcaQuestions>(entity =>
@@ -150,6 +178,10 @@ namespace tjdaca.Data
 
                 entity.Property(e => e.CliniqScore).HasColumnName("cliniq_score");
 
+                entity.Property(e => e.CliniqGrade)
+                    .HasMaxLength(50)
+                    .HasColumnName("cliniq_grade");
+
                 entity.Property(e => e.CliniqSubject)
                     .HasMaxLength(200)
                     .HasColumnName("cliniq_subject");
@@ -225,6 +257,10 @@ namespace tjdaca.Data
                 entity.Property(e => e.TIdx)
                     .HasColumnType("int(11)")
                     .HasColumnName("t_idx");
+
+                entity.Property(e => e.TestGrade)
+                    .HasMaxLength(50)
+                    .HasColumnName("test_grade");
 
                 entity.Property(e => e.TestSubject)
                     .HasMaxLength(200)
@@ -389,6 +425,14 @@ namespace tjdaca.Data
                     .HasColumnName("teacher");
 
                 entity.Property(e => e.TestDate).HasColumnName("test_date");
+
+                entity.Property(e => e.TestArea)
+                    .HasMaxLength(200)
+                    .HasColumnName("test_area");
+
+                entity.Property(e => e.TestScore)
+                .HasMaxLength(10)
+                .HasColumnName("test_score");
 
                 entity.Property(e => e.TestResult)
                     .HasMaxLength(300)

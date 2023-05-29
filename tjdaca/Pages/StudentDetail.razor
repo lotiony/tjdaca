@@ -15,21 +15,18 @@
         </CardHeaderContent>
     </MudCardHeader>
     <MudCardContent>
-        <MudGrid Spacing="2" Justify="Justify.Center">
+        <MudGrid Spacing="2">
             <MudItem xs="6">
                 <MudTextField @bind-Value="student.StuName" Required Label="학생 이름" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
             </MudItem>
             <MudItem xs="6">
-                <MudTextField @bind-Value="student.StudentPhone" Required Label="학생 연락처" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                <MudTextField @bind-Value="student.StudentPhone" Required Label="학생 연락처" Variant="Variant.Text" Margin="Margin.Normal" Placeholder="01088886666 (숫자를 다 붙여 쓰시면 됩니다)"></MudTextField>
             </MudItem>
             <MudItem xs="6">
                 <MudTextField @bind-Value="student.Parent" Required Label="학부모 이름" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
             </MudItem>
             <MudItem xs="6">
-                <MudTextField @bind-Value="student.ParentPhone" Required Label="학부모 연락처" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-            </MudItem>
-            <MudItem xs="6">
-                <MudTextField @bind-Value="student.School" Label="학교" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                <MudTextField @bind-Value="student.ParentPhone" Required Label="학부모 연락처" Variant="Variant.Text" Margin="Margin.Normal" Placeholder="01088886666 (숫자를 다 붙여 쓰시면 됩니다)"></MudTextField>
             </MudItem>
             <MudItem xs="3">
                 <MudSelect @bind-Value="student.SchType" Label="학교구분" Variant="Variant.Text" Margin="Margin.Normal">
@@ -39,8 +36,11 @@
                     }
                 </MudSelect>
             </MudItem>
+            <MudItem xs="6">
+                <MudTextField @bind-Value="student.School" Label="학교" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+            </MudItem>
             <MudItem xs="3">
-                <MudSelect @bind-Value="student.SchGrade" Label="학년구분" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect @bind-Value="student.SchGrade" Label="학년" Variant="Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in schGradeList)
                     {
                         <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
@@ -81,7 +81,7 @@
                 </MudSelect>
             </MudItem>
             <MudItem xs="3">
-                <MudSelect @bind-Value="student.SubjectOption" Label="옵션" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect @bind-Value="student.SubjectOption" Label="과정선택" Variant="Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in schTypeList)
                     {
                         <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
@@ -91,9 +91,6 @@
         
             <MudItem xs="6">
                 <MudTextField @bind-Value="student.MathProgress" Label="현재수학진도현황" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-            </MudItem>
-            <MudItem xs="6">
-                <MudTextField @bind-Value="student.VisitPurpose" Label="학원방문목적" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
             </MudItem>
             <MudItem xs="12">
                 <MudCheckBox @bind-Checked="@student.Agree" Label="개인정보수집 활용에 동의합니다."></MudCheckBox>
@@ -116,17 +113,23 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem xs="4">
-                    <MudTextField @bind-Value="student.TestDate" Label="테스트일자" InputType="InputType.Date" Format="yyyy-MM-dd" Margin="Margin.Normal" />
+                <MudItem xs="3">
+                    <MudTextField @bind-Value="student.TestDate" Label="테스트날짜" InputType="InputType.Date" Format="yyyy-MM-dd" Margin="Margin.Normal" />
+                </MudItem>
+                <MudItem xs="3">
+                    <MudTextField @bind-Value="student.TestArea" Label="테스트범위" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                </MudItem>
+                <MudItem xs="2">
+                    <MudTextField @bind-Value="student.TestScore" Label="점수" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="4">
-                    <MudTextField @bind-Value="student.TestResult" Label="입반테스트내용" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.TestResult" Label="결과" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
-                <MudItem xs="4">
+                <MudItem xs="2">
                     <MudTextField @bind-Value="student.Class" Label="상담실예정반배정" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
-                <MudItem xs="12">
-                    <MudTextField @bind-Value="student.Etc1" Label="선생님의견" Variant="Variant.Text" Lines="3" MaxLength="500" Margin="Margin.Normal"></MudTextField>
+                <MudItem xs="10">
+                    <MudTextField @bind-Value="student.Etc1" Label="선생님의견" Variant="Variant.Text" MaxLength="500" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
 
             }

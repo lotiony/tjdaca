@@ -16,26 +16,28 @@ namespace tjdaca.Data
         public string SchType { get; set; } = string.Empty;
         public string SchName { get; set; } = string.Empty;
         public string Grade { get; set; } = string.Empty;
-        public string Attendance { get; set; } = string.Empty;  
+        public string Attendance { get; set; } = "O";  
         public string AbsenceReason { get; set; } = string.Empty;
         public string SchAchievement { get; set; } = string.Empty;
         public string ClassSubject { get; set; } = string.Empty;
         public string ClassGrade { get; set; } = string.Empty;
         public string Homework { get; set; } = string.Empty;
-        public float? HomeworkPrev { get; set; }
-        public float? HomeworkPerform { get; set; }
-        public float? HomeworkCorrect { get; set; }
+        public float? HomeworkPrev { get; set; } = 100f;
+        public float? HomeworkPerform { get; set; } = 100f;
+        public float? HomeworkCorrect { get; set; } = 100f;
         public float? HomeworkProgress { get; set; }
         public float? HomeworkRatio { get; set; }
+        public string TestGrade { get; set; } = string.Empty;
         public string TestSubject { get; set; } = string.Empty;
         public string TextbookSource { get; set; } = string.Empty;
         public string Difficulty { get; set; } = string.Empty;
-        public float? DaliyCount { get; set; }
-        public float? DailyCorrect { get; set; }
+        public float? DaliyCount { get; set; } = 100f;
+        public float? DailyCorrect { get; set; } = 100f;
         public float? DailyScore { get; set; }
+        public string CliniqGrade { get; set; } = string.Empty;
         public string CliniqSubject { get; set; } = string.Empty;
-        public float? CliniqCount { get; set; }
-        public float? CliniqCorrect { get; set; }
+        public float? CliniqCount { get; set; } = 100f;
+        public float? CliniqCorrect { get; set; } = 100f;
         public float? CliniqScore { get; set; }
         public string Counsel { get; set; } = string.Empty;
         public string Etc1 { get; set; }
