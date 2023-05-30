@@ -7,19 +7,14 @@ using tjdaca.Services;
 
 namespace tjdaca.Pages
 {
-    public partial class StudentDetail : ComponentBase
+    public partial class NewStudent : ComponentBase
     {
         [Inject] NavigationManager NavManager { get; set; }
         [Inject] MudBlazor.ISnackbar snackBar { get; set; }
         [Inject] private IDialogService DialogService { get; set; }
 
-        [Parameter]
-        public string stu_idx { get; set; }
-        [Parameter]
-        public string isAdmin { get; set; } = string.Empty;
 
         private AcaStudents student;
-        private bool IsAdmin { get { return this.isAdmin.ToLower() == "a" ?  true : false; } }
         private List<AcaOptions> schTypeList { get; set; }
         private List<AcaOptions> schGradeList { get; set; }
         private List<AcaOptions> cognitivePathwayList { get; set; }
@@ -28,17 +23,7 @@ namespace tjdaca.Pages
         protected override async Task OnInitializedAsync()
         {
             InitInputForm();
-
-            Int32.TryParse(stu_idx, out int stu_idx_int);
-
-            if (stu_idx_int == 0)
-            {
-                student = new AcaStudents();
-            }
-            else
-            {
-                student = studentService.GetStudentById(stu_idx_int);
-            }
+            student = new AcaStudents();
         }
     
         private async void Save()
@@ -51,14 +36,22 @@ namespace tjdaca.Pages
             {
                 studentService.SaveStudent(student);
                 snackBar.Add("학생 등록이 완료되었습니다.", Severity.Success);
-                NavManager.NavigateTo("/students");
+                student = new AcaStudents();
+                StateHasChanged();
             }
-           
         }
 
-        private void Cancel()
+        private async void Cancel()
         {
-            JS.InvokeVoidAsync("history.go", -1);
+            bool? result = await DialogService.ShowMessageBox(
+                         "초기화",
+                         "입력하신 정보를 모두 초기화 합니다. 진행하시겠습니까?",
+                         yesText: "초기화", cancelText: "취소");
+            if (result != null)
+            {
+                student = new AcaStudents();
+                StateHasChanged();
+            }
         }
 
         private void InitInputForm()

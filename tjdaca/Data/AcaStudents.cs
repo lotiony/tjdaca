@@ -2,16 +2,21 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace tjdaca.Data
 {
     public partial class AcaStudents
     {
         public int StuIdx { get; set; }
-        public string StuName { get; set; }
-        public string StudentPhone { get; set; }
-        public string Parent { get; set; }
-        public string ParentPhone { get; set; }
+        [Required(ErrorMessage="학생이름은 필수입니다."), MinLength(2)]
+        public string StuName { get; set; } = string.Empty;
+        [Required(ErrorMessage = "학생 연락처는 필수입니다."), MinLength(10)]
+        public string StudentPhone { get; set; } = string.Empty;
+        [Required(ErrorMessage = "학부모 이름은 필수입니다."), MinLength(2)]
+        public string Parent { get; set; } = string.Empty;
+        [Required(ErrorMessage = "학부모 연락처는 필수입니다."), MinLength(10)]
+        public string ParentPhone { get; set; } = string.Empty;
         public string Zipcode { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
@@ -31,7 +36,8 @@ namespace tjdaca.Data
         public string MathProgress { get; set; }
         public string CognitivePathway { get; set; }
         public string VisitPurpose { get; set; }
-        public bool Agree { get; set; }
+        [Required(ErrorMessage = "개인정보 동의에 체크해 주세요.")]
+        public bool? Agree { get; set; }
         public DateTime? AcaRegdate { get; set; }
         public DateTime? AcaOutdate { get; set; }
         public string Teacher { get; set; }
