@@ -1,8 +1,26 @@
 ﻿@inherits LayoutComponentBase
-
 <PageTitle>tjdaca</PageTitle>
 
-<div class="page">
+<style scoped>
+    @@import "css/custom.css";
+    
+    /* custom styles specific to this component */
+	@@media (max-width:600px){
+		.custom-page{ padding-top: 60px; background-image: url(/img/logo.jpg); background-position: top 20px center; background-repeat: no-repeat; background-size: 110px;}
+		.custom-page .content{ padding-bottom: 16px; padding-top: 6px}
+		.mud-card-header .mud-card-header-content .mud-typography{ font-size: 18px; font-weight: bold; text-align: center;}
+		.mud-card-content{ padding: 0 16px 16px;}	
+		.mud-card-content .mud-grid{ width:100%; display: block;}
+		.mud-card-content .mud-grid-item-xs-2,
+		.mud-card-content .mud-grid-item-xs-3,
+		.mud-card-content .mud-grid-item-xs-5,
+		.mud-card-content .mud-grid-item-xs-6{ max-width: 100%; padding: 0}
+		.mud-card-content .mud-grid-spacing-xs-2{ margin: 0;}
+		.mud-card-content .mud-button-filled-size-large{ width: calc(50% - 11px); margin: 0 4px; padding: 8px 0;}
+	}
+</style>
+
+<div class="custom-page">
 
     <main>
         <article class="content px-4">
