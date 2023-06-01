@@ -1,0 +1,102 @@
+﻿@page "/search"
+@using tjdaca.Data
+@inject tjdaca.Services.IStudentService studentService
+@inject MudBlazor.ISnackbar snackBar
+
+<PageTitle>학생 성적 관리</PageTitle>
+
+<h3>학생 성적 관리</h3>
+@*
+<MudDataGrid T="AcaStudents" Items="@Elements" Filterable="true" FilterMode="@DataGridFilterMode.ColumnFilterRow">
+    <Columns>
+        <PropertyColumn Property="x => x.Number" Title="Nr" Filterable="false" />
+        <PropertyColumn Property="x => x.Sign">
+            <FilterTemplate>
+                <MudIconButton OnClick="@OpenFilter" Icon="@_icon" Size="@Size.Small" />
+                <MudOverlay Visible="@_filterOpen" OnClick="@(() => _filterOpen = false)" />
+                <MudPopover Open="@_filterOpen" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter"
+                    Style="width:150px">
+		           <MudStack Spacing="0">
+                       <MudCheckBox T="bool" Label="Select All" Size="@Size.Small" Checked="@_selectAll" CheckedChanged="@SelectAll" />
+                       <MudStack Spacing="0" Style="overflow-y:auto;max-height:250px">
+                           @foreach (var item in context.Items)
+                           {
+                               <MudCheckBox T="bool" Label="@($"{item.Sign}")" Size="@Size.Small" Checked="@(_selectedItems.Contains(item))"
+                                   CheckedChanged="@((value) => SelectedChanged(value, item))" />
+                           }
+                       </MudStack>
+                       <MudStack Row="true">
+                            <MudButton OnClick="@(() => ClearFilterAsync(context))">Clear</MudButton>
+                            <MudButton Color="@Color.Primary" OnClick="@(() => ApplyFilterAsync(context))">Filter</MudButton>
+                       </MudStack>
+                   </MudStack>
+	            </MudPopover>
+            </FilterTemplate>
+        </PropertyColumn>
+        <PropertyColumn Property="x => x.Name" />
+        <PropertyColumn Property="x => x.Position" />
+        <PropertyColumn Property="x => x.Molar" Title="Molar mass" />
+        <PropertyColumn Property="x => x.Group" Title="Category" />
+    </Columns>
+    <PagerContent>
+        <MudDataGridPager T="Element" />
+    </PagerContent>
+</MudDataGrid>*@
+
+
+
+<MudTable Elevation="25" Dense="true" Striped="true" Items="GetStudentList()" Filter="new Func<AcaStudents, bool>(Search)" RowsPerPage="20">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">학생 목록</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString" Placeholder="Search for Students..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+@*    <ColGroup>
+        <col style="width: 120px;" />
+        <col style="width: 100px;" />
+        <col style="width: 120px;" />
+        <col style="width: 140px;" />
+        <col style="width: 120px;" />
+        <col style="width: 140px;" />
+        <col />
+        <col style="width: 50px;" />
+        <col style="width: 140px;" />
+    </ColGroup>*@
+    <HeaderContent>
+        <MudTh>등록일</MudTh>
+        <MudTh>학생번호</MudTh>
+        <MudTh>담임</MudTh>
+        <MudTh>학생 이름</MudTh>
+        <MudTh>인지경로</MudTh>
+        <MudTh>테스트일자</MudTh>
+        <MudTh>테스트단원</MudTh>
+        <MudTh>테스트점수</MudTh>
+        <MudTh>학교</MudTh>
+        <MudTh>수정</MudTh>
+        <MudTh>관리자수정/삭제</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="등록일">@context.AcaRegdate?.ToString("yy/MM/dd")</MudTd>
+        <MudTd DataLabel="학생번호">@context.StuIdx</MudTd>
+        <MudTd DataLabel="담임">@context.Teacher</MudTd>
+        <MudTd DataLabel="학생 이름">@context.StuName</MudTd>
+        <MudTd DataLabel="인지경로">@context.CognitivePathway</MudTd>
+        <MudTd DataLabel="테스트일자">@context.TestDate?.ToString("yy/MM/dd")</MudTd>
+        <MudTd DataLabel="테스트단원">@context.TestArea</MudTd>
+        <MudTd DataLabel="테스트점수">@context.TestScore</MudTd>
+        <MudTd DataLabel="학교">@context.School</MudTd>
+        <MudTd DataLabel="수정">
+            <MudFab @onclick="@(()=>Edit(@context.StuIdx))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
+        </MudTd>
+        <MudTd DataLabel="관리자수정/삭제">
+            <MudFab @onclick="@(()=>AdminEdit(@context.StuIdx))" Color="Color.Info" Icon="@Icons.Material.Filled.ManageAccounts" Size="Size.Small" IconSize="Size.Small" />
+            <MudFab @onclick="@(()=>Delete(@context.StuIdx))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+@code {
+}

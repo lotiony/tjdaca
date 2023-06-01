@@ -78,6 +78,8 @@ namespace tjdaca.Pages
             else
             {
                 rdata = rawdataService.GetRawdataById(ridx_int);
+                selectedCliniqGrade = rdata.CliniqGrade;
+                selectedTestGrade = rdata.TestSubject;
             }
         }
     
@@ -115,6 +117,51 @@ namespace tjdaca.Pages
                 rdata.SchType = value.SchType;
                 rdata.SchName = value.School;
                 rdata.Grade = value.SchGrade;
+                rdata.ClassName = value.Class;
+                SetLastRawdata();
+            }
+        }
+        
+        /// <summary>
+        /// 해당학생의 가장 마지막 Rawdata 값이 있으면 불러온다.
+        /// </summary>
+        private void SetLastRawdata()
+        {
+            var lastRawdata = rawdataService.GetLastRawdataBySid(rdata.StuIdx ?? 0);
+            if (lastRawdata.RIdx > 0)
+            {
+                snackBar.Add("가장 마지막에 입력된 데이터를 불러오는데 성공했습니다.", Severity.Success);
+
+                rdata.ClassName = lastRawdata.ClassName;
+                rdata.Attendance = lastRawdata.Attendance;
+                rdata.AbsenceReason = lastRawdata.AbsenceReason;
+                rdata.SchAchievement= lastRawdata.SchAchievement;
+                rdata.ClassSubject = lastRawdata.ClassSubject;
+                rdata.ClassGrade = lastRawdata.ClassGrade;
+                rdata.Homework = lastRawdata.Homework;
+                rdata.HomeworkPrev = lastRawdata.HomeworkPrev;
+                rdata.HomeworkPerform = lastRawdata.HomeworkPerform;
+                rdata.HomeworkCorrect = lastRawdata.HomeworkCorrect;
+                rdata.HomeworkProgress = lastRawdata .HomeworkProgress;
+                rdata.HomeworkRatio = lastRawdata.HomeworkRatio;
+                rdata.TestGrade = lastRawdata.TestGrade;
+                selectedTestGrade = lastRawdata.TestGrade;
+                rdata.TestSubject = lastRawdata.TestSubject;
+                rdata.TextbookSource = lastRawdata.TextbookSource;
+                rdata.Difficulty = lastRawdata.Difficulty;
+                rdata.DailyCorrect = lastRawdata.DailyCorrect;
+                rdata.DailyScore = lastRawdata.DailyScore;
+                rdata.DaliyCount = lastRawdata.DaliyCount;
+                rdata.CliniqCorrect = lastRawdata.CliniqCorrect;
+                rdata.CliniqCount = lastRawdata.CliniqCount;
+                rdata.CliniqGrade = lastRawdata.CliniqGrade;
+                selectedCliniqGrade = lastRawdata.CliniqGrade;
+                rdata.CliniqScore = lastRawdata.CliniqScore;
+                rdata.CliniqSubject = lastRawdata.CliniqSubject;
+                rdata.Counsel = lastRawdata.Counsel;
+                rdata.Etc1 = lastRawdata.Etc1;
+                rdata.Etc2 = lastRawdata.Etc2;
+                rdata.Etc3 = lastRawdata.Etc3;
             }
         }
 

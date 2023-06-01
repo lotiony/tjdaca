@@ -31,7 +31,19 @@
          "ObjectType": 0
       },
       {
+         "Name": "aca_stu_exam_score",
+         "ObjectType": 0
+      },
+      {
+         "Name": "aca_stu_school_score",
+         "ObjectType": 0
+      },
+      {
          "Name": "aca_students",
+         "ObjectType": 0
+      },
+      {
+         "Name": "aca_subject",
          "ObjectType": 0
       },
       {
