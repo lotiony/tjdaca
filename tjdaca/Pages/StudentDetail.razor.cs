@@ -68,6 +68,7 @@ namespace tjdaca.Pages
             cognitivePathwayList = optionService.GetOptions("학원 인지경로");
             subjectList = optionService.GetOptions("과목구분");
             teacherList = optionService.GetTeachers();
+            teacherList.Insert(0, "미정");
         }
     }
 }

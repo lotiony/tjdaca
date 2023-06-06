@@ -26,7 +26,12 @@
             </MudItem>
 
             <MudItem xs="4">
-                <MudTextField @bind-Value="rdata.ClassName" Required Label="반명" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                <MudSelect @bind-Value="rdata.ClassName" Label="반명" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in classNameList)
+                    {
+                        <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
+                    }
+                </MudSelect>
             </MudItem>
 
             <MudItem xs="4">

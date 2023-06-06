@@ -22,6 +22,7 @@ namespace tjdaca.Pages
 
         private AcaRawdata rdata;
         private List<AcaStudents> studentList { get; set; } = new List<AcaStudents>();
+        private List<AcaOptions> classNameList { get; set; } = new List<AcaOptions>();
         private List<string> classGradeList { get; set; } = new List<string>();
         private List<string> testGradeList { get; set; } = new List<string>();
         private List<string> testSubjectList { get; set; } = new List<string>();
@@ -99,6 +100,7 @@ namespace tjdaca.Pages
         {
             studentList = rawdataService.GetStudentByTid(tidx_int);
             textbookSourceList = optionService.GetOptions("교재출처");
+            classNameList = optionService.GetOptions("반명");
             classGradeList = GetClassGradeList();
             ratioList = GetRatioList();
             testGradeList = GetTestGradeList();
@@ -135,33 +137,33 @@ namespace tjdaca.Pages
                 rdata.ClassName = lastRawdata.ClassName;
                 rdata.Attendance = lastRawdata.Attendance;
                 rdata.AbsenceReason = lastRawdata.AbsenceReason;
-                rdata.SchAchievement= lastRawdata.SchAchievement;
-                rdata.ClassSubject = lastRawdata.ClassSubject;
+                //rdata.SchAchievement= lastRawdata.SchAchievement;
+                //rdata.ClassSubject = lastRawdata.ClassSubject;
                 rdata.ClassGrade = lastRawdata.ClassGrade;
-                rdata.Homework = lastRawdata.Homework;
-                rdata.HomeworkPrev = lastRawdata.HomeworkPrev;
-                rdata.HomeworkPerform = lastRawdata.HomeworkPerform;
-                rdata.HomeworkCorrect = lastRawdata.HomeworkCorrect;
-                rdata.HomeworkProgress = lastRawdata .HomeworkProgress;
-                rdata.HomeworkRatio = lastRawdata.HomeworkRatio;
-                rdata.TestGrade = lastRawdata.TestGrade;
-                selectedTestGrade = lastRawdata.TestGrade;
-                rdata.TestSubject = lastRawdata.TestSubject;
-                rdata.TextbookSource = lastRawdata.TextbookSource;
-                rdata.Difficulty = lastRawdata.Difficulty;
-                rdata.DailyCorrect = lastRawdata.DailyCorrect;
-                rdata.DailyScore = lastRawdata.DailyScore;
-                rdata.DaliyCount = lastRawdata.DaliyCount;
-                rdata.CliniqCorrect = lastRawdata.CliniqCorrect;
-                rdata.CliniqCount = lastRawdata.CliniqCount;
-                rdata.CliniqGrade = lastRawdata.CliniqGrade;
-                selectedCliniqGrade = lastRawdata.CliniqGrade;
-                rdata.CliniqScore = lastRawdata.CliniqScore;
-                rdata.CliniqSubject = lastRawdata.CliniqSubject;
-                rdata.Counsel = lastRawdata.Counsel;
-                rdata.Etc1 = lastRawdata.Etc1;
-                rdata.Etc2 = lastRawdata.Etc2;
-                rdata.Etc3 = lastRawdata.Etc3;
+                //rdata.Homework = lastRawdata.Homework;
+                //rdata.HomeworkPrev = lastRawdata.HomeworkPrev;
+                //rdata.HomeworkPerform = lastRawdata.HomeworkPerform;
+                //rdata.HomeworkCorrect = lastRawdata.HomeworkCorrect;
+                //rdata.HomeworkProgress = lastRawdata .HomeworkProgress;
+                //rdata.HomeworkRatio = lastRawdata.HomeworkRatio;
+                //rdata.TestGrade = lastRawdata.TestGrade;
+                //selectedTestGrade = lastRawdata.TestGrade;
+                //rdata.TestSubject = lastRawdata.TestSubject;
+                //rdata.TextbookSource = lastRawdata.TextbookSource;
+                //rdata.Difficulty = lastRawdata.Difficulty;
+                //rdata.DailyCorrect = lastRawdata.DailyCorrect;
+                //rdata.DailyScore = lastRawdata.DailyScore;
+                //rdata.DaliyCount = lastRawdata.DaliyCount;
+                //rdata.CliniqCorrect = lastRawdata.CliniqCorrect;
+                //rdata.CliniqCount = lastRawdata.CliniqCount;
+                //rdata.CliniqGrade = lastRawdata.CliniqGrade;
+                //selectedCliniqGrade = lastRawdata.CliniqGrade;
+                //rdata.CliniqScore = lastRawdata.CliniqScore;
+                //rdata.CliniqSubject = lastRawdata.CliniqSubject;
+                //rdata.Counsel = lastRawdata.Counsel;
+                //rdata.Etc1 = lastRawdata.Etc1;
+                //rdata.Etc2 = lastRawdata.Etc2;
+                //rdata.Etc3 = lastRawdata.Etc3;
             }
         }
 

@@ -13,7 +13,7 @@
 
 <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddRawdata"> 상담일지 등록</MudButton>
 
-<MudTable Elevation="25" Dense="true" Striped="true" Items="GetRawdataList()" Filter="new Func<AcaRawdata, bool>(Search)" RowsPerPage="20" HorizontalScrollbar="true" Breakpoint="Breakpoint.Sm" FixedHeader="true">
+<MudTable Elevation="25" Dense="true" Striped="true" Items="GetRawdataList()" Filter="new Func<AcaRawdata, bool>(Search)" RowsPerPage="20" HorizontalScrollbar="true" FixedHeader="true">
     <ToolBarContent>
         <MudText Typo="Typo.h6">학생 검색</MudText>
         <MudSpacer />
@@ -73,7 +73,7 @@
         <MudTd DataLabel="학교명">@context.SchName</MudTd>
         <MudTd DataLabel="학년">@context.Grade</MudTd>
         <MudTd DataLabel="출석여부">@context.Attendance</MudTd>
-        <MudTd DataLabel="결석사유">@context.AbsenceReason.TextShorten(20)</MudTd>
+        <MudTd DataLabel="결석사유">@context.AbsenceReason.TextShorten(5)</MudTd>
         <MudTd DataLabel="학교시험성적">@context.SchAchievement</MudTd>
         <MudTd DataLabel="수업내용">@context.ClassSubject</MudTd>
         <MudTd DataLabel="수업학년-학기">@context.ClassGrade</MudTd>
@@ -93,11 +93,11 @@
         <MudTd DataLabel="클리닉테스트문항수">@context.CliniqCount</MudTd>
         <MudTd DataLabel="클리닉테스트정답수">@context.CliniqCorrect</MudTd>
         <MudTd DataLabel="클리닉테스트정답률">@context.CliniqScore</MudTd>
-        <MudTd DataLabel="월간 상담내용">@context.Counsel.TextShorten(50)</MudTd>
-        <MudTd DataLabel="특이사항">@context.Etc1.TextShorten(30)</MudTd>
+        <MudTd DataLabel="월간 상담내용">@context.Counsel.TextShorten(10)</MudTd>
+        <MudTd DataLabel="특이사항">@context.Etc1.TextShorten(10)</MudTd>
     </RowTemplate>
     <PagerContent>
-        <MudTablePager />
+        <MudTablePager HorizontalAlignment="HorizontalAlignment.Start" />
     </PagerContent>
 </MudTable>
 

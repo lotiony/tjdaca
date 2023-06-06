@@ -6,7 +6,7 @@
 <PageTitle>학생 성적 관리</PageTitle>
 
 <h3>학생 성적 관리</h3>
-@*
+
 <MudDataGrid T="AcaStudents" Items="@Elements" Filterable="true" FilterMode="@DataGridFilterMode.ColumnFilterRow">
     <Columns>
         <PropertyColumn Property="x => x.Number" Title="Nr" Filterable="false" />
@@ -41,7 +41,7 @@
     <PagerContent>
         <MudDataGridPager T="Element" />
     </PagerContent>
-</MudDataGrid>*@
+</MudDataGrid>
 
 
 
@@ -99,4 +99,72 @@
 </MudTable>
 
 @code {
+    IEnumerable<AcaStudents> Students = new List<AcaStudents>();
+    HashSet<AcaStudents> _selectedItems = new();
+    HashSet<AcaStudents> _filterItems = new();
+    FilterDefinition<AcaStudents> _filterDefinition;
+    bool _selectAll = true;
+    string _icon = Icons.Material.Outlined.FilterAlt;
+
+    bool _filterOpen = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Students = await studentService.GetStudentsAsync();
+        _selectedItems = Students.ToHashSet();
+        _filterItems = Students.ToHashSet();
+        _filterDefinition = new FilterDefinition<AcaStudents>
+            {
+                FilterFunction = x => _filterItems.Contains(x)
+            };
+    }
+
+    void OpenFilter()
+    {
+        _filterOpen = true;
+    }
+
+    private void SelectedChanged(bool value, AcaStudents item)
+    {
+        if (value)
+            _selectedItems.Add(item);
+        else
+            _selectedItems.Remove(item);
+
+        if (_selectedItems.Count == Students.Count())
+            _selectAll = true;
+        else
+            _selectAll = false;
+    }
+
+    private async Task ClearFilterAsync(FilterContext<AcaStudents> context)
+    {
+        _selectedItems = Students.ToHashSet();
+        _filterItems = Students.ToHashSet();
+        _icon = Icons.Material.Outlined.FilterAlt;
+        await context.Actions.ClearFilterAsync(_filterDefinition);
+        _filterOpen = false;
+    }
+
+    private async Task ApplyFilterAsync(FilterContext<AcaStudents> context)
+    {
+        _filterItems = _selectedItems.ToHashSet();
+        _icon = _filterItems.Count == Students.Count() ? Icons.Material.Outlined.FilterAlt : Icons.Material.Filled.FilterAlt;
+        await context.Actions.ApplyFilterAsync(_filterDefinition);
+        _filterOpen = false;
+    }
+
+    private void SelectAll(bool value)
+    {
+        _selectAll = value;
+
+        if (value)
+        {
+            _selectedItems = Students.ToHashSet();
+        }
+        else
+        {
+            _selectedItems.Clear();
+        }
+    }
 }

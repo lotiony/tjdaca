@@ -27,28 +27,30 @@
         <col style="width: 140px;" />
     </ColGroup>*@
     <HeaderContent>
-        <MudTh>등록일</MudTh>
         <MudTh>학생번호</MudTh>
-        <MudTh>담임</MudTh>
         <MudTh>학생 이름</MudTh>
+        <MudTh>학원등록일</MudTh>
+        <MudTh>담임</MudTh>
         <MudTh>인지경로</MudTh>
         <MudTh>테스트일자</MudTh>
         <MudTh>테스트단원</MudTh>
         <MudTh>테스트점수</MudTh>
         <MudTh>학교</MudTh>
+        <MudTh>등록일</MudTh>
         <MudTh>수정</MudTh>
         <MudTh>관리자수정/삭제</MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="등록일">@context.AcaRegdate?.ToString("yy/MM/dd")</MudTd>
         <MudTd DataLabel="학생번호">@context.StuIdx</MudTd>
-        <MudTd DataLabel="담임">@context.Teacher</MudTd>
         <MudTd DataLabel="학생 이름">@context.StuName</MudTd>
+        <MudTd DataLabel="학원등록일">@context.AcaRegdate?.ToString("yy/MM/dd")</MudTd>
+        <MudTd DataLabel="담임">@context.Teacher</MudTd>
         <MudTd DataLabel="인지경로">@context.CognitivePathway</MudTd>
         <MudTd DataLabel="테스트일자">@context.TestDate?.ToString("yy/MM/dd")</MudTd>
         <MudTd DataLabel="테스트단원">@context.TestArea</MudTd>
         <MudTd DataLabel="테스트점수">@context.TestScore</MudTd>
         <MudTd DataLabel="학교">@context.School</MudTd>
+        <MudTd DataLabel="등록일">@context.Regdate.ToString("yy/MM/dd")</MudTd>
         <MudTd DataLabel="수정">
             <MudFab @onclick="@(()=>Edit(@context.StuIdx))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
         </MudTd>

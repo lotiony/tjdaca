@@ -29,7 +29,15 @@ namespace tjdaca.Services
 
         public List<AcaStudents> GetStudents()
         {
-            return _dbContext.AcaStudents.ToList();
+            return _dbContext.AcaStudents.OrderByDescending(x=> x.StuIdx).ToList();
+        }
+
+        public async Task<List<AcaStudents>> GetStudentsAsync()
+        {
+            return await Task.Run(() =>
+            {
+                return _dbContext.AcaStudents.OrderByDescending(x => x.StuIdx).ToList();
+            });
         }
 
         public void SaveStudent(AcaStudents students)
