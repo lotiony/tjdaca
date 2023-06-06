@@ -7,10 +7,10 @@
 
 <h3>학생 성적 관리</h3>
 
-<MudDataGrid T="AcaStudents" Items="@Elements" Filterable="true" FilterMode="@DataGridFilterMode.ColumnFilterRow">
+<MudDataGrid T="AcaStudents" Items="@Students" Filterable="true" FilterMode="@DataGridFilterMode.ColumnFilterRow">
     <Columns>
-        <PropertyColumn Property="x => x.Number" Title="Nr" Filterable="false" />
-        <PropertyColumn Property="x => x.Sign">
+        <PropertyColumn Property="x => x.StuIdx" Title="학생번호" Filterable="false" />
+        <PropertyColumn Property="x => x.StuName">
             <FilterTemplate>
                 <MudIconButton OnClick="@OpenFilter" Icon="@_icon" Size="@Size.Small" />
                 <MudOverlay Visible="@_filterOpen" OnClick="@(() => _filterOpen = false)" />
@@ -39,7 +39,7 @@
         <PropertyColumn Property="x => x.Group" Title="Category" />
     </Columns>
     <PagerContent>
-        <MudDataGridPager T="Element" />
+        <MudDataGridPager T="AcaStudents" />
     </PagerContent>
 </MudDataGrid>
 
