@@ -34,6 +34,7 @@ namespace tjdaca.Data
         public string Subject { get; set; }
         public string SubjectOption { get; set; }
         public string MathProgress { get; set; }
+        [Required(ErrorMessage = "학원 인지경로는 필수입니다."), MinLength(2)]
         public string CognitivePathway { get; set; }
         public string VisitPurpose { get; set; }
         [Required(ErrorMessage = "개인정보 동의에 체크해 주세요.")]
@@ -56,6 +57,6 @@ namespace tjdaca.Data
         public string Etc8 { get; set; }
         public string Etc9 { get; set; }
         public DateTime Regdate { get; set; }
-        public DateTime Lastdate { get; set; }
+        public DateTime Lastdate { get; set; } = DateTime.Now;
     }
 }

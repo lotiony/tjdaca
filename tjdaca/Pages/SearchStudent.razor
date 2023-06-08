@@ -1,7 +1,10 @@
 ﻿@page "/search"
 @using tjdaca.Data
 @inject tjdaca.Services.IStudentService studentService
+@inject tjdaca.Services.IOptionService optionService
 @inject MudBlazor.ISnackbar snackBar
+@using MudBlazor.Components
+
 
 <PageTitle>학생 성적 관리</PageTitle>
 
@@ -10,33 +13,36 @@
 <MudDataGrid T="AcaStudents" Items="@Students" Filterable="true" FilterMode="@DataGridFilterMode.ColumnFilterRow">
     <Columns>
         <PropertyColumn Property="x => x.StuIdx" Title="학생번호" Filterable="false" />
-        <PropertyColumn Property="x => x.StuName">
+        <PropertyColumn Property="x => x.StuName" Title="학생이름" ShowFilterIcon="false" />
+        <PropertyColumn Property="x => x.Teacher" Title="담임">
             <FilterTemplate>
                 <MudIconButton OnClick="@OpenFilter" Icon="@_icon" Size="@Size.Small" />
                 <MudOverlay Visible="@_filterOpen" OnClick="@(() => _filterOpen = false)" />
                 <MudPopover Open="@_filterOpen" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter"
-                    Style="width:150px">
-		           <MudStack Spacing="0">
-                       <MudCheckBox T="bool" Label="Select All" Size="@Size.Small" Checked="@_selectAll" CheckedChanged="@SelectAll" />
-                       <MudStack Spacing="0" Style="overflow-y:auto;max-height:250px">
-                           @foreach (var item in context.Items)
-                           {
-                               <MudCheckBox T="bool" Label="@($"{item.Sign}")" Size="@Size.Small" Checked="@(_selectedItems.Contains(item))"
-                                   CheckedChanged="@((value) => SelectedChanged(value, item))" />
-                           }
-                       </MudStack>
-                       <MudStack Row="true">
-                            <MudButton OnClick="@(() => ClearFilterAsync(context))">Clear</MudButton>
-                            <MudButton Color="@Color.Primary" OnClick="@(() => ApplyFilterAsync(context))">Filter</MudButton>
-                       </MudStack>
-                   </MudStack>
-	            </MudPopover>
+                            Style="width:150px">
+                    <MudStack Spacing="0">
+                        <MudCheckBox T="bool" Label="Select All" Size="@Size.Small" Checked="@_selectAll" CheckedChanged="@SelectAll" />
+                        <MudStack Spacing="0" Style="overflow-y:auto;max-height:250px">
+                            @foreach (var item in Teachers)
+                            {
+                                <MudCheckBox T="bool" Label="@($"{item}")" Size="@Size.Small" Checked="@(_selectedTeachers.Contains(item))"
+                                         CheckedChanged="@((value) => SelectedChanged(value, item))" />
+                            }
+                        </MudStack>
+                        <MudStack Row="true">
+                            <MudButton OnClick="@(() => ClearFilter(context))">Clear</MudButton>
+                            <MudButton Color="@Color.Primary" OnClick="@(() => ApplyFilter(context))">Filter</MudButton>
+                        </MudStack>
+                    </MudStack>
+                </MudPopover>
             </FilterTemplate>
         </PropertyColumn>
-        <PropertyColumn Property="x => x.Name" />
-        <PropertyColumn Property="x => x.Position" />
-        <PropertyColumn Property="x => x.Molar" Title="Molar mass" />
-        <PropertyColumn Property="x => x.Group" Title="Category" />
+        <PropertyColumn Property="x => x.School" Title="학교" ShowFilterIcon="false" />
+        <TemplateColumn StickyRight="true"  Title="입력/수정" Filterable="false" >
+            <CellTemplate>
+                <MudIconButton Icon="@Icons.Material.Outlined.Edit" Size="@Size.Small" />
+            </CellTemplate>
+        </TemplateColumn>
     </Columns>
     <PagerContent>
         <MudDataGridPager T="AcaStudents" />
@@ -44,78 +50,29 @@
 </MudDataGrid>
 
 
-
-<MudTable Elevation="25" Dense="true" Striped="true" Items="GetStudentList()" Filter="new Func<AcaStudents, bool>(Search)" RowsPerPage="20">
-    <ToolBarContent>
-        <MudText Typo="Typo.h6">학생 목록</MudText>
-        <MudSpacer />
-        <MudTextField @bind-Value="searchString" Placeholder="Search for Students..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-    </ToolBarContent>
-@*    <ColGroup>
-        <col style="width: 120px;" />
-        <col style="width: 100px;" />
-        <col style="width: 120px;" />
-        <col style="width: 140px;" />
-        <col style="width: 120px;" />
-        <col style="width: 140px;" />
-        <col />
-        <col style="width: 50px;" />
-        <col style="width: 140px;" />
-    </ColGroup>*@
-    <HeaderContent>
-        <MudTh>등록일</MudTh>
-        <MudTh>학생번호</MudTh>
-        <MudTh>담임</MudTh>
-        <MudTh>학생 이름</MudTh>
-        <MudTh>인지경로</MudTh>
-        <MudTh>테스트일자</MudTh>
-        <MudTh>테스트단원</MudTh>
-        <MudTh>테스트점수</MudTh>
-        <MudTh>학교</MudTh>
-        <MudTh>수정</MudTh>
-        <MudTh>관리자수정/삭제</MudTh>
-    </HeaderContent>
-    <RowTemplate>
-        <MudTd DataLabel="등록일">@context.AcaRegdate?.ToString("yy/MM/dd")</MudTd>
-        <MudTd DataLabel="학생번호">@context.StuIdx</MudTd>
-        <MudTd DataLabel="담임">@context.Teacher</MudTd>
-        <MudTd DataLabel="학생 이름">@context.StuName</MudTd>
-        <MudTd DataLabel="인지경로">@context.CognitivePathway</MudTd>
-        <MudTd DataLabel="테스트일자">@context.TestDate?.ToString("yy/MM/dd")</MudTd>
-        <MudTd DataLabel="테스트단원">@context.TestArea</MudTd>
-        <MudTd DataLabel="테스트점수">@context.TestScore</MudTd>
-        <MudTd DataLabel="학교">@context.School</MudTd>
-        <MudTd DataLabel="수정">
-            <MudFab @onclick="@(()=>Edit(@context.StuIdx))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
-        </MudTd>
-        <MudTd DataLabel="관리자수정/삭제">
-            <MudFab @onclick="@(()=>AdminEdit(@context.StuIdx))" Color="Color.Info" Icon="@Icons.Material.Filled.ManageAccounts" Size="Size.Small" IconSize="Size.Small" />
-            <MudFab @onclick="@(()=>Delete(@context.StuIdx))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
-        </MudTd>
-    </RowTemplate>
-    <PagerContent>
-        <MudTablePager />
-    </PagerContent>
-</MudTable>
-
 @code {
     IEnumerable<AcaStudents> Students = new List<AcaStudents>();
-    HashSet<AcaStudents> _selectedItems = new();
-    HashSet<AcaStudents> _filterItems = new();
     FilterDefinition<AcaStudents> _filterDefinition;
+    List<string> Teachers = new List<string>();
+    HashSet<string> _selectedTeachers = new();
+    HashSet<string> _filterTeachers = new();
+
     bool _selectAll = true;
     string _icon = Icons.Material.Outlined.FilterAlt;
+    private DateTime? filterDate;
 
     bool _filterOpen = false;
 
     protected override async Task OnInitializedAsync()
     {
         Students = await studentService.GetStudentsAsync();
-        _selectedItems = Students.ToHashSet();
-        _filterItems = Students.ToHashSet();
+        Teachers = optionService.GetTeachers();
+        Teachers.Insert(0, "미정");
+        _selectedTeachers = Teachers.ToHashSet();
+        _filterTeachers = Teachers.ToHashSet();
         _filterDefinition = new FilterDefinition<AcaStudents>
             {
-                FilterFunction = x => _filterItems.Contains(x)
+                FilterFunction = x => _filterTeachers.Contains(x.Teacher)
             };
     }
 
@@ -124,33 +81,33 @@
         _filterOpen = true;
     }
 
-    private void SelectedChanged(bool value, AcaStudents item)
+    private void SelectedChanged(bool value, string item)
     {
         if (value)
-            _selectedItems.Add(item);
+            _selectedTeachers.Add(item);
         else
-            _selectedItems.Remove(item);
+            _selectedTeachers.Remove(item);
 
-        if (_selectedItems.Count == Students.Count())
+        if (_selectedTeachers.Count == Teachers.Count())
             _selectAll = true;
         else
             _selectAll = false;
     }
 
-    private async Task ClearFilterAsync(FilterContext<AcaStudents> context)
+    private void ClearFilter(FilterContext<AcaStudents> context)
     {
-        _selectedItems = Students.ToHashSet();
-        _filterItems = Students.ToHashSet();
+        _selectedTeachers = Teachers.ToHashSet();
+        _filterTeachers = Teachers.ToHashSet();
         _icon = Icons.Material.Outlined.FilterAlt;
-        await context.Actions.ClearFilterAsync(_filterDefinition);
+        context.Actions.ClearFilter(_filterDefinition);
         _filterOpen = false;
     }
 
-    private async Task ApplyFilterAsync(FilterContext<AcaStudents> context)
+    private void ApplyFilter(FilterContext<AcaStudents> context)
     {
-        _filterItems = _selectedItems.ToHashSet();
-        _icon = _filterItems.Count == Students.Count() ? Icons.Material.Outlined.FilterAlt : Icons.Material.Filled.FilterAlt;
-        await context.Actions.ApplyFilterAsync(_filterDefinition);
+        _filterTeachers = _selectedTeachers.ToHashSet();
+        _icon = _filterTeachers.Count == Teachers.Count() ? Icons.Material.Outlined.FilterAlt : Icons.Material.Filled.FilterAlt;
+        context.Actions.ApplyFilter(_filterDefinition);
         _filterOpen = false;
     }
 
@@ -160,11 +117,13 @@
 
         if (value)
         {
-            _selectedItems = Students.ToHashSet();
+            _selectedTeachers = Teachers.ToHashSet();
         }
         else
         {
-            _selectedItems.Clear();
+            _selectedTeachers.Clear();
         }
     }
+
+
 }

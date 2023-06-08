@@ -49,6 +49,8 @@ namespace tjdaca.Pages
                          yesText: "등록", cancelText: "취소");
             if (result != null)
             {
+                if (student.StuIdx == 0) student.Regdate = DateTime.Now;
+                student.Lastdate = DateTime.Now;
                 studentService.SaveStudent(student);
                 snackBar.Add("학생 등록이 완료되었습니다.", Severity.Success);
                 NavManager.NavigateTo("/students");

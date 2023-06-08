@@ -26,10 +26,9 @@ namespace tjdaca.Pages
         private bool Search(AcaStudents student)
         {
             if (string.IsNullOrWhiteSpace(searchString)) return true;
-            if (student.StuName.Contains(searchString, StringComparison.OrdinalIgnoreCase)
-            || student.StudentPhone.Contains(searchString, StringComparison.OrdinalIgnoreCase)
-            || student.Parent.Contains(searchString, StringComparison.Ordinal)
-            || student.Teacher.Contains(searchString, StringComparison.Ordinal)
+            if ((student.StuName?.Contains(searchString, StringComparison.OrdinalIgnoreCase) ?? true)
+            || (student.StudentPhone?.Contains(searchString, StringComparison.OrdinalIgnoreCase) ?? true)
+            || (student.Parent?.Contains(searchString, StringComparison.Ordinal) ?? true)
             )
             {
                 return true;
