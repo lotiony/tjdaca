@@ -38,9 +38,9 @@
             </FilterTemplate>
         </PropertyColumn>
         <PropertyColumn Property="x => x.School" Title="학교" ShowFilterIcon="false" />
-        <TemplateColumn StickyRight="true"  Title="입력/수정" Filterable="false" >
+        <TemplateColumn StickyRight="true"  Title="성적입력" Filterable="false" >
             <CellTemplate>
-                <MudIconButton Icon="@Icons.Material.Outlined.Edit" Size="@Size.Small" />
+                <MudFab @onclick="@(() => Edit(context.Item.StuIdx))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
             </CellTemplate>
         </TemplateColumn>
     </Columns>

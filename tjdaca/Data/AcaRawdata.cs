@@ -22,27 +22,30 @@ namespace tjdaca.Data
         public string ClassSubject { get; set; } = string.Empty;
         public string ClassGrade { get; set; } = string.Empty;
         public string Homework { get; set; } = string.Empty;
+        public bool HomeworkYn { get; set; } = false;
         public float? HomeworkPrev { get; set; } = 100f;
         public float? HomeworkPerform { get; set; } = 100f;
         public float? HomeworkCorrect { get; set; } = 100f;
-        public float? HomeworkProgress { get; set; }
-        public float? HomeworkRatio { get; set; }
+        public float? HomeworkProgress { get; set; } = 0f;
+        public float? HomeworkRatio { get; set; } = 0f;
         public string TestGrade { get; set; } = string.Empty;
         public string TestSubject { get; set; } = string.Empty;
         public string TextbookSource { get; set; } = string.Empty;
         public string Difficulty { get; set; } = string.Empty;
+        public bool DailyYn { get; set; } = false;
         public float? DaliyCount { get; set; } = 100f;
         public float? DailyCorrect { get; set; } = 100f;
-        public float? DailyScore { get; set; }
+        public float? DailyScore { get; set; } = 0f;
+        public bool CliniqYn { get; set; } = false;
         public string CliniqGrade { get; set; } = string.Empty;
         public string CliniqSubject { get; set; } = string.Empty;
         public float? CliniqCount { get; set; } = 100f;
         public float? CliniqCorrect { get; set; } = 100f;
-        public float? CliniqScore { get; set; }
+        public float? CliniqScore { get; set; } = 0f;
         public string Counsel { get; set; } = string.Empty;
-        public string Etc1 { get; set; }
-        public string Etc2 { get; set; }
-        public string Etc3 { get; set; }
+        public string Etc1 { get; set; } = string.Empty;
+        public string Etc2 { get; set; } = string.Empty;
+        public string Etc3 { get; set; } = string.Empty;
         public DateTime? RegDate { get; set; } = DateTime.Now;
     }
 }

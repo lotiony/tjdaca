@@ -1,0 +1,267 @@
+﻿@page "/search/score/{stu_idx}"
+@using tjdaca.Data
+@inject tjdaca.Services.IStudentService studentService
+@inject tjdaca.Services.IOptionService optionService
+@inject IJSRuntime JS
+
+<PageTitle>학생 성적 관리</PageTitle>
+
+<h3>학생 성적 관리</h3>
+
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">선택학생 정보</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+
+    <MudCardContent>
+        <MudGrid Spacing="0">
+            <MudItem xs="1">
+                <MudTextField @bind-Value="student.StuIdx" Label="학생번호" ReadOnly="true" Variant="Variant.Filled" Margin="Margin.Normal"></MudTextField>
+            </MudItem>
+            <MudItem xs="3">
+                <MudTextField @bind-Value="student.StuName" Label="학생 이름" ReadOnly="true" Variant="Variant.Filled" Margin="Margin.Normal"></MudTextField>
+            </MudItem>
+            <MudItem xs="3">
+                <MudTextField @bind-Value="student.School" Label="학교" ReadOnly="true" Variant="Variant.Filled" Margin="Margin.Normal"></MudTextField>
+            </MudItem>
+            <MudItem xs="2">
+                <MudTextField @bind-Value="student.SchGrade" Label="학년" ReadOnly="true" Variant="Variant.Filled" Margin="Margin.Normal"></MudTextField>
+            </MudItem>
+            <MudItem xs="3">
+                <MudTextField @bind-Value="student.Teacher" Label="담임선생님" ReadOnly="true" Variant="Variant.Filled" Margin="Margin.Normal"></MudTextField>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+
+</MudCard>
+<br />
+<br />
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">학교 성적</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+
+    <MudCardContent>
+        <MudGrid Spacing="1">
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.M11" Label="중1-1" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+             <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.M12" Label="중1-2" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>            
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.M21" Label="중2-1" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>           
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.M22" Label="중2-2" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>            
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.M31" Label="중3-1" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>            
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.M32" Label="중3-2" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>           
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H11" Label="고1-1" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H12" Label="고1-2" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H21" Label="고2-1" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H22" Label="고2-2" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H31" Label="고3-1" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H32" Label="고3-2" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+        </MudGrid>
+        <br />
+        <MudButton Variant="Variant.Filled" Size="Size.Large" Color="Color.Info" StartIcon="@Icons.Material.Filled.Save" OnClick="SaveSchoolScore">학교 성적 저장</MudButton>
+    </MudCardContent>
+
+</MudCard>
+<br />
+<br />
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">월말 모의고사 성적 등록</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+
+    <MudCardContent>
+
+        <MudGrid Spacing="2">
+            <MudItem xs="2">
+                <MudNumericField @bind-Value="examScore.Year" Label="연도" Min="2020" Max="2040" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
+            </MudItem>
+            <MudItem xs="2">
+                <MudNumericField @bind-Value="examScore.Month" Label="월" Min="1" Max="12" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
+            </MudItem>
+            <MudItem xs="2">
+                <MudSelect @bind-Value="examScore.Score" Label="점수" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="5">
+                <MudTextField @bind-Value="examScore.ReportUrl" Label="매쓰홀릭 리포트URL" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+            </MudItem>
+            <MudItem xs="1">
+                <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="SaveExamScore">추가</MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+
+</MudCard>
+<br />
+
+<MudTable Elevation="25" Items="@examScoreList" Dense="true" Hover="true" CanCancelEdit="true"
+    SortLabel="정렬기준" CommitEditTooltip="변경내용 저장"
+    OnCommitEditClick="@(() => snackBar.Add("변경내용이 저장되었습니다."))" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues"
+    RowEditCommit="ItemHasBeenCommitted" IsEditRowSwitchingBlocked="true" ApplyButtonPosition="TableApplyButtonPosition.End" EditButtonPosition="TableEditButtonPosition.End" EditTrigger="TableEditTrigger.EditButton">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">월말 모의고사 성적 목록</MudText>
+    </ToolBarContent>
+    <ColGroup>
+        <col style="width:150px;" />
+        <col style="width:150px;" />
+        <col style="width:150px;" />
+        <col />
+        <col style="width:50px;" />
+    </ColGroup>
+    <HeaderContent>
+        <MudTh>연도</MudTh>
+        <MudTh>월</MudTh>
+        <MudTh>점수</MudTh>
+        <MudTh>매쓰홀릭 리포트URL</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="연도">@context.Year</MudTd>
+        <MudTd DataLabel="월">@context.Month</MudTd>
+        <MudTd DataLabel="점수">@context.Score</MudTd>
+        <MudTd DataLabel="매쓰홀릭 리포트URL">@context.ReportUrl</MudTd>
+    </RowTemplate>
+    <RowEditingTemplate>
+        <MudTd DataLabel="연도">
+            <MudNumericField @bind-Value="@context.Year" Required Min="2020" Max="2040" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
+        </MudTd>
+        <MudTd DataLabel="월">
+            <MudNumericField @bind-Value="@context.Month" Required Min="1" Max="12" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
+        </MudTd>
+        <MudTd DataLabel="점수">
+            <MudNumericField @bind-Value="@context.Score" Required Min="0" Max="100" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
+        </MudTd>
+        <MudTd DataLabel="매쓰홀릭 리포트URL">
+            <MudTextField @bind-Value="@context.ReportUrl" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+        </MudTd>
+    </RowEditingTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+    <EditButtonContent Context="button">
+        <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" Class="pa-0" OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled" />
+    </EditButtonContent>
+</MudTable>
+    
+
+@code {
+    private AcaStuExamScore examScoreBeforeEdit;
+
+    private void BackupItem(object item)
+    {
+        examScoreBeforeEdit = new()
+            {
+                Year = ((AcaStuExamScore)item).Year,
+                Month = ((AcaStuExamScore)item).Month,
+                Score = ((AcaStuExamScore)item).Score,
+                ReportUrl = ((AcaStuExamScore)item).ReportUrl
+            };
+    }
+
+    private void ItemHasBeenCommitted(object item)
+    {
+        UpdateExamScore((AcaStuExamScore)item);
+    }
+
+    private void ResetItemToOriginalValues(object item)
+    {
+        ((AcaStuExamScore)item).Year = examScoreBeforeEdit.Year;
+        ((AcaStuExamScore)item).Month = examScoreBeforeEdit.Month;
+        ((AcaStuExamScore)item).Score = examScoreBeforeEdit.Score;
+        ((AcaStuExamScore)item).ReportUrl = examScoreBeforeEdit.ReportUrl;
+    }
+   
+}
+

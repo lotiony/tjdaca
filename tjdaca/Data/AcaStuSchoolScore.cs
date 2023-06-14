@@ -23,5 +23,24 @@ namespace tjdaca.Data
         public float? H31 { get; set; }
         public float? H32 { get; set; }
         public DateTime RegDate { get; set; }
+
+        public AcaStuSchoolScore() { }
+        public AcaStuSchoolScore(int id)
+        {
+            this.StuIdx = id;
+            this.M11 = 0;
+            this.M12 = 0;
+            this.M21 = 0;
+            this.M22 = 0;
+            this.M31 = 0;
+            this.M32 = 0;
+            this.H11 = 0;
+            this.H12 = 0;
+            this.H21 = 0;
+            this.H22 = 0;
+            this.H31 = 0;
+            this.H32 = 0;
+            this.RegDate = DateTime.Now;
+        }
     }
 }

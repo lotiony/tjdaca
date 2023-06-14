@@ -162,6 +162,11 @@ namespace tjdaca.Data
                     .HasMaxLength(200)
                     .HasColumnName("cliniq_subject");
 
+                entity.Property(e => e.CliniqYn)
+                .HasColumnType("bit(1)")
+                .HasColumnName("cliniq_yn");
+
+
                 entity.Property(e => e.Counsel)
                     .HasMaxLength(500)
                     .HasColumnName("counsel");
@@ -171,6 +176,11 @@ namespace tjdaca.Data
                 entity.Property(e => e.DailyScore).HasColumnName("daily_score");
 
                 entity.Property(e => e.DaliyCount).HasColumnName("daliy_count");
+
+                entity.Property(e => e.DailyYn)
+                .HasColumnType("bit(1)")
+                .HasColumnName("daily_yn");
+
 
                 entity.Property(e => e.Difficulty)
                     .HasMaxLength(10)
@@ -195,6 +205,10 @@ namespace tjdaca.Data
                 entity.Property(e => e.Homework)
                     .HasMaxLength(200)
                     .HasColumnName("homework");
+
+                entity.Property(e => e.HomeworkYn)
+                .HasColumnType("bit(1)")
+                .HasColumnName("homework_yn");
 
                 entity.Property(e => e.HomeworkCorrect).HasColumnName("homework_correct");
 

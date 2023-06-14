@@ -206,6 +206,7 @@ namespace tjdaca.Pages
                 {
                     /// 과제정답률 = 과제정답 / 과제수행량
                     rdata.HomeworkRatio = (float?)(Math.Round((decimal)value / (decimal)rdata.HomeworkPerform * 100, 0));
+                    rdata.HomeworkYn = true;    // 값을 셋팅하면 yn값을 자동으로 true로 변경한다.
                 }
             }
         }
@@ -233,6 +234,7 @@ namespace tjdaca.Pages
                 {
                     /// 데일리정답률 = 일일정답수 / 일일문항수
                     rdata.DailyScore = (float?)(Math.Round((decimal)value / (decimal)rdata.DaliyCount * 100, 0));
+                    rdata.DailyYn = true;    // 값을 셋팅하면 yn값을 자동으로 true로 변경한다.
                 }
             }
         }
@@ -259,6 +261,7 @@ namespace tjdaca.Pages
                 {
                     /// 클리닉정답률 = 클리닉정답수 / 클리닉문항수
                     rdata.CliniqScore = (float?)(Math.Round((decimal)value / (decimal)rdata.CliniqCount * 100, 0));
+                    rdata.CliniqYn = true;    // 값을 셋팅하면 yn값을 자동으로 true로 변경한다.
                 }
             }
         }

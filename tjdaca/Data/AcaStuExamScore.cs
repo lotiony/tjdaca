@@ -7,13 +7,25 @@ namespace tjdaca.Data
 {
     public partial class AcaStuExamScore
     {
-        public int Idx { get; set; }
-        public int StuIdx { get; set; }
-        public string StuName { get; set; }
+        public int Idx { get; set; } = 0;
+        public int StuIdx { get; set; } = 0;
+        public string StuName { get; set; } = string.Empty;
         public int? Year { get; set; }
         public int? Month { get; set; }
         public float? Score { get; set; }
         public string ReportUrl { get; set; }
         public DateTime RegDate { get; set; }
+
+        public AcaStuExamScore(int id)
+        {
+            this.StuIdx = id;
+            this.Year = DateTime.Now.Year;
+            this.Month = DateTime.Now.Month;
+            this.Score = 0;
+            this.ReportUrl = string.Empty;
+            this.RegDate = DateTime.Now;
+        }
+
+        public AcaStuExamScore() { }
     }
 }
