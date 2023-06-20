@@ -77,5 +77,12 @@ namespace tjdaca.Services
             else _dbContext.AcaStuSchoolScore.Update(schoolScore);
             _dbContext.SaveChanges();
         }
+
+        public void DeleteExamScore(AcaStuExamScore examScore)
+        {
+            _dbContext.AcaStuExamScore.Remove(examScore);
+            _dbContext.SaveChanges();
+        }
+
     }
 }

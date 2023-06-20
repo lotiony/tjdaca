@@ -2,13 +2,27 @@
 @using tjdaca.Data
 @inject tjdaca.Services.IStudentService studentService
 @inject MudBlazor.ISnackbar snackBar
+@inject IJSRuntime JS
 
 <PageTitle>학생 관리</PageTitle>
 
 <h3>학생 관리</h3>
 
-<MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddStudent">신규학생 등록</MudButton>
-
+<MudStack Justify="Justify.SpaceBetween" Row="true">
+    <MudButton Variant="Variant.Filled" IconSize="Size.Large" Color="Color.Success" OnClick="AddStudent">신규학생 등록</MudButton>
+    <MudButton Disabled="@_processing" OnClick="DownloadExcel" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download">
+        @if (_processing)
+        {
+            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+            <MudText Class="ms-2">Processing</MudText>
+        }
+        else
+        {
+            <MudText>Excel 다운로드</MudText>
+        }
+    </MudButton>
+</MudStack>
+<br/>
 <MudTable Elevation="25" Dense="true" Striped="true" Items="GetStudentList()" Filter="new Func<AcaStudents, bool>(Search)" RowsPerPage="20">
     <ToolBarContent>
         <MudText Typo="Typo.h6">학생 목록</MudText>

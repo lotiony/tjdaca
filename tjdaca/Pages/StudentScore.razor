@@ -38,65 +38,18 @@
 </MudCard>
 <br />
 <br />
+
 <MudCard Elevation="25">
     <MudCardHeader>
         <CardHeaderContent>
-            <MudText Typo="Typo.h6">학교 성적</MudText>
+            <MudText Typo="Typo.h6">중학교 성적</MudText>
         </CardHeaderContent>
     </MudCardHeader>
 
     <MudCardContent>
         <MudGrid Spacing="1">
             <MudItem xs="1">
-                <MudSelect @bind-Value="schoolScore.M11" Label="중1-1" Variant="Variant.Text" Margin="Margin.Normal">
-                    @foreach (var type in ratioList)
-                    {
-                        <MudSelectItem Value="@type">@type</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>
-             <MudItem xs="1">
-                <MudSelect @bind-Value="schoolScore.M12" Label="중1-2" Variant="Variant.Text" Margin="Margin.Normal">
-                    @foreach (var type in ratioList)
-                    {
-                        <MudSelectItem Value="@type">@type</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>            
-            <MudItem xs="1">
-                <MudSelect @bind-Value="schoolScore.M21" Label="중2-1" Variant="Variant.Text" Margin="Margin.Normal">
-                    @foreach (var type in ratioList)
-                    {
-                        <MudSelectItem Value="@type">@type</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>           
-            <MudItem xs="1">
-                <MudSelect @bind-Value="schoolScore.M22" Label="중2-2" Variant="Variant.Text" Margin="Margin.Normal">
-                    @foreach (var type in ratioList)
-                    {
-                        <MudSelectItem Value="@type">@type</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>            
-            <MudItem xs="1">
-                <MudSelect @bind-Value="schoolScore.M31" Label="중3-1" Variant="Variant.Text" Margin="Margin.Normal">
-                    @foreach (var type in ratioList)
-                    {
-                        <MudSelectItem Value="@type">@type</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>            
-            <MudItem xs="1">
-                <MudSelect @bind-Value="schoolScore.M32" Label="중3-2" Variant="Variant.Text" Margin="Margin.Normal">
-                    @foreach (var type in ratioList)
-                    {
-                        <MudSelectItem Value="@type">@type</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>           
-            <MudItem xs="1">
-                <MudSelect @bind-Value="schoolScore.H11" Label="고1-1" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect @bind-Value="schoolScore.M111" Label="1-1중간" Variant="Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in ratioList)
                     {
                         <MudSelectItem Value="@type">@type</MudSelectItem>
@@ -104,7 +57,7 @@
                 </MudSelect>
             </MudItem>
             <MudItem xs="1">
-                <MudSelect @bind-Value="schoolScore.H12" Label="고1-2" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect @bind-Value="schoolScore.M112" Label="1-1기말" Variant="Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in ratioList)
                     {
                         <MudSelectItem Value="@type">@type</MudSelectItem>
@@ -112,7 +65,7 @@
                 </MudSelect>
             </MudItem>
             <MudItem xs="1">
-                <MudSelect @bind-Value="schoolScore.H21" Label="고2-1" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect @bind-Value="schoolScore.M121" Label="1-2중간" Variant="Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in ratioList)
                     {
                         <MudSelectItem Value="@type">@type</MudSelectItem>
@@ -120,7 +73,7 @@
                 </MudSelect>
             </MudItem>
             <MudItem xs="1">
-                <MudSelect @bind-Value="schoolScore.H22" Label="고2-2" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect @bind-Value="schoolScore.M122" Label="1-2기말" Variant="Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in ratioList)
                     {
                         <MudSelectItem Value="@type">@type</MudSelectItem>
@@ -128,7 +81,7 @@
                 </MudSelect>
             </MudItem>
             <MudItem xs="1">
-                <MudSelect @bind-Value="schoolScore.H31" Label="고3-1" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect @bind-Value="schoolScore.M211" Label="2-1중간" Variant="Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in ratioList)
                     {
                         <MudSelectItem Value="@type">@type</MudSelectItem>
@@ -136,7 +89,164 @@
                 </MudSelect>
             </MudItem>
             <MudItem xs="1">
-                <MudSelect @bind-Value="schoolScore.H32" Label="고3-2" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect @bind-Value="schoolScore.M212" Label="2-1기말" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.M221" Label="2-2중간" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.M222" Label="2-2기말" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.M311" Label="3-1중간" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.M312" Label="3-1기말" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.M321" Label="3-2중간" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.M322" Label="3-2기말" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+        </MudGrid>
+        
+    </MudCardContent>
+    <br />
+
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">고등학교 성적</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+
+    <MudCardContent>
+        <MudGrid Spacing="1">
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H111" Label="1-1중간" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H112" Label="1-1기말" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H121" Label="1-2중간" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H122" Label="1-2기말" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H211" Label="2-1중간" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H212" Label="2-1기말" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H221" Label="2-2중간" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H222" Label="2-2기말" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H311" Label="3-1중간" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H312" Label="3-1기말" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H321" Label="3-2중간" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in ratioList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
+                <MudSelect @bind-Value="schoolScore.H322" Label="3-2기말" Variant="Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in ratioList)
                     {
                         <MudSelectItem Value="@type">@type</MudSelectItem>
@@ -187,7 +297,7 @@
 </MudCard>
 <br />
 
-<MudTable Elevation="25" Items="@examScoreList" Dense="true" Hover="true" CanCancelEdit="true"
+<MudTable Elevation="25" Items="@examScoreList" T="AcaStuExamScore" Dense="true" Hover="true" CanCancelEdit="true"
     SortLabel="정렬기준" CommitEditTooltip="변경내용 저장"
     OnCommitEditClick="@(() => snackBar.Add("변경내용이 저장되었습니다."))" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues"
     RowEditCommit="ItemHasBeenCommitted" IsEditRowSwitchingBlocked="true" ApplyButtonPosition="TableApplyButtonPosition.End" EditButtonPosition="TableEditButtonPosition.End" EditTrigger="TableEditTrigger.EditButton">
@@ -200,18 +310,23 @@
         <col style="width:150px;" />
         <col />
         <col style="width:50px;" />
+        <col style="width:50px;" />
     </ColGroup>
     <HeaderContent>
         <MudTh>연도</MudTh>
         <MudTh>월</MudTh>
         <MudTh>점수</MudTh>
         <MudTh>매쓰홀릭 리포트URL</MudTh>
+        <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="연도">@context.Year</MudTd>
         <MudTd DataLabel="월">@context.Month</MudTd>
         <MudTd DataLabel="점수">@context.Score</MudTd>
         <MudTd DataLabel="매쓰홀릭 리포트URL">@context.ReportUrl</MudTd>
+        <MudTd DataLabel="삭제">
+            <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Filled.DeleteForever" Class="pa-0" Color="Color.Error" @onclick="() => DeleteData(context)" />
+        </MudTd>
     </RowTemplate>
     <RowEditingTemplate>
         <MudTd DataLabel="연도">
@@ -225,6 +340,9 @@
         </MudTd>
         <MudTd DataLabel="매쓰홀릭 리포트URL">
             <MudTextField @bind-Value="@context.ReportUrl" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+        </MudTd>
+        <MudTd DataLabel="">
+            
         </MudTd>
     </RowEditingTemplate>
     <PagerContent>
@@ -262,6 +380,20 @@
         ((AcaStuExamScore)item).Score = examScoreBeforeEdit.Score;
         ((AcaStuExamScore)item).ReportUrl = examScoreBeforeEdit.ReportUrl;
     }
-   
+    
+    private async void DeleteData(AcaStuExamScore item)
+    {
+        bool? result = await DialogService.ShowMessageBox(
+                "삭제 확인",
+                "데이터를 삭제하시면 복구할 수 없습니다. 삭제하시겠습니까?",
+                yesText: "삭제", cancelText: "취소");
+        if (result != null)
+        {
+            examScoreList.Remove(item);
+            studentService.DeleteExamScore(item);
+            snackBar.Add("성적 삭제 완료.", Severity.Success);
+            StateHasChanged();
+        }
+    }  
 }
 

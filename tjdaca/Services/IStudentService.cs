@@ -13,5 +13,6 @@ namespace tjdaca.Services
         void DeleteStudent(int id);
         void SaveSchoolScore(AcaStuSchoolScore schoolScore);
         void SaveExamScore(AcaStuExamScore examScore);
+        void DeleteExamScore(AcaStuExamScore examScore);
     }
 }

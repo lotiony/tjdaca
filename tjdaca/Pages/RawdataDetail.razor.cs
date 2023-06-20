@@ -64,7 +64,6 @@ namespace tjdaca.Pages
             }
         }
 
-
         protected override async Task OnInitializedAsync()
         {
             InitInputForm();
@@ -138,17 +137,18 @@ namespace tjdaca.Pages
                 rdata.Attendance = lastRawdata.Attendance;
                 rdata.AbsenceReason = lastRawdata.AbsenceReason;
                 //rdata.SchAchievement= lastRawdata.SchAchievement;
-                //rdata.ClassSubject = lastRawdata.ClassSubject;
+                rdata.ClassSubject = lastRawdata.ClassSubject;
                 rdata.ClassGrade = lastRawdata.ClassGrade;
-                //rdata.Homework = lastRawdata.Homework;
+                rdata.Homework = lastRawdata.Homework;
                 //rdata.HomeworkPrev = lastRawdata.HomeworkPrev;
+                rdata.HomeworkPrev = lastRawdata.HomeworkPerform;   /// 이전과제량을 불러오는거기땜에 마지막데이터의 과제수행량 값을 바인드한다.
                 //rdata.HomeworkPerform = lastRawdata.HomeworkPerform;
                 //rdata.HomeworkCorrect = lastRawdata.HomeworkCorrect;
-                //rdata.HomeworkProgress = lastRawdata .HomeworkProgress;
+                //rdata.HomeworkProgress = lastRawdata.HomeworkProgress;
                 //rdata.HomeworkRatio = lastRawdata.HomeworkRatio;
-                //rdata.TestGrade = lastRawdata.TestGrade;
-                //selectedTestGrade = lastRawdata.TestGrade;
-                //rdata.TestSubject = lastRawdata.TestSubject;
+                rdata.TestGrade = lastRawdata.TestGrade;
+                selectedTestGrade = lastRawdata.TestGrade;
+                rdata.TestSubject = lastRawdata.TestSubject;
                 //rdata.TextbookSource = lastRawdata.TextbookSource;
                 //rdata.Difficulty = lastRawdata.Difficulty;
                 //rdata.DailyCorrect = lastRawdata.DailyCorrect;
@@ -167,15 +167,45 @@ namespace tjdaca.Pages
             }
         }
 
+        private bool selectedHomeworkYn
+        {
+            get { return this.rdata.HomeworkYn; }
+            set
+            {
+                this.rdata.HomeworkYn = value;
+                this.rdata.HomeworkPrev = selectedHomeworkPrev;
+                this.rdata.HomeworkPerform = selectedHomeworkPerform;
+                this.rdata.HomeworkCorrect = selectedHomeworkCorrect;
+
+                if (rdata.HomeworkPrev > 0 && value)
+                {
+                    /// 과제이행정도 = 과제수행량 / 이전과제량
+                    rdata.HomeworkProgress = (float?)(Math.Round((decimal)rdata.HomeworkPerform / (decimal)rdata.HomeworkPrev * 100, 0));
+                }
+                else
+                    rdata.HomeworkProgress = 0f;
+
+                if (rdata.HomeworkPerform > 0 && value)
+                {
+                    /// 과제정답률 = 과제정답 / 과제수행량
+                    rdata.HomeworkRatio = (float?)(Math.Round((decimal)rdata.HomeworkCorrect / (decimal)rdata.HomeworkPerform * 100, 0));
+                }
+                else
+                    rdata.HomeworkRatio = 0f;
+            }
+        }
+
         private float? selectedHomeworkPrev
         { get { return rdata.HomeworkPrev ?? 0; } 
           set { 
                 rdata.HomeworkPrev = value;
-                if (value > 0 && rdata.HomeworkPerform > 0)
+                if (value > 0)
                 {
                     /// 과제이행정도 = 과제수행량 / 이전과제량
                     rdata.HomeworkProgress = (float?)(Math.Round((decimal)rdata.HomeworkPerform / (decimal)value * 100, 0));
                 }
+                else
+                    rdata.HomeworkProgress = 0f;
           }
         }
         private float? selectedHomeworkPerform
@@ -184,16 +214,21 @@ namespace tjdaca.Pages
             set
             {
                 rdata.HomeworkPerform = value;
-                if (value > 0 && rdata.HomeworkPrev > 0)
+                if (rdata.HomeworkPrev > 0)
                 {
                     /// 과제이행정도 = 과제수행량 / 이전과제량
                     rdata.HomeworkProgress = (float?)(Math.Round((decimal)value / (decimal)rdata.HomeworkPrev * 100, 0));
                 }
-                if (value > 0 && rdata.HomeworkCorrect > 0)
+                else
+                    rdata.HomeworkProgress = 0f;
+
+                if (value > 0)
                 {
                     /// 과제정답률 = 과제정답 / 과제수행량
                     rdata.HomeworkRatio = (float?)(Math.Round((decimal)rdata.HomeworkCorrect / (decimal)value * 100, 0));
                 }
+                else
+                    rdata.HomeworkRatio = 0f;
             }
         }
         private float? selectedHomeworkCorrect
@@ -202,26 +237,47 @@ namespace tjdaca.Pages
             set
             {
                 rdata.HomeworkCorrect = value;
-                if (value > 0 && rdata.HomeworkPerform > 0)
+                if (rdata.HomeworkPerform > 0)
                 {
                     /// 과제정답률 = 과제정답 / 과제수행량
                     rdata.HomeworkRatio = (float?)(Math.Round((decimal)value / (decimal)rdata.HomeworkPerform * 100, 0));
-                    rdata.HomeworkYn = true;    // 값을 셋팅하면 yn값을 자동으로 true로 변경한다.
+                    //rdata.HomeworkYn = true;    // 값을 셋팅하면 yn값을 자동으로 true로 변경한다.
                 }
+                else
+                    rdata.HomeworkRatio = 0f;
             }
         }
 
+        private bool selectedDailyYn
+        {
+            get { return this.rdata.DailyYn; }
+            set
+            {
+                this.rdata.DailyYn = value;
+                this.rdata.DailyCorrect = selectedDailyCorrect;
+                this.rdata.DaliyCount = selectedDailyCount;
+                if (rdata.DaliyCount > 0 && value)
+                {
+                    /// 데일리정답률 = 일일정답수 / 일일문항수
+                    rdata.DailyScore = (float?)(Math.Round((decimal)rdata.DailyCorrect / (decimal)rdata.DaliyCount * 100, 0));
+                }
+                else
+                    rdata.DailyScore = 0f;
+            }
+        }
         private float? selectedDailyCount
         {
             get { return rdata.DaliyCount ?? 0; }
             set
             {
                 rdata.DaliyCount = value;
-                if (value > 0 && rdata.DailyCorrect > 0)
+                if (value > 0)
                 {
                     /// 데일리정답률 = 일일정답수 / 일일문항수
                     rdata.DailyScore = (float?)(Math.Round((decimal)rdata.DailyCorrect / (decimal)value * 100, 0));
                 }
+                else
+                    rdata.DailyScore = 0f;
             }
         }
         private float? selectedDailyCorrect
@@ -230,12 +286,32 @@ namespace tjdaca.Pages
             set
             {
                 rdata.DailyCorrect = value;
-                if (value > 0 && rdata.DaliyCount > 0)
+                if (rdata.DaliyCount > 0)
                 {
                     /// 데일리정답률 = 일일정답수 / 일일문항수
                     rdata.DailyScore = (float?)(Math.Round((decimal)value / (decimal)rdata.DaliyCount * 100, 0));
-                    rdata.DailyYn = true;    // 값을 셋팅하면 yn값을 자동으로 true로 변경한다.
+                    //rdata.DailyYn = true;    // 값을 셋팅하면 yn값을 자동으로 true로 변경한다.
                 }
+                else
+                    rdata.DailyScore = 0f;
+            }
+        }
+
+        private bool selectedCliniqYn
+        {
+            get { return this.rdata.CliniqYn; }
+            set
+            {
+                this.rdata.CliniqYn = value;
+                this.rdata.CliniqCorrect = selectedCliniqCorrect;
+                this.rdata.CliniqCount = selectedCliniqCount;
+                if (rdata.CliniqCount > 0 && value)
+                {
+                    /// 클리닉정답률 = 클리닉정답수 / 클리닉문항수
+                    rdata.CliniqScore = (float?)(Math.Round((decimal)rdata.CliniqCorrect / (decimal)rdata.CliniqCount * 100, 0));
+                }
+                else
+                    rdata.CliniqScore = 0f;
             }
         }
         private float? selectedCliniqCount
@@ -244,11 +320,13 @@ namespace tjdaca.Pages
             set
             {
                 rdata.CliniqCount = value;
-                if (value > 0 && rdata.CliniqCorrect > 0)
+                if (value > 0)
                 {
                     /// 클리닉정답률 = 클리닉정답수 / 클리닉문항수
                     rdata.CliniqScore = (float?)(Math.Round((decimal)rdata.CliniqCorrect / (decimal)value * 100, 0));
                 }
+                else
+                    rdata.CliniqScore = 0f;
             }
         }
         private float? selectedCliniqCorrect
@@ -257,12 +335,14 @@ namespace tjdaca.Pages
             set
             {
                 rdata.CliniqCorrect = value;
-                if (value > 0 && rdata.CliniqCount > 0)
+                if (rdata.CliniqCount > 0)
                 {
                     /// 클리닉정답률 = 클리닉정답수 / 클리닉문항수
                     rdata.CliniqScore = (float?)(Math.Round((decimal)value / (decimal)rdata.CliniqCount * 100, 0));
-                    rdata.CliniqYn = true;    // 값을 셋팅하면 yn값을 자동으로 true로 변경한다.
+                    //rdata.CliniqYn = true;    // 값을 셋팅하면 yn값을 자동으로 true로 변경한다.
                 }
+                else
+                    rdata.CliniqScore = 0f;
             }
         }
 
@@ -286,7 +366,7 @@ namespace tjdaca.Pages
         private List<float?> GetRatioList()
         {
             List<float?> rtn = new List<float?>();
-            for(float i = 100; i >= 0; i--) 
+            for(float i = 130; i >= 0; i--) 
             {
                 rtn.Add(i);
             }

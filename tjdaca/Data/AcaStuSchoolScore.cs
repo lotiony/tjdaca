@@ -10,36 +10,62 @@ namespace tjdaca.Data
         public int Idx { get; set; }
         public int StuIdx { get; set; }
         public string StuName { get; set; }
-        public float? M11 { get; set; }
-        public float? M12 { get; set; }
-        public float? M21 { get; set; }
-        public float? M22 { get; set; }
-        public float? M31 { get; set; }
-        public float? M32 { get; set; }
-        public float? H11 { get; set; }
-        public float? H12 { get; set; }
-        public float? H21 { get; set; }
-        public float? H22 { get; set; }
-        public float? H31 { get; set; }
-        public float? H32 { get; set; }
+        public float? M111 { get; set; }
+        public float? M112 { get; set; }
+        public float? M121 { get; set; }
+        public float? M122 { get; set; }
+        public float? M211 { get; set; }
+        public float? M212 { get; set; }
+        public float? M221 { get; set; }
+        public float? M222 { get; set; }
+        public float? M311 { get; set; }
+        public float? M312 { get; set; }
+        public float? M321 { get; set; }
+        public float? M322 { get; set; }
+        public float? H111 { get; set; }
+        public float? H112 { get; set; }
+        public float? H121 { get; set; }
+        public float? H122 { get; set; }
+        public float? H211 { get; set; }
+        public float? H212 { get; set; }
+        public float? H221 { get; set; }
+        public float? H222 { get; set; }
+        public float? H311 { get; set; }
+        public float? H312 { get; set; }
+        public float? H321 { get; set; }
+        public float? H322 { get; set; }
         public DateTime RegDate { get; set; }
 
         public AcaStuSchoolScore() { }
         public AcaStuSchoolScore(int id)
         {
             this.StuIdx = id;
-            this.M11 = 0;
-            this.M12 = 0;
-            this.M21 = 0;
-            this.M22 = 0;
-            this.M31 = 0;
-            this.M32 = 0;
-            this.H11 = 0;
-            this.H12 = 0;
-            this.H21 = 0;
-            this.H22 = 0;
-            this.H31 = 0;
-            this.H32 = 0;
+            this.M111 = 0;
+            this.M121 = 0;
+            this.M211 = 0;
+            this.M221 = 0;
+            this.M311 = 0;
+            this.M321 = 0;
+            this.H111 = 0;
+            this.H121 = 0;
+            this.H211 = 0;
+            this.H221 = 0;
+            this.H311 = 0;
+            this.H321 = 0;
+
+            this.M112 = 0;
+            this.M122 = 0;
+            this.M212 = 0;
+            this.M222 = 0;
+            this.M312 = 0;
+            this.M322 = 0;
+            this.H112 = 0;
+            this.H122 = 0;
+            this.H212 = 0;
+            this.H222 = 0;
+            this.H312 = 0;
+            this.H322 = 0;
+
             this.RegDate = DateTime.Now;
         }
     }
