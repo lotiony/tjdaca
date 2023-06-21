@@ -3,6 +3,7 @@
 @using tjdaca.Data
 @inject tjdaca.Services.IRawdataService rawdataService
 @inject MudBlazor.ISnackbar snackBar
+@inject IJSRuntime JS
 
 <style>
     .mud-table-sticky-header * .mud-table-root .mud-table-head * .mud-table-cell { height:45px; background: gainsboro;}
@@ -11,7 +12,11 @@
 
 <h3>상담일지 목록 관리</h3>
 
-<MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddRawdata"> 상담일지 등록</MudButton>
+
+<MudStack Justify="Justify.SpaceBetween" Row="true">
+    <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddRawdata"> 상담일지 등록</MudButton>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="DownloadExcel"  StartIcon="@Icons.Material.Filled.Download"> Excel 다운로드</MudButton>
+</MudStack>
 
 <MudTable Elevation="25" Dense="true" Striped="true" Items="GetRawdataList()" Filter="new Func<AcaRawdata, bool>(Search)" RowsPerPage="20" HorizontalScrollbar="true" FixedHeader="true">
     <ToolBarContent>

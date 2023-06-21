@@ -79,5 +79,10 @@ namespace tjdaca.Services
 
             return subjectList;
         }
+
+        public string GetTeacherNameByTid(int tid)
+        {
+            return _dbContext.AcaTeachers.Where(x => x.TIdx.Equals(tid)).SingleOrDefault()?.TName ?? "";
+        }
     }
 }

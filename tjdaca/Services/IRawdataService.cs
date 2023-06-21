@@ -13,5 +13,6 @@ namespace tjdaca.Services
         void SaveData(AcaRawdata rawdata);
         void DeleteRawdata(int id);
         List<string> GetSubjectListByGrade(string subject, string grade);
+        string GetTeacherNameByTid(int tid);
     }
 }

@@ -11,7 +11,7 @@ namespace tjdaca.Data
     public partial class AcaStudents
     {
         [Display(Name = "학생번호")]
-        public int StuIdx { get; set; }
+        public int StuIdx { get; set; } = 0;
 
         [Display(Name = "학생이름")]
         [Required(ErrorMessage="학생이름은 필수입니다."), MinLength(2)]
@@ -30,50 +30,63 @@ namespace tjdaca.Data
         public string ParentPhone { get; set; } = string.Empty;
 
         [Display(Name = "우편번호")]
-        public string Zipcode { get; set; }
+        [Required(ErrorMessage = "우편번호는 필수입니다."), MinLength(2)]
+        public string Zipcode { get; set; } = string.Empty;
+
         [Display(Name = "도로명주소")]
-        public string Address1 { get; set; }
+        [Required(ErrorMessage = "도로명주소는 필수입니다."), MinLength(2)]
+        public string Address1 { get; set; } = string.Empty;
+
         [Display(Name = "상세주소")]
-        public string Address2 { get; set; }
+        [Required(ErrorMessage = "상세주소는 필수입니다."), MinLength(2)]
+        public string Address2 { get; set; } = string.Empty;
+
         [Display(Name = "학교")]
-        public string School { get; set; }
+        [Required(ErrorMessage = "학교는 필수입니다."), MinLength(2)]
+        public string School { get; set; } = string.Empty;
 
         [Display(Name = "학교구분")]
+        [Required(ErrorMessage = "학교구분은 필수입니다."), MinLength(2)]
         /// <summary>
         /// 초등/중등/고등
         /// </summary>
-        public string SchType { get; set; }
+        public string SchType { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "학년은 필수입니다."), MinLength(1)]
         [Display(Name = "학년")]
         /// <summary>
         /// 학년
         /// </summary>
-        public string SchGrade { get; set; }
+        public string SchGrade { get; set; } = string.Empty;
 
         [Display(Name = "희망고등학교")]
-        public string HopeHighschool { get; set; }
+        public string HopeHighschool { get; set; } = string.Empty;
 
         [Display(Name = "희망대학교")]
-        public string HopeUniversity { get; set; }
+        public string HopeUniversity { get; set; } = string.Empty;
 
         [Display(Name = "수강희망과목")]
-        public string Subject { get; set; }
+        [Required(ErrorMessage = "수강희망과목은 필수입니다."), MinLength(2)]
+        public string Subject { get; set; } = string.Empty;
 
         [Display(Name = "과정선택")]
-        public string SubjectOption { get; set; }
+        [Required(ErrorMessage = "과정선택은 필수입니다."), MinLength(2)]
+        public string SubjectOption { get; set; } = string.Empty;
 
         [Display(Name = "현재수학진도현황")]
-        public string MathProgress { get; set; }
+        [Required(ErrorMessage = "현재수학진도현황은 필수입니다."), MinLength(2)]
+        public string MathProgress { get; set; } = string.Empty;
 
         [Display(Name = "학원인지경로")]
         [Required(ErrorMessage = "학원 인지경로는 필수입니다."), MinLength(2)]
-        public string CognitivePathway { get; set; }
+        public string CognitivePathway { get; set; } = string.Empty;
 
-        [IgnoreExcelAttribute]
-        public string VisitPurpose { get; set; }
+        [Display(Name = "방문목적")]
+        [Required(ErrorMessage = "방문목적은 필수입니다."), MinLength(2)]
+        public string VisitPurpose { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "개인정보 동의에 체크해 주세요."), IgnoreExcelAttribute]
-        public bool? Agree { get; set; }
+        public bool? Agree { get; set; } = false;
 
         [Display(Name = "학원등록일")]
         public DateTime? AcaRegdate { get; set; }
@@ -82,19 +95,19 @@ namespace tjdaca.Data
         public DateTime? AcaOutdate { get; set; }
 
         [Display(Name = "담당선생님")]
-        public string Teacher { get; set; }
+        public string Teacher { get; set; } = string.Empty;
 
         [Display(Name = "테스트날짜")]
         public DateTime? TestDate { get; set; }
 
         [Display(Name = "테스트범위")]
-        public string TestArea { get; set; }
+        public string TestArea { get; set; } = string.Empty;
 
         [Display(Name = "테스트점수")]
-        public string TestScore { get; set; }
+        public string TestScore { get; set; } = string.Empty;
 
         [Display(Name = "테스트결과")]
-        public string TestResult { get; set; }
+        public string TestResult { get; set; } = string.Empty;
 
         [IgnoreExcelAttribute]
         public string Class { get; set; }
