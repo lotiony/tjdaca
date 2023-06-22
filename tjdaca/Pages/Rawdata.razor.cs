@@ -2,12 +2,10 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using tjdaca.Class;
 using tjdaca.Data;
-using tjdaca.Services;
 
 namespace tjdaca.Pages
 {
@@ -38,8 +36,7 @@ namespace tjdaca.Pages
         private bool Search(AcaRawdata student)
         {
             if (string.IsNullOrWhiteSpace(searchString)) return true;
-            if (student.StuName.Contains(searchString, StringComparison.OrdinalIgnoreCase)
-            || student.ClassName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            if (student.StuName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
