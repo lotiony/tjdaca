@@ -11,10 +11,10 @@ namespace tjdaca.Data
     public partial class AcaStudents
     {
         [Display(Name = "학생번호")]
-        public int StuIdx { get; set; } = 0;
+        public int StuIdx { get; set; }
 
         [Display(Name = "학생이름")]
-        [Required(ErrorMessage="학생이름은 필수입니다."), MinLength(2)]
+        [Required(ErrorMessage = "학생이름은 필수입니다."), MinLength(2)]
         public string StuName { get; set; } = string.Empty;
 
         [Display(Name = "학생 연락처")]
@@ -24,7 +24,7 @@ namespace tjdaca.Data
         [Display(Name = "학부모이름")]
         [Required(ErrorMessage = "학부모 이름은 필수입니다."), MinLength(2)]
         public string Parent { get; set; } = string.Empty;
-        
+
         [Display(Name = "학부모 연락처")]
         [Required(ErrorMessage = "학부모 연락처는 필수입니다."), MinLength(10)]
         public string ParentPhone { get; set; } = string.Empty;
@@ -59,6 +59,7 @@ namespace tjdaca.Data
         /// </summary>
         public string SchGrade { get; set; } = string.Empty;
 
+
         [Display(Name = "희망고등학교")]
         public string HopeHighschool { get; set; } = string.Empty;
 
@@ -81,12 +82,11 @@ namespace tjdaca.Data
         [Required(ErrorMessage = "학원 인지경로는 필수입니다."), MinLength(2)]
         public string CognitivePathway { get; set; } = string.Empty;
 
-        [Display(Name = "방문목적")]
-        [Required(ErrorMessage = "방문목적은 필수입니다."), MinLength(2)]
         public string VisitPurpose { get; set; } = string.Empty;
 
+
         [Required(ErrorMessage = "개인정보 동의에 체크해 주세요."), IgnoreExcelAttribute]
-        public bool? Agree { get; set; } = false;
+        public bool? Agree { get; set; }
 
         [Display(Name = "학원등록일")]
         public DateTime? AcaRegdate { get; set; }

@@ -17,95 +17,95 @@
     </MudCardHeader>
 
     <EditForm Model="@student" OnValidSubmit="OnValidSubmit">
-    <DataAnnotationsValidator/>
+        <DataAnnotationsValidator />
 
-    <MudCardContent>
-        <MudGrid Spacing="2">
-            <MudItem xs="6">
+        <MudCardContent>
+            <MudGrid Spacing="2">
+                <MudItem xs="6">
                     <MudTextField @bind-Value="student.StuName" For="@(() => student.StuName)" Label="학생 이름" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-            </MudItem>
-            <MudItem xs="6">
+                </MudItem>
+                <MudItem xs="6">
                     <MudTextField @bind-Value="student.StudentPhone" For="@(() => student.StudentPhone)" Label="학생 연락처" Variant="Variant.Text" Margin="Margin.Normal" Placeholder="01088886666 (숫자를 다 붙여 쓰시면 됩니다)"></MudTextField>
-            </MudItem>
-            <MudItem xs="6">
+                </MudItem>
+                <MudItem xs="6">
                     <MudTextField @bind-Value="student.Parent" For="@(() => student.Parent)" Label="학부모 이름" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-            </MudItem>
-            <MudItem xs="6">
+                </MudItem>
+                <MudItem xs="6">
                     <MudTextField @bind-Value="student.ParentPhone" For="@(() => student.ParentPhone)" Label="학부모 연락처" Variant="Variant.Text" Margin="Margin.Normal" Placeholder="01088886666 (숫자를 다 붙여 쓰시면 됩니다)"></MudTextField>
-            </MudItem>
-            <MudItem xs="3">
-                <MudSelect @bind-Value="student.SchType" For="@(() => student.SchType)" Label="학교구분" Variant="Variant.Text" Margin="Margin.Normal">
-                @foreach (var type in schTypeList)
-                {
-                    <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
-                }
-                </MudSelect>
-            </MudItem>
-            <MudItem xs="6">
-                <MudTextField @bind-Value="student.School" For="@(() => student.School)"  Label="학교" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-            </MudItem>
-            <MudItem xs="3">
-                <MudSelect @bind-Value="student.SchGrade" For="@(() => student.SchGrade)" Label="학년" Variant="Variant.Text" Margin="Margin.Normal">
-                    @foreach (var type in schGradeList)
-                    {
-                        <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>
+                </MudItem>
+                <MudItem xs="3">
+                    <MudSelect @bind-Value="student.SchType" For="@(() => student.SchType)" Label="학교구분" Variant="Variant.Text" Margin="Margin.Normal">
+                        @foreach (var type in schTypeList)
+                        {
+                            <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="student.School" For="@(() => student.School)" Label="학교" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                </MudItem>
+                <MudItem xs="3">
+                    <MudSelect @bind-Value="student.SchGrade" For="@(() => student.SchGrade)" Label="학년" Variant="Variant.Text" Margin="Margin.Normal">
+                        @foreach (var type in schGradeList)
+                        {
+                            <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
 
-            <MudItem xs="2">
-                <MudTextField @bind-Value="student.Zipcode" For="@(() => student.Zipcode)" Label="우편번호" id="zipcode" Variant="Variant.Text" Margin="Margin.Normal" ReadOnly="true" onclick="@execDaumPostcode"></MudTextField>
-            </MudItem>
-            <MudItem xs="5">
-                <MudTextField @bind-Value="student.Address1" For="@(() => student.Address1)" Label="도로명주소" id="roadAddress" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-            </MudItem>
-            <MudItem xs="5">
-                <MudTextField @bind-Value="student.Address2" For="@(() => student.Address2)" Label="상세주소" id="detailAddress" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-            </MudItem>
+                <MudItem xs="2">
+                    <MudTextField @bind-Value="student.Zipcode" For="@(() => student.Zipcode)" Label="우편번호" id="zipcode" Variant="Variant.Text" Margin="Margin.Normal" ReadOnly="true" onclick="@execDaumPostcode"></MudTextField>
+                </MudItem>
+                <MudItem xs="5">
+                    <MudTextField @bind-Value="student.Address1" For="@(() => student.Address1)" Label="도로명주소" id="roadAddress" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                </MudItem>
+                <MudItem xs="5">
+                    <MudTextField @bind-Value="student.Address2" For="@(() => student.Address2)" Label="상세주소" id="detailAddress" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                </MudItem>
 
-            <MudItem xs="6">
-                <MudTextField @bind-Value="student.HopeHighschool" Label="희망고등학교" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-            </MudItem>
-            <MudItem xs="6">
-                <MudTextField @bind-Value="student.HopeUniversity" Label="희망대학교" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-            </MudItem>
-            <MudItem xs="6">
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="student.HopeHighschool" Label="희망고등학교" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="student.HopeUniversity" Label="희망대학교" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                </MudItem>
+                <MudItem xs="6">
                     <MudSelect @bind-Value="student.CognitivePathway" For="@(() => student.CognitivePathway)" Label="학원 인지경로" Variant="Variant.Text" Margin="Margin.Normal">
-                    @foreach (var type in cognitivePathwayList)
-                    {
-                        <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>
-            <MudItem xs="3">
-                <MudSelect @bind-Value="student.Subject" For="@(() => student.Subject)" Label="수강희망과목" Variant="Variant.Text" Margin="Margin.Normal">
-                    @foreach (var type in subjectList)
-                    {
-                        <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>
-            <MudItem xs="3">
-                <MudSelect @bind-Value="student.SubjectOption" For="@(() => student.SubjectOption)" Label="과정선택" Variant="Variant.Text" Margin="Margin.Normal">
-                    @foreach (var type in schTypeList)
-                    {
-                        <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>
-        
-            <MudItem xs="6">
-                <MudTextField @bind-Value="student.MathProgress" For="@(() => student.MathProgress)" Label="현재수학진도현황" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-            </MudItem>
-            <MudItem xs="12">
-                    <MudCheckBox @bind-Checked="@student.Agree" Label="개인정보수집 활용에 동의합니다." For="@(() => student.Agree)"></MudCheckBox>
-            </MudItem>
+                        @foreach (var type in cognitivePathwayList)
+                        {
+                            <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="3">
+                    <MudSelect @bind-Value="student.Subject" For="@(() => student.Subject)" Label="수강희망과목" Variant="Variant.Text" Margin="Margin.Normal">
+                        @foreach (var type in subjectList)
+                        {
+                            <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="3">
+                    <MudSelect @bind-Value="student.SubjectOption" For="@(() => student.SubjectOption)" Label="과정선택" Variant="Variant.Text" Margin="Margin.Normal">
+                        @foreach (var type in schTypeList)
+                        {
+                            <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
 
-        </MudGrid>
-        <br />
-        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Size="Size.Large" Color="Color.Info" StartIcon="@Icons.Material.Filled.Save" >학생 정보 등록</MudButton>
-        <MudButton Variant="Variant.Filled" Size="Size.Large" OnClick="Cancel">입력내용 초기화</MudButton>
-    </MudCardContent>
+                <MudItem xs="6">
+                    <MudTextField @bind-Value="student.MathProgress" For="@(() => student.MathProgress)" Label="현재수학진도현황" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudCheckBox @bind-Checked="@student.Agree" Label="개인정보수집 활용에 동의합니다." For="@(() => student.Agree)"></MudCheckBox>
+                </MudItem>
+
+            </MudGrid>
+            <br />
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Size="Size.Large" Color="Color.Info" StartIcon="@Icons.Material.Filled.Save">학생 정보 등록</MudButton>
+            <MudButton Variant="Variant.Filled" Size="Size.Large" OnClick="Cancel">입력내용 초기화</MudButton>
+        </MudCardContent>
 
     </EditForm>
 
@@ -138,8 +138,10 @@
         public string bname { get; set; }
         public string buildingName { get; set; }
         public string apartment { get; set; }
-        public string applyAddress {
-            get {
+        public string applyAddress
+        {
+            get
+            {
                 string rtnStr = string.Empty;
                 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
                 // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
