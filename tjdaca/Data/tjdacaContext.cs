@@ -156,6 +156,10 @@ namespace tjdaca.Data
                     .HasMaxLength(50)
                     .HasColumnName("cliniq_grade");
 
+                entity.Property(e => e.CliniqTeacher)
+                    .HasMaxLength(50)
+                    .HasColumnName("cliniq_teacher");
+
                 entity.Property(e => e.CliniqScore).HasColumnName("cliniq_score");
 
                 entity.Property(e => e.CliniqSubject)

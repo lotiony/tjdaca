@@ -19,6 +19,12 @@ namespace tjdaca.Class
                 return text ;
         }
 
+        public static float? ToFloat(this string text)
+        {
+            if (string.IsNullOrEmpty(text)) return null ;
+            return float.Parse(text) ;
+        }
+
         public static string GetDescription<T>(Expression<Func<T>> propertyExpression)
         {
             MemberExpression memberExpression = (MemberExpression)propertyExpression.Body;

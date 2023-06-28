@@ -59,19 +59,19 @@ namespace tjdaca.Data
         public bool HomeworkYn { get; set; } = false;
 
         [Display(Name = "이전과제량")]
-        public float? HomeworkPrev { get; set; } = 100f;
+        public float? HomeworkPrev { get; set; } = null;
 
         [Display(Name = "과제수행량")]
-        public float? HomeworkPerform { get; set; } = 100f;
+        public float? HomeworkPerform { get; set; } = null;
 
         [Display(Name = "과제정답")]
-        public float? HomeworkCorrect { get; set; } = 100f;
+        public float? HomeworkCorrect { get; set; } = null;
 
         [Display(Name = "과제이행정도")]
-        public float? HomeworkProgress { get; set; } = 0f;
+        public float? HomeworkProgress { get; set; } = null;
 
         [Display(Name = "과제정답률")]
-        public float? HomeworkRatio { get; set; } = 0f;
+        public float? HomeworkRatio { get; set; } = null;
 
         [Display(Name = "테스트학기")]
         public string TestGrade { get; set; } = string.Empty;
@@ -89,16 +89,19 @@ namespace tjdaca.Data
         public bool DailyYn { get; set; } = false;
 
         [Display(Name = "일일테스트문항수")]
-        public float? DaliyCount { get; set; } = 100f;
+        public float? DaliyCount { get; set; } = null;
 
         [Display(Name = "일일테스트정답수")]
-        public float? DailyCorrect { get; set; } = 100f;
+        public float? DailyCorrect { get; set; } = null;
 
         [Display(Name = "일일테스트정답률")]
-        public float? DailyScore { get; set; } = 0f;
+        public float? DailyScore { get; set; } = null;
 
         [Display(Name = "클리닉진행여부")]
         public bool CliniqYn { get; set; } = false;
+
+        [Display(Name = "클리닉담임")]
+        public string CliniqTeacher { get; set; } = string.Empty;
 
         [Display(Name = "클리닉학기")]
         public string CliniqGrade { get; set; } = string.Empty;
@@ -107,13 +110,13 @@ namespace tjdaca.Data
         public string CliniqSubject { get; set; } = string.Empty;
 
         [Display(Name = "클리닉테스트문항수")]
-        public float? CliniqCount { get; set; } = 100f;
+        public float? CliniqCount { get; set; } = null;
 
         [Display(Name = "클리닉테스트정답수")]
-        public float? CliniqCorrect { get; set; } = 100f;
+        public float? CliniqCorrect { get; set; } = null;
 
         [Display(Name = "클리닉테스트정답률")]
-        public float? CliniqScore { get; set; } = 0f;
+        public float? CliniqScore { get; set; } = null;
 
         [Display(Name = "월간상담내용")]
         public string Counsel { get; set; } = string.Empty;

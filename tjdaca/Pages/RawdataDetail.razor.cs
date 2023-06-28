@@ -2,6 +2,7 @@
 using Microsoft.JSInterop;
 using MudBlazor;
 using System;
+using tjdaca.Class;
 using tjdaca.Data;
 using tjdaca.Services;
 
@@ -23,12 +24,13 @@ namespace tjdaca.Pages
         private AcaRawdata rdata;
         private List<AcaStudents> studentList { get; set; } = new List<AcaStudents>();
         private List<AcaOptions> classNameList { get; set; } = new List<AcaOptions>();
+        private List<string> teacherList { get; set; } = new List<string>();
         private List<string> classGradeList { get; set; } = new List<string>();
         private List<string> testGradeList { get; set; } = new List<string>();
         private List<string> testSubjectList { get; set; } = new List<string>();
         private List<string> cliniqSubjectList { get; set; } = new List<string>();
         private List<AcaOptions> textbookSourceList { get; set; } = new List<AcaOptions>();
-        private List<float?> ratioList { get; set; } = new List<float?>();
+        private List<string> ratioList { get; set; } = new List<string>();
         private string selectedTestGrade
         {
             get { return testGradeList?.SingleOrDefault(x => x == rdata.TestGrade) ?? ""; }
@@ -100,6 +102,8 @@ namespace tjdaca.Pages
             studentList = rawdataService.GetStudentByTid(tidx_int);
             textbookSourceList = optionService.GetOptions("교재출처");
             classNameList = optionService.GetOptions("반명");
+            teacherList = optionService.GetTeachers();
+            teacherList.Insert(0, "");
             classGradeList = GetClassGradeList();
             ratioList = GetRatioList();
             testGradeList = GetTestGradeList();
@@ -172,79 +176,84 @@ namespace tjdaca.Pages
             get { return this.rdata.HomeworkYn; }
             set
             {
-                this.rdata.HomeworkYn = value;
-                this.rdata.HomeworkPrev = selectedHomeworkPrev;
-                this.rdata.HomeworkPerform = selectedHomeworkPerform;
-                this.rdata.HomeworkCorrect = selectedHomeworkCorrect;
+                selectedHomeworkPerform = value ? selectedHomeworkPrev : "";
+                selectedHomeworkCorrect = value ? selectedHomeworkPrev : "";
 
-                if (rdata.HomeworkPrev > 0 && value)
+                this.rdata.HomeworkYn = value;
+                this.rdata.HomeworkPrev = selectedHomeworkPrev.ToFloat();
+                this.rdata.HomeworkPerform = selectedHomeworkPerform.ToFloat(); ;
+                this.rdata.HomeworkCorrect = selectedHomeworkCorrect.ToFloat(); ;
+
+                if ((rdata.HomeworkPrev ?? 0) > 0 && value)
                 {
                     /// 과제이행정도 = 과제수행량 / 이전과제량
-                    rdata.HomeworkProgress = (float?)(Math.Round((decimal)rdata.HomeworkPerform / (decimal)rdata.HomeworkPrev * 100, 0));
+                    rdata.HomeworkProgress = (float?)(Math.Round((decimal)(rdata.HomeworkPerform ?? 0) / (decimal)rdata.HomeworkPrev * 100, 0));
                 }
                 else
-                    rdata.HomeworkProgress = 0f;
+                    rdata.HomeworkProgress = null;
 
-                if (rdata.HomeworkPerform > 0 && value)
+                if ((rdata.HomeworkPerform ?? 0) > 0 && value)
                 {
                     /// 과제정답률 = 과제정답 / 과제수행량
-                    rdata.HomeworkRatio = (float?)(Math.Round((decimal)rdata.HomeworkCorrect / (decimal)rdata.HomeworkPerform * 100, 0));
+                    rdata.HomeworkRatio = (float?)(Math.Round((decimal)(rdata.HomeworkCorrect ?? 0) / (decimal)rdata.HomeworkPerform * 100, 0));
                 }
                 else
-                    rdata.HomeworkRatio = 0f;
+                    rdata.HomeworkRatio = null;
             }
         }
 
-        private float? selectedHomeworkPrev
-        { get { return rdata.HomeworkPrev ?? 0; } 
+        private string selectedHomeworkPrev
+        { get { return rdata.HomeworkPrev?.ToString() ?? ""; } 
           set { 
-                rdata.HomeworkPrev = value;
-                if (value > 0)
+                rdata.HomeworkPrev = value.ToFloat(); ;
+                if ((rdata.HomeworkPrev ?? 0) > 0)
                 {
+                    selectedHomeworkPerform = value;
+                    selectedHomeworkCorrect = value;
                     /// 과제이행정도 = 과제수행량 / 이전과제량
-                    rdata.HomeworkProgress = (float?)(Math.Round((decimal)rdata.HomeworkPerform / (decimal)value * 100, 0));
+                    rdata.HomeworkProgress = (float?)(Math.Round((decimal)(rdata.HomeworkPerform ?? 0) / (decimal)rdata.HomeworkPrev * 100, 0));
                 }
                 else
-                    rdata.HomeworkProgress = 0f;
+                    rdata.HomeworkProgress = null;
           }
         }
-        private float? selectedHomeworkPerform
+        private string selectedHomeworkPerform
         {
-            get { return rdata.HomeworkPerform ?? 0; }
+            get { return rdata.HomeworkPerform?.ToString() ?? ""; }
             set
             {
-                rdata.HomeworkPerform = value;
-                if (rdata.HomeworkPrev > 0)
+                rdata.HomeworkPerform = value.ToFloat();
+                if ((rdata.HomeworkPrev ?? 0) > 0)
                 {
                     /// 과제이행정도 = 과제수행량 / 이전과제량
-                    rdata.HomeworkProgress = (float?)(Math.Round((decimal)value / (decimal)rdata.HomeworkPrev * 100, 0));
+                    rdata.HomeworkProgress = (float?)(Math.Round((decimal)(rdata.HomeworkPerform ?? 0) / (decimal)rdata.HomeworkPrev * 100, 0));
                 }
                 else
-                    rdata.HomeworkProgress = 0f;
+                    rdata.HomeworkProgress = null ;
 
-                if (value > 0)
+                if ((rdata.HomeworkPerform ?? 0) > 0)
                 {
                     /// 과제정답률 = 과제정답 / 과제수행량
-                    rdata.HomeworkRatio = (float?)(Math.Round((decimal)rdata.HomeworkCorrect / (decimal)value * 100, 0));
+                    rdata.HomeworkRatio = (float?)(Math.Round((decimal)(rdata.HomeworkCorrect ?? 0) / (decimal)rdata.HomeworkPerform * 100, 0));
                 }
                 else
-                    rdata.HomeworkRatio = 0f;
+                    rdata.HomeworkRatio = null ;
             }
         }
-        private float? selectedHomeworkCorrect
+        private string selectedHomeworkCorrect
         {
-            get { return rdata.HomeworkCorrect ?? 0; }
+            get { return rdata.HomeworkCorrect?.ToString() ?? ""; }
             set
             {
-                rdata.HomeworkCorrect = value;
-                if (rdata.HomeworkPerform > 0)
+                rdata.HomeworkCorrect = value.ToFloat();
+                if ((rdata.HomeworkPerform ?? 0) > 0)
                 {
                     /// 과제정답률 = 과제정답 / 과제수행량
-                    rdata.HomeworkRatio = (float?)(Math.Round((decimal)value / (decimal)rdata.HomeworkPerform * 100, 0));
+                    rdata.HomeworkRatio = (float?)(Math.Round((decimal)(rdata.HomeworkCorrect ?? 0) / (decimal)rdata.HomeworkPerform * 100, 0));
                     //rdata.HomeworkYn = true;    // 값을 셋팅하면 yn값을 자동으로 true로 변경한다.
                 }
                 else
-                    rdata.HomeworkRatio = 0f;
+                    rdata.HomeworkRatio = null;
             }
         }
 
@@ -253,47 +262,51 @@ namespace tjdaca.Pages
             get { return this.rdata.DailyYn; }
             set
             {
+                selectedDailyCorrect = value ? "20" : "";
+                selectedDailyCount = value ? "20" : "";
+
                 this.rdata.DailyYn = value;
-                this.rdata.DailyCorrect = selectedDailyCorrect;
-                this.rdata.DaliyCount = selectedDailyCount;
-                if (rdata.DaliyCount > 0 && value)
+                this.rdata.DailyCorrect = selectedDailyCorrect.ToFloat();
+                this.rdata.DaliyCount = selectedDailyCount.ToFloat();
+                if ((rdata.DaliyCount ?? 0) > 0 && value)
                 {
                     /// 데일리정답률 = 일일정답수 / 일일문항수
-                    rdata.DailyScore = (float?)(Math.Round((decimal)rdata.DailyCorrect / (decimal)rdata.DaliyCount * 100, 0));
+                    rdata.DailyScore = (float?)(Math.Round((decimal)(rdata.DailyCorrect ?? 0) / (decimal)rdata.DaliyCount * 100, 0));
                 }
                 else
-                    rdata.DailyScore = 0f;
+                    rdata.DailyScore = null;
             }
         }
-        private float? selectedDailyCount
+        private string selectedDailyCount
         {
-            get { return rdata.DaliyCount ?? 0; }
+            get { return rdata.DaliyCount?.ToString() ?? ""; }
             set
             {
-                rdata.DaliyCount = value;
-                if (value > 0)
+                rdata.DaliyCount = value.ToFloat();
+                if ((rdata.DaliyCount ?? 0) > 0)
                 {
+                    selectedDailyCorrect = value;
                     /// 데일리정답률 = 일일정답수 / 일일문항수
-                    rdata.DailyScore = (float?)(Math.Round((decimal)rdata.DailyCorrect / (decimal)value * 100, 0));
+                    rdata.DailyScore = (float?)(Math.Round((decimal)(rdata.DailyCorrect ?? 0) / (decimal)rdata.DaliyCount * 100, 0));
                 }
                 else
-                    rdata.DailyScore = 0f;
+                    rdata.DailyScore = null;
             }
         }
-        private float? selectedDailyCorrect
+        private string selectedDailyCorrect
         {
-            get { return rdata.DailyCorrect ?? 0; }
+            get { return rdata.DailyCorrect?.ToString() ?? ""; }
             set
             {
-                rdata.DailyCorrect = value;
-                if (rdata.DaliyCount > 0)
+                rdata.DailyCorrect = value.ToFloat();
+                if ((rdata.DaliyCount ?? 0) > 0)
                 {
                     /// 데일리정답률 = 일일정답수 / 일일문항수
-                    rdata.DailyScore = (float?)(Math.Round((decimal)value / (decimal)rdata.DaliyCount * 100, 0));
+                    rdata.DailyScore = (float?)(Math.Round((decimal)(rdata.DailyCorrect ?? 0) / (decimal)rdata.DaliyCount * 100, 0));
                     //rdata.DailyYn = true;    // 값을 셋팅하면 yn값을 자동으로 true로 변경한다.
                 }
                 else
-                    rdata.DailyScore = 0f;
+                    rdata.DailyScore = null;
             }
         }
 
@@ -302,43 +315,47 @@ namespace tjdaca.Pages
             get { return this.rdata.CliniqYn; }
             set
             {
+                selectedCliniqCorrect = value ? "100" : "";
+                selectedCliniqCount = value ? "100" : "";
+
                 this.rdata.CliniqYn = value;
-                this.rdata.CliniqCorrect = selectedCliniqCorrect;
-                this.rdata.CliniqCount = selectedCliniqCount;
-                if (rdata.CliniqCount > 0 && value)
+                this.rdata.CliniqCorrect = selectedCliniqCorrect.ToFloat();
+                this.rdata.CliniqCount = selectedCliniqCount.ToFloat();
+                if ((rdata.CliniqCount ?? 0) > 0 && value)
                 {
+                    /// 클리닉정답률 = 클리닉정답수 / 클리닉문항수
+                    rdata.CliniqScore = (float?)(Math.Round((decimal)(rdata.CliniqCorrect ?? 0) / (decimal)rdata.CliniqCount * 100, 0));
+                }
+                else
+                    rdata.CliniqScore = null;
+            }
+        }
+        private string selectedCliniqCount
+        {
+            get { return rdata.CliniqCount?.ToString() ?? ""; }
+            set
+            {
+                rdata.CliniqCount = value.ToFloat();
+                if ((rdata.CliniqCount ?? 0) > 0)
+                {
+                    selectedCliniqCorrect = value;
                     /// 클리닉정답률 = 클리닉정답수 / 클리닉문항수
                     rdata.CliniqScore = (float?)(Math.Round((decimal)rdata.CliniqCorrect / (decimal)rdata.CliniqCount * 100, 0));
                 }
                 else
-                    rdata.CliniqScore = 0f;
+                    rdata.CliniqScore = null;
             }
         }
-        private float? selectedCliniqCount
+        private string selectedCliniqCorrect
         {
-            get { return rdata.CliniqCount ?? 0; }
+            get { return rdata.CliniqCorrect?.ToString() ?? ""; }
             set
             {
-                rdata.CliniqCount = value;
-                if (value > 0)
+                rdata.CliniqCorrect = value.ToFloat();
+                if ((rdata.CliniqCount ?? 0) > 0)
                 {
                     /// 클리닉정답률 = 클리닉정답수 / 클리닉문항수
-                    rdata.CliniqScore = (float?)(Math.Round((decimal)rdata.CliniqCorrect / (decimal)value * 100, 0));
-                }
-                else
-                    rdata.CliniqScore = 0f;
-            }
-        }
-        private float? selectedCliniqCorrect
-        {
-            get { return rdata.CliniqCorrect ?? 0; }
-            set
-            {
-                rdata.CliniqCorrect = value;
-                if (rdata.CliniqCount > 0)
-                {
-                    /// 클리닉정답률 = 클리닉정답수 / 클리닉문항수
-                    rdata.CliniqScore = (float?)(Math.Round((decimal)value / (decimal)rdata.CliniqCount * 100, 0));
+                    rdata.CliniqScore = (float?)(Math.Round((decimal)(rdata.CliniqCorrect ?? 0) / (decimal)rdata.CliniqCount * 100, 0));
                     //rdata.CliniqYn = true;    // 값을 셋팅하면 yn값을 자동으로 true로 변경한다.
                 }
                 else
@@ -363,12 +380,13 @@ namespace tjdaca.Pages
             rtn = rawdataService.GetTestGradeList("수학");
             return rtn;
         }
-        private List<float?> GetRatioList()
+        private List<string> GetRatioList()
         {
-            List<float?> rtn = new List<float?>();
+            List<string> rtn = new List<string>();
+            rtn.Add("");
             for(float i = 130; i >= 0; i--) 
             {
-                rtn.Add(i);
+                rtn.Add(i.ToString());
             }
             return rtn;
         }

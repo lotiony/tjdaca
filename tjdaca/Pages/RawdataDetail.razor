@@ -1,4 +1,5 @@
 ﻿@page "/rawdata/{tid}/detail/{rid}"
+@using tjdaca.Class;
 @using tjdaca.Data
 @inject tjdaca.Services.IOptionService optionService
 @inject tjdaca.Services.IStudentService studentService
@@ -160,7 +161,10 @@
                 <MudSelect @bind-Value="selectedDailyCount" Label="일일테스트문항수" Variant="Variant.Text" Margin="Margin.Normal" Disabled="@(!rdata.DailyYn)">
                     @foreach (var type in ratioList)
                     {
-                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                        if (type == "" || type.ToFloat() <= 50)
+                        {
+                            <MudSelectItem Value="@type">@type</MudSelectItem>
+                        }
                     }
                 </MudSelect>
             </MudItem>
@@ -169,7 +173,10 @@
                 <MudSelect @bind-Value="selectedDailyCorrect" Label="일일테스트정답수" Variant="Variant.Text" Margin="Margin.Normal" Disabled="@(!rdata.DailyYn)">
                     @foreach (var type in ratioList)
                     {
-                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                        if ( type == "" || type.ToFloat() <= 50)
+                        {
+                            <MudSelectItem Value="@type">@type</MudSelectItem>
+                        }
                     }
                 </MudSelect>
 
@@ -185,6 +192,14 @@
                 <MudCheckBox @bind-Checked="selectedCliniqYn" Label="클리닉진행여부" For="@(() => rdata.CliniqYn)"></MudCheckBox>
             </MudItem>
             <MudItem xs="1">
+                <MudSelect @bind-Value="rdata.CliniqTeacher" Label="클리닉담임명" Variant="Variant.Text" Margin="Margin.Normal">
+                    @foreach (var type in teacherList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="1">
                 <MudSelect @bind-Value="selectedCliniqGrade" Label="클리닉 학기" Variant="Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in testGradeList)
                     {
@@ -192,7 +207,7 @@
                     }
                 </MudSelect>
             </MudItem>
-            <MudItem xs="3">
+            <MudItem xs="2">
                 <MudSelect @bind-Value="selectedCliniqSubject" Label="클리닉 단원" Variant="Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in cliniqSubjectList)
                     {
