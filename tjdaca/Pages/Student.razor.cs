@@ -22,8 +22,24 @@ namespace tjdaca.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            await GetSessionStorage("IsPasswordVerified");
             GetStudentList();
+
+            DateTime sessionTime = new DateTime();
+            if (!string.IsNullOrEmpty(getSessionStorage)) DateTime.TryParse(getSessionStorage, out sessionTime);
+
+            if (sessionTime.AddMinutes(30) > DateTime.Now)
+            {
+                isPasswordVerified = true;
+                passwordRequired = false;
+            }
+            else 
+            { 
+                isPasswordVerified = false;
+                passwordRequired = true;
+            }
         }
+
         private List<AcaStudents> GetStudentList()
         {
             StudentsList = studentService.GetStudents();
@@ -71,6 +87,8 @@ namespace tjdaca.Pages
         }
 
         // 엑셀 다운로드 메서드
+
+
         private bool _processing = false;
         public async Task DownloadExcel()
         {

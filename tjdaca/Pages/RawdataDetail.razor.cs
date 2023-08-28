@@ -81,7 +81,7 @@ namespace tjdaca.Pages
             {
                 rdata = rawdataService.GetRawdataById(ridx_int);
                 selectedCliniqGrade = rdata.CliniqGrade;
-                selectedTestGrade = rdata.TestSubject;
+                selectedTestGrade = rdata.TestGrade;
             }
         }
     

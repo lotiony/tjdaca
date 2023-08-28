@@ -12,24 +12,34 @@ namespace tjdaca.Data
         public string StuName { get; set; }
         public float? M111 { get; set; }
         public float? M112 { get; set; }
+        public float? M113 { get; set; }
         public float? M121 { get; set; }
         public float? M122 { get; set; }
+        public float? M123 { get; set; }
         public float? M211 { get; set; }
         public float? M212 { get; set; }
+        public float? M213 { get; set; }
         public float? M221 { get; set; }
         public float? M222 { get; set; }
+        public float? M223 { get; set; }
         public float? M311 { get; set; }
         public float? M312 { get; set; }
+        public float? M313 { get; set; }
         public float? M321 { get; set; }
         public float? M322 { get; set; }
+        public float? M323 { get; set; }
         public float? H111 { get; set; }
         public float? H112 { get; set; }
+        public float? H113 { get; set; }
         public float? H121 { get; set; }
         public float? H122 { get; set; }
+        public float? H123 { get; set; }
         public float? H211 { get; set; }
         public float? H212 { get; set; }
+        public float? H213 { get; set; }
         public float? H221 { get; set; }
         public float? H222 { get; set; }
+        public float? H223 { get; set; }
         public float? H311 { get; set; }
         public float? H312 { get; set; }
         public float? H321 { get; set; }
@@ -65,6 +75,17 @@ namespace tjdaca.Data
             this.H222 = 0;
             this.H312 = 0;
             this.H322 = 0;
+
+            this.M113 = 0;
+            this.M123 = 0;
+            this.M213 = 0;
+            this.M223 = 0;
+            this.M313 = 0;
+            this.M323 = 0;
+            this.H113 = 0;
+            this.H123 = 0;
+            this.H213 = 0;
+            this.H223 = 0;
 
             this.RegDate = DateTime.Now;
         }

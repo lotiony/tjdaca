@@ -1,0 +1,49 @@
+﻿@inject IDialogService DialogService
+
+<MudGrid Justify="Justify.Center">
+    <MudItem>
+        <MudDialog @ref="dialogInstance">
+            <MudStack Row="false">
+
+                <MudTextField Label="비밀번호" HelperText="Choose a strong password" @bind-Value="password" InputType="InputType.Password"
+                        Required="true"
+                        RequiredError="Password is required!"/>
+
+                <MudButton Variant="Variant.Filled" Size="Size.Large" EndIcon="@Icons.Material.Filled.ArrowDownward"  Style="background-color: yellowgreen; color: white; width: 200px; height: 60px;" OnClick="CheckPassword">확인</MudButton>
+            </MudStack>
+        </MudDialog>
+    </MudItem>
+
+</MudGrid>
+
+
+
+
+<MudOverlay Visible="true" DarkBackground="true" AutoClose="true" />
+
+@code {
+
+    private string password = "";
+    private MudDialog? dialogInstance;
+    [Parameter] public EventCallback<bool> OnPasswordCheck { get; set; }
+
+    private async void CheckPassword()
+    {
+        if (password == "tjd180!!")
+        {
+            dialogInstance?.Close(DialogResult.Ok(true));
+        }
+        else
+        {
+            dialogInstance?.Close(DialogResult.Ok(false));
+        }
+    }
+    
+
+    private async void Cancel()
+    {
+        dialogInstance?.Close(DialogResult.Cancel());
+    }
+
+
+}

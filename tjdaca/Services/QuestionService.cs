@@ -29,7 +29,7 @@ namespace tjdaca.Services
 
         public List<AcaQuestions> GetQuestions()
         {
-            return _dbContext.AcaQuestions.ToList();
+            return _dbContext.AcaQuestions.OrderByDescending(x=> x.QIdx).ToList();
         }
 
         public void SaveQuestion(AcaQuestions Questions)

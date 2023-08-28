@@ -1,82 +1,179 @@
 ﻿@page "/students"
 @using tjdaca.Data
+@using tjdaca.Pages.Component
+
 @inject tjdaca.Services.IStudentService studentService
 @inject MudBlazor.ISnackbar snackBar
 @inject IJSRuntime JS
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 
 <PageTitle>학생 관리</PageTitle>
 
-<h3>학생 관리</h3>
+@if (!isPasswordVerified && passwordRequired)
+{
+    
+    <PasswordComponent OnPasswordVerified="HandlePasswordVerified" />
+}
+else
+{
+    <h3>학생 관리</h3>
 
-<MudStack Justify="Justify.SpaceBetween" Row="true">
-    <MudButton Variant="Variant.Filled" IconSize="Size.Large" Color="Color.Success" OnClick="AddStudent">신규학생 등록</MudButton>
-    <MudButton Disabled="@_processing" OnClick="DownloadExcel" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download">
-        @if (_processing)
+    @if (isAdministrator)
+    {
+        <MudStack Justify="Justify.SpaceBetween" Row="true">
+            <MudButton Variant="Variant.Filled" IconSize="Size.Large" Color="Color.Success" OnClick="AddStudent">신규학생 등록</MudButton>
+            <MudButton Disabled="@_processing" OnClick="DownloadExcel" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download">
+                @if (_processing)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                    <MudText Class="ms-2">Processing</MudText>
+                }
+                else
+                {
+                    <MudText>Excel 다운로드</MudText>
+                }
+            </MudButton>
+        </MudStack>
+        <br />
+
+        <MudTable Elevation="25" Dense="true" Striped="true" Items="GetStudentList()" Filter="new Func<AcaStudents, bool>(Search)" RowsPerPage="20" FixedHeader="true">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">학생 목록</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="searchString" Placeholder="Search for Students..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>학생번호</MudTh>
+                <MudTh>학생 이름</MudTh>
+                <MudTh>학원등록일</MudTh>
+                <MudTh>담임</MudTh>
+                <MudTh>인지경로</MudTh>
+                <MudTh>테스트일자</MudTh>
+                <MudTh>테스트단원</MudTh>
+                <MudTh>테스트점수</MudTh>
+                <MudTh>학교</MudTh>
+                <MudTh>등록일</MudTh>
+                <MudTh>수정</MudTh>
+                <MudTh>관리자수정/삭제</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="학생번호">@context.StuIdx</MudTd>
+                <MudTd DataLabel="학생 이름">@context.StuName</MudTd>
+                <MudTd DataLabel="학원등록일">@context.AcaRegdate?.ToString("yy/MM/dd")</MudTd>
+                <MudTd DataLabel="담임">@context.Teacher</MudTd>
+                <MudTd DataLabel="인지경로">@context.CognitivePathway</MudTd>
+                <MudTd DataLabel="테스트일자">@context.TestDate?.ToString("yy/MM/dd")</MudTd>
+                <MudTd DataLabel="테스트단원">@context.TestArea</MudTd>
+                <MudTd DataLabel="테스트점수">@context.TestScore</MudTd>
+                <MudTd DataLabel="학교">@context.School</MudTd>
+                <MudTd DataLabel="등록일">@context.Regdate.ToString("yy/MM/dd")</MudTd>
+                <MudTd DataLabel="수정">
+                    <MudFab @onclick="@(()=>Edit(@context.StuIdx))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
+                </MudTd>
+                <MudTd DataLabel="관리자수정/삭제">
+                    <MudFab @onclick="@(()=>AdminEdit(@context.StuIdx))" Color="Color.Info" Icon="@Icons.Material.Filled.ManageAccounts" Size="Size.Small" IconSize="Size.Small" />
+                    <MudFab @onclick="@(()=>Delete(@context.StuIdx))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+
+    }
+    else
+    {
+        <MudTable Elevation="25" Dense="true" Striped="true" Items="GetStudentList()" Filter="new Func<AcaStudents, bool>(Search)" RowsPerPage="20">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">학생 목록</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="searchString" Placeholder="Search for Students..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+            <ColGroup>
+                <col />
+                <col />
+                <col />
+                <col />
+                <col />
+                <col />
+                <col />
+                <col />
+                <col />
+                <col style="max-width:400px;" />
+            </ColGroup>
+            <HeaderContent>
+                <MudTh>학생번호</MudTh>
+                <MudTh>학생 이름</MudTh>
+                <MudTh>학원등록일</MudTh>
+                <MudTh>담임</MudTh>
+                <MudTh>테스트일자</MudTh>
+                <MudTh>테스트단원</MudTh>
+                <MudTh>테스트점수</MudTh>
+                <MudTh>학교</MudTh>
+                <MudTh>등록일</MudTh>
+                <MudTh>선생님의견</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="학생번호">@context.StuIdx</MudTd>
+                <MudTd DataLabel="학생 이름">@context.StuName</MudTd>
+                <MudTd DataLabel="학원등록일">@context.AcaRegdate?.ToString("yy/MM/dd")</MudTd>
+                <MudTd DataLabel="담임">@context.Teacher</MudTd>
+                <MudTd DataLabel="테스트일자">@context.TestDate?.ToString("yy/MM/dd")</MudTd>
+                <MudTd DataLabel="테스트단원">@context.TestArea</MudTd>
+                <MudTd DataLabel="테스트점수">@context.TestScore</MudTd>
+                <MudTd DataLabel="학교">@context.School</MudTd>
+                <MudTd DataLabel="등록일">@context.Regdate.ToString("yy/MM/dd")</MudTd>
+                <MudTd DataLabel="선생님의견">@context.Etc1</MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    }
+
+}
+
+
+
+@code {
+    private bool isPasswordVerified = false;
+    private bool passwordRequired = true;
+    private bool isAdministrator = false;
+    public string getSessionStorage { get; set; } = string.Empty;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+    }
+
+    private async Task HandlePasswordVerified(PasswordComponent.AuthoizeData result)
+    {
+        isPasswordVerified = result.IsPassed;
+        isAdministrator = result.IsAdmin;
+
+        if (result.IsPassed)
         {
-            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
-            <MudText Class="ms-2">Processing</MudText>
+            snackBar.Add("비밀번호 확인 완료.", Severity.Success);
+            await SetSessionStorage("IsPasswordVerified", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+            isPasswordVerified = true;
+            passwordRequired = false;
+            StateHasChanged();
         }
         else
         {
-            <MudText>Excel 다운로드</MudText>
+            snackBar.Add("비밀번호 불일치", Severity.Error);
         }
-    </MudButton>
-</MudStack>
-<br/>
-<MudTable Elevation="25" Dense="true" Striped="true" Items="GetStudentList()" Filter="new Func<AcaStudents, bool>(Search)" RowsPerPage="20">
-    <ToolBarContent>
-        <MudText Typo="Typo.h6">학생 목록</MudText>
-        <MudSpacer />
-        <MudTextField @bind-Value="searchString" Placeholder="Search for Students..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-    </ToolBarContent>
-@*    <ColGroup>
-        <col style="width: 120px;" />
-        <col style="width: 100px;" />
-        <col style="width: 120px;" />
-        <col style="width: 140px;" />
-        <col style="width: 120px;" />
-        <col style="width: 140px;" />
-        <col />
-        <col style="width: 50px;" />
-        <col style="width: 140px;" />
-    </ColGroup>*@
-    <HeaderContent>
-        <MudTh>학생번호</MudTh>
-        <MudTh>학생 이름</MudTh>
-        <MudTh>학원등록일</MudTh>
-        <MudTh>담임</MudTh>
-        <MudTh>인지경로</MudTh>
-        <MudTh>테스트일자</MudTh>
-        <MudTh>테스트단원</MudTh>
-        <MudTh>테스트점수</MudTh>
-        <MudTh>학교</MudTh>
-        <MudTh>등록일</MudTh>
-        <MudTh>수정</MudTh>
-        <MudTh>관리자수정/삭제</MudTh>
-    </HeaderContent>
-    <RowTemplate>
-        <MudTd DataLabel="학생번호">@context.StuIdx</MudTd>
-        <MudTd DataLabel="학생 이름">@context.StuName</MudTd>
-        <MudTd DataLabel="학원등록일">@context.AcaRegdate?.ToString("yy/MM/dd")</MudTd>
-        <MudTd DataLabel="담임">@context.Teacher</MudTd>
-        <MudTd DataLabel="인지경로">@context.CognitivePathway</MudTd>
-        <MudTd DataLabel="테스트일자">@context.TestDate?.ToString("yy/MM/dd")</MudTd>
-        <MudTd DataLabel="테스트단원">@context.TestArea</MudTd>
-        <MudTd DataLabel="테스트점수">@context.TestScore</MudTd>
-        <MudTd DataLabel="학교">@context.School</MudTd>
-        <MudTd DataLabel="등록일">@context.Regdate.ToString("yy/MM/dd")</MudTd>
-        <MudTd DataLabel="수정">
-            <MudFab @onclick="@(()=>Edit(@context.StuIdx))" Color="Color.Primary" Icon="@Icons.Material.Filled.Edit" Size="Size.Small" IconSize="Size.Small" />
-        </MudTd>
-        <MudTd DataLabel="관리자수정/삭제">
-            <MudFab @onclick="@(()=>AdminEdit(@context.StuIdx))" Color="Color.Info" Icon="@Icons.Material.Filled.ManageAccounts" Size="Size.Small" IconSize="Size.Small" />
-            <MudFab @onclick="@(()=>Delete(@context.StuIdx))" Color="Color.Secondary" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" IconSize="Size.Small" />
-        </MudTd>
-    </RowTemplate>
-    <PagerContent>
-        <MudTablePager />
-    </PagerContent>
-</MudTable>
+    }
+  
+    private async Task SetSessionStorage(string key, string value)
+    {
+        await sessionStorage.SetItemAsync(key, value);
+    }
 
-@code {
+    private async Task GetSessionStorage(string key)
+    {
+        getSessionStorage = await sessionStorage.GetItemAsync<string>(key);
+    }
+
 }

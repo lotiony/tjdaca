@@ -337,15 +337,19 @@ namespace tjdaca.Data
 
                 entity.Property(e => e.H111).HasColumnName("h1_11");
                 entity.Property(e => e.H112).HasColumnName("h1_12");
+                entity.Property(e => e.H113).HasColumnName("h1_13");
 
                 entity.Property(e => e.H121).HasColumnName("h1_21");
                 entity.Property(e => e.H122).HasColumnName("h1_22");
+                entity.Property(e => e.H123).HasColumnName("h1_23");
 
                 entity.Property(e => e.H211).HasColumnName("h2_11");
                 entity.Property(e => e.H212).HasColumnName("h2_12");
+                entity.Property(e => e.H213).HasColumnName("h2_13");
 
                 entity.Property(e => e.H221).HasColumnName("h2_21");
                 entity.Property(e => e.H222).HasColumnName("h2_22");
+                entity.Property(e => e.H223).HasColumnName("h2_23");
 
                 entity.Property(e => e.H311).HasColumnName("h3_11");
                 entity.Property(e => e.H312).HasColumnName("h3_12");
@@ -355,21 +359,27 @@ namespace tjdaca.Data
 
                 entity.Property(e => e.M111).HasColumnName("m1_11");
                 entity.Property(e => e.M112).HasColumnName("m1_12");
+                entity.Property(e => e.M113).HasColumnName("m1_13");
 
                 entity.Property(e => e.M121).HasColumnName("m1_21");
                 entity.Property(e => e.M122).HasColumnName("m1_22");
+                entity.Property(e => e.M123).HasColumnName("m1_23");
 
                 entity.Property(e => e.M211).HasColumnName("m2_11");
                 entity.Property(e => e.M212).HasColumnName("m2_12");
+                entity.Property(e => e.M213).HasColumnName("m2_13");
 
                 entity.Property(e => e.M221).HasColumnName("m2_21");
                 entity.Property(e => e.M222).HasColumnName("m2_22");
+                entity.Property(e => e.M223).HasColumnName("m2_23");
 
                 entity.Property(e => e.M311).HasColumnName("m3_11");
                 entity.Property(e => e.M312).HasColumnName("m3_12");
+                entity.Property(e => e.M313).HasColumnName("m3_13");
 
                 entity.Property(e => e.M321).HasColumnName("m3_21");
                 entity.Property(e => e.M322).HasColumnName("m3_22");
+                entity.Property(e => e.M323).HasColumnName("m3_23");
 
                 entity.Property(e => e.RegDate)
                     .HasColumnType("datetime")

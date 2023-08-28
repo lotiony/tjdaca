@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">tjdaca</a>
+        <a class="navbar-brand" href="">특자단 학원관리</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,11 +19,19 @@
                 <span class="oi oi-people" aria-hidden="true"></span> 학원생등록
             </NavLink>
         </div>
+
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="search">
-                <span class="oi oi-people" aria-hidden="true"></span> 학생성적등록
+            <NavLink class="nav-link dropdown-toggle" href="search">
+                <span class="oi oi-document" aria-hidden="true"></span>학생성적/통계
             </NavLink>
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="search">
+                    <span class="oi oi-people" aria-hidden="true"></span> 학생성적등록
+                </NavLink>
+            </div>
         </div>
+
+
         <div class="nav-item px-3">
             <NavLink class="nav-link dropdown-toggle" @onclick="()=>expandSubNav=!expandSubNav">
                 <span class="oi oi-document" aria-hidden="true"></span>상담일지 RawData
@@ -52,7 +60,7 @@
                 </div>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="rawdata/5">
-                        <span class="oi oi-arrow-circle-right"></span>유지수 선생님
+                        <span class="oi oi-arrow-circle-right"></span>강춘기 선생님
                     </NavLink>
                 </div>
                 <div class="nav-item px-3">

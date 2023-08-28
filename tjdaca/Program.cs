@@ -1,3 +1,5 @@
+using Blazored.SessionStorage;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Services;
@@ -16,6 +18,8 @@ builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IOptionService, OptionService>();
 builder.Services.AddScoped<IRawdataService, RawdataService>();
 builder.Services.AddScoped<IQuestionService, QuestionService>();
+builder.Services.AddBlazoredSessionStorage();
+
 
 var app = builder.Build();
 
