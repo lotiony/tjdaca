@@ -139,11 +139,9 @@ else
     private bool isPasswordVerified = false;
     private bool passwordRequired = true;
     private bool isAdministrator = false;
-    public string getSessionStorage { get; set; } = string.Empty;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-
     }
 
     private async Task HandlePasswordVerified(PasswordComponent.AuthoizeData result)
@@ -155,6 +153,7 @@ else
         {
             snackBar.Add("비밀번호 확인 완료.", Severity.Success);
             await SetSessionStorage("IsPasswordVerified", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            await SetSessionStorage("IsAdministrator", isAdministrator.ToString());
 
             isPasswordVerified = true;
             passwordRequired = false;
@@ -171,9 +170,5 @@ else
         await sessionStorage.SetItemAsync(key, value);
     }
 
-    private async Task GetSessionStorage(string key)
-    {
-        getSessionStorage = await sessionStorage.GetItemAsync<string>(key);
-    }
 
 }

@@ -18,6 +18,8 @@ builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IOptionService, OptionService>();
 builder.Services.AddScoped<IRawdataService, RawdataService>();
 builder.Services.AddScoped<IQuestionService, QuestionService>();
+builder.Services.AddScoped<IStatisticsService, StatisticsService>();
+builder.Services.AddScoped<ICliniqService, CliniqService>();
 builder.Services.AddBlazoredSessionStorage();
 
 

@@ -131,5 +131,38 @@ namespace tjdaca.Data
 
         [Display(Name = "등록일")]
         public DateTime? RegDate { get; set; } = DateTime.Now;
+
+        public string DailyAdjust { get
+            {
+                switch (DailyScore ?? -1)
+                {
+                    case >= 90:
+                        return "우수";
+                    case >= 80:
+                        return "보통";
+                    case >= 0:
+                        return "클리닉";
+                }
+                return string.Empty;
+            } 
+        }
+
+
+        public string CliniqAdjust
+        {
+            get
+            {
+                switch (CliniqScore ?? -1)
+                {
+                    case >= 90:
+                        return "우수";
+                    case >= 80:
+                        return "보통";
+                    case >= 0:
+                        return "";
+                }
+                return string.Empty;
+            }
+        }
     }
 }

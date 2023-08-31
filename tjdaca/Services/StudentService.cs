@@ -26,7 +26,7 @@ namespace tjdaca.Services
 
         public List<AcaStuExamScore> GetExamScore(int id)
         {
-            var examScore = _dbContext.AcaStuExamScore.Where(x => x.StuIdx == id).ToList();
+            var examScore = _dbContext.AcaStuExamScore.Where(x => x.StuIdx == id).OrderBy(x=> x.Idx).ToList();
             return examScore;
         }
 

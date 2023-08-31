@@ -1,0 +1,218 @@
+﻿@page "/studentreport"
+@using tjdaca.Data
+@using tjdaca.Models;
+@using tjdaca.Pages.Component
+@inject MudBlazor.ISnackbar snackBar
+@inject IJSRuntime JS
+
+<style>
+    .selected {
+        background-color: #1E88E5 !important;
+    }
+
+        .selected > td {
+            color: white !important;
+        }
+
+            .selected > td .mud-input {
+                color: white !important;
+            }
+</style>
+
+<PageTitle></PageTitle>
+
+<h3>개별학습분석</h3>
+
+<MudTable Elevation="25" Dense="true" Striped="true" Hover="true" Items="@_studentList" Filter="new Func<AcaStudents, bool>(Filtering)" RowsPerPage="5" RowClassFunc="@SelectStudent" @bind-SelectedItem="ss" T="AcaStudents" @ref="StudentTable">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">학생 검색</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="_schString" Placeholder="학생번호 또는 이름으로 검색하세요." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="Search" Size="Size.Large">검색</MudButton>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>학생번호</MudTh>
+        <MudTh>담임명</MudTh>
+        <MudTh>학생이름</MudTh>
+        <MudTh>학교명</MudTh>
+        <MudTh>학교구분</MudTh>
+        <MudTh>학년</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="학생번호">@context.StuIdx</MudTd>
+        <MudTd DataLabel="담임명">@context.Teacher</MudTd>
+        <MudTd DataLabel="학생이름">@context.StuName</MudTd>
+        <MudTd DataLabel="학교명">@context.School</MudTd>
+        <MudTd DataLabel="학교구분">@context.SchType</MudTd>
+        <MudTd DataLabel="학년">@context.SchGrade</MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+<br />
+
+@if (_ss != null)
+{
+    <MudDivider></MudDivider>
+
+    <MudCard Elevation="25" Outlined="true">
+        <MudCardHeader>
+            <CardHeaderContent>
+               <MudPaper Class="d-flex flex-column flex-grow-1 gap-4" Elevation="0">
+                    <MudPaper Class="pa-4 mud-theme-primary">
+                        <MudText Typo="Typo.h6">@_ss.School @_ss.SchGrade 학년 @_ss.StuName 학생의 개별학습분석 리포트 </MudText>
+                    </MudPaper>
+                </MudPaper>
+                
+                <MudSpacer />
+                <MudSelect T="int" @bind-Value="setDataCount" Label="분석대상수업차수" Variant="Variant.Text" Margin="Margin.Normal" Style="width:200px;">
+                    <MudSelectItem Value="@(10)">10일</MudSelectItem>
+                    <MudSelectItem Value="@(20)">20일</MudSelectItem>
+                    <MudSelectItem Value="@(30)">30일</MudSelectItem>
+                </MudSelect>
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudCardContent>
+
+            <MudPaper Outlined="false" Elevation="30">
+                <MudPaper Class="d-flex flex-column flex-grow-1 gap-4" Elevation="0">
+                    <MudPaper Class="mud-theme-secondary  py-2 px-4">
+                        <MudText Typo="Typo.h6">A. @_ss.StuName 학생의 수업진행 단원의 성적 결과</MudText>
+                    </MudPaper>
+                </MudPaper>
+                <br >
+                <MudChart ChartType="ChartType.Bar" ChartSeries="@_series" XAxisLabels="@_xaxisLabels" Width="100%" Height="500px" ChartOptions="@_chartOption"></MudChart>
+            </MudPaper>
+
+
+            <br>
+            <MudPaper  Outlined="false" Elevation="30">
+                <MudPaper Class="d-flex flex-column flex-grow-1 gap-4" Elevation="0">
+                    <MudPaper Class="mud-theme-secondary  py-2 px-4">
+                        <MudText Typo="Typo.h6">B. @_ss.StuName 학생의 세부단원별 학습평가</MudText>
+                    </MudPaper>
+                </MudPaper>
+                <br>
+                <MudTable Elevation="3" Dense="true" Striped="true" Hover="true" Items="@_dailyList" T="AcaRawdata">
+                    <HeaderContent>
+                        <MudTh>일자</MudTh>
+                        <MudTh>학년</MudTh>
+                        <MudTh>수업학년</MudTh>
+                        <MudTh>테스트단원</MudTh>
+                        <MudTh>정답률</MudTh>
+                        <MudTh>평가</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="일자">@context.BaseDate.ToString("yyyy년 MM월 dd일")</MudTd>
+                        <MudTd DataLabel="학년">@context.Grade</MudTd>
+                        <MudTd DataLabel="수업학년">@context.TestGrade</MudTd>
+                        <MudTd DataLabel="테스트단원">@context.TestSubject</MudTd>
+                        <MudTd DataLabel="정답률">@context.DailyScore</MudTd>
+                        <MudTd DataLabel="평가">@context.DailyAdjust</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            </MudPaper>
+            <br>
+            <MudPaper Outlined="false" Elevation="30">
+                <MudPaper Class="d-flex flex-column flex-grow-1 gap-4" Elevation="0">
+                    <MudPaper Class="mud-theme-secondary  py-2 px-4">
+                        <MudText Typo="Typo.h6">C. @_ss.StuName 학생의 클리닉 현황</MudText>
+                    </MudPaper>
+                </MudPaper>
+                <br>
+                <MudTable Elevation="3" Dense="true" Striped="true" Hover="true" Items="@_cliniqList" T="AcaRawdata">
+                    <HeaderContent>
+                        <MudTh>일자</MudTh>
+                        <MudTh>학년</MudTh>
+                        <MudTh>수업학년</MudTh>
+                        <MudTh>클리닉단원</MudTh>
+                        <MudTh>정답률</MudTh>
+                        <MudTh>평가</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="일자">@context.BaseDate.ToString("yyyy년 MM월 dd일")</MudTd>
+                        <MudTd DataLabel="학년">@context.Grade</MudTd>
+                        <MudTd DataLabel="수업학년">@context.CliniqGrade</MudTd>
+                        <MudTd DataLabel="클리닉단원">@context.CliniqSubject</MudTd>
+                        <MudTd DataLabel="정답률">@context.CliniqScore</MudTd>
+                        <MudTd DataLabel="평가">@context.CliniqAdjust</MudTd>
+                    </RowTemplate>
+                </MudTable>
+            </MudPaper>
+            <br>
+            <MudPaper  Outlined="false" Elevation="30">
+                <MudPaper Class="d-flex flex-column flex-grow-1 gap-4" Elevation="0">
+                    <MudPaper Class="mud-theme-secondary py-2 px-4">
+                        <MudText Typo="Typo.h6">D. @_ss.StuName 학생의 내신성적현황</MudText>
+                    </MudPaper>
+                </MudPaper>
+                <br>
+                <MudText Typo="Typo.subtitle1">중학교 성적</MudText>
+                <MudGrid Spacing="1">
+                    <MudItem xs="2"><MudField Label="1-1 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M111</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-1 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M112</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-1 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M113</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-2 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M121</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-2 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M122</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-2 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M123</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-1 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M211</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-1 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M212</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-1 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M213</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-2 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M221</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-2 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M222</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-2 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M223</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="3-1 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M311</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="3-1 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M312</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="3-1 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M313</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="3-2 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M321</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="3-2 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M322</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="3-2 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M323</MudField></MudItem>
+                </MudGrid>
+                <br>
+                <MudText Typo="Typo.subtitle1">고등학교 성적</MudText>
+                <MudGrid Spacing="1">
+                    <MudItem xs="2"><MudField Label="1-1 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H111</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-1 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H112</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-1 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H113</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-2 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H121</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-2 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H122</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-2 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H123</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-1 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H211</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-1 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H212</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-1 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H213</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-2 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H221</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-2 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H222</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-2 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H223</MudField></MudItem>
+                </MudGrid>
+
+            </MudPaper>
+            <br>
+            <MudPaper  Outlined="false" Elevation="30">
+                <MudPaper Class="d-flex flex-column flex-grow-1 gap-4" Elevation="0">
+                    <MudPaper Class="mud-theme-secondary py-2 px-4">
+                        <MudText Typo="Typo.h6">E. @_ss.StuName 학생의 전국단위 월말 모의고사</MudText>
+                    </MudPaper>
+                </MudPaper>
+                <br>
+                <MudTable Elevation="3" Dense="true" Striped="true" Hover="true" Items="@_examScore" T="AcaStuExamScore">
+                    <HeaderContent>
+                        <MudTh>연도</MudTh>
+                        <MudTh>월</MudTh>
+                        <MudTh>점수</MudTh>
+                        <MudTh>리포트보기</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="연도">@context.Year 년</MudTd>
+                        <MudTd DataLabel="월">@context.Month 월</MudTd>
+                        <MudTd DataLabel="점수">@context.Score</MudTd>
+                        <MudTd DataLabel="리포트보기"><MudLink Href="@context.ReportUrl" Target="_blank" Color="Color.Tertiary">리포트보기</MudLink> </MudTd>
+                    </RowTemplate>
+                </MudTable>
+            </MudPaper>
+
+        </MudCardContent>
+    </MudCard>
+
+}
+

@@ -7,6 +7,7 @@ namespace tjdaca.Services
         List<AcaRawdata> GetRawdata();
         List<string> GetTestGradeList(string subject);
         List<AcaRawdata> GetRawdatasByTid(int tid);
+        List<AcaRawdata> GetRawdatasBySid(int stuid);
         AcaRawdata GetRawdataById(int rid);
         AcaRawdata GetLastRawdataBySid(int sid);
         List<AcaStudents> GetStudentByTid(int tid);

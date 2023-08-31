@@ -1,0 +1,133 @@
+﻿@page "/cliniqlist"
+@using tjdaca.Data
+@using tjdaca.Models;
+@using tjdaca.Pages.Component
+@inject MudBlazor.ISnackbar snackBar
+@inject IJSRuntime JS
+
+<PageTitle></PageTitle>
+
+
+<h3>클리닉 대상자</h3>
+
+
+
+<MudCard Elevation="25" Class="search">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">검색</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudGrid Spacing="2" Justify="Justify.Center">
+            <MudItem xs="1">
+                <MudSelect T="int" @bind-Value="schDays" Label="기간" Variant="Variant.Text" Margin="Margin.Normal">
+                    <MudSelectItem Value="@(0)">직접선택</MudSelectItem>
+                    <MudSelectItem Value="@(7)">7일</MudSelectItem>
+                    <MudSelectItem Value="@(15)">15일</MudSelectItem>
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="4">
+                <MudDateRangePicker @bind-DateRange="dateRange" AutoClose="true" PlaceholderStart="시작일자" PlaceholderEnd="종료일자" />
+            </MudItem>
+
+            <MudItem xs="1">
+                <MudSelect T="string" @bind-Value="_schSchGrade" Label="학년" Variant="Variant.Text" Margin="Margin.Normal">
+                    <MudSelectItem Value="@("0")">전체</MudSelectItem>
+                    <MudSelectItem Value="@("초4")">초4</MudSelectItem>
+                    <MudSelectItem Value="@("초5")">초5</MudSelectItem>
+                    <MudSelectItem Value="@("초6")">초6</MudSelectItem>
+                    <MudSelectItem Value="@("중1")">중1</MudSelectItem>
+                    <MudSelectItem Value="@("중2")">중2</MudSelectItem>
+                    <MudSelectItem Value="@("중3")">중3</MudSelectItem>
+                    <MudSelectItem Value="@("고1")">고1</MudSelectItem>
+                    <MudSelectItem Value="@("고2")">고2</MudSelectItem>
+                </MudSelect>
+            </MudItem>
+
+            <MudItem xs="2">
+                <MudSelect T="string" @bind-Value="_schTeacher" Label="강사명" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" Margin="Margin.Normal">
+                    <MudSelectItem Value="@("0")">전체</MudSelectItem>
+                    @foreach (var type in teacherList)
+                    {
+                        <MudSelectItem Value="@type">@type</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudItem>
+
+            <MudItem xs="2">
+                <MudSelect T="string" @bind-Value="_schScore" Label="일일테스트점수" Variant="Variant.Text" Margin="Margin.Normal">
+                    <MudSelectItem Value="@("0")">전체</MudSelectItem>
+                    <MudSelectItem Value="@("1")">100~90점</MudSelectItem>
+                    <MudSelectItem Value="@("2")">90~80점</MudSelectItem>
+                    <MudSelectItem Value="@("3")">80~70점</MudSelectItem>
+                    <MudSelectItem Value="@("4")">70점미만</MudSelectItem>
+                </MudSelect>
+            </MudItem>
+
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="Search" Size="Size.Large">검색</MudButton>
+            </MudItem>
+
+        </MudGrid>
+
+    </MudCardContent>
+</MudCard>
+<br />
+
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">목록</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+@*        <MudStack Justify="Justify.SpaceBetween" Row="true">
+            <MudText Class="mud-secondary-text">
+            </MudText>
+            <MudButton Variant="Variant.Filled" IconSize="Size.Large" Color="Color.Success" Disabled="true">엑셀 다운로드</MudButton>
+        </MudStack>
+        <br />*@
+        <MudTable Elevation="25" Dense="true" Striped="true" Items="@_cliniqList" Filter="new Func<StuCliniq, bool>(Filtering)" RowsPerPage="10" Virtualize="true">
+            <HeaderContent>
+                <MudTh>학생번호</MudTh>
+                <MudTh>담임명</MudTh>
+                <MudTh>학생이름</MudTh>
+                <MudTh>학교명</MudTh>
+                <MudTh>학교구분</MudTh>
+                <MudTh>학년</MudTh>
+                <MudTh>결과값</MudTh>
+                <MudTh>70점미만단원</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="학생번호">@context.StuIdx</MudTd>
+                <MudTd DataLabel="담임명">@context.Teacher</MudTd>
+                <MudTd DataLabel="학생이름">@context.StuName</MudTd>
+                <MudTd DataLabel="학교명">@context.School</MudTd>
+                <MudTd DataLabel="학교구분">@context.SchType</MudTd>
+                <MudTd DataLabel="학년">@context.SchGrade</MudTd>
+                <MudTd DataLabel="결과값">@context.AverageScore</MudTd>
+                <MudTd DataLabel="70점미만단원">
+                    @{
+                        var lines = context.CliniqSubject.Split(Environment.NewLine);
+                        foreach (var line in lines)
+                        {
+                            <div>@line</div>
+                        }
+                    }
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+  
+    </MudCardContent>
+</MudCard>
+
+@if (_isProcessing)
+{
+    <MudOverlay Visible="true" DarkBackground="true" Absolute="true">
+        <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
+    </MudOverlay>
+}

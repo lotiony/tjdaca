@@ -22,11 +22,23 @@ namespace tjdaca.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            await GetSessionStorage("IsPasswordVerified");
-            GetStudentList();
+            string isverified = string.Empty;
+            string isadmin = string.Empty;
 
+            try
+            {
+                isverified = await sessionStorage.GetItemAsync<string>("IsPasswordVerified");
+                isadmin = await sessionStorage.GetItemAsync<string>("IsAdministrator");
+            }
+            catch (Exception)
+            {
+                isverified = string.Empty;
+                isadmin = string.Empty;
+            }
+            
             DateTime sessionTime = new DateTime();
-            if (!string.IsNullOrEmpty(getSessionStorage)) DateTime.TryParse(getSessionStorage, out sessionTime);
+            if (!string.IsNullOrEmpty(isverified)) DateTime.TryParse(isverified, out sessionTime);
+            if (!string.IsNullOrEmpty(isadmin)) bool.TryParse(isadmin, out isAdministrator);
 
             if (sessionTime.AddMinutes(30) > DateTime.Now)
             {
@@ -38,6 +50,8 @@ namespace tjdaca.Pages
                 isPasswordVerified = false;
                 passwordRequired = true;
             }
+
+            GetStudentList();
         }
 
         private List<AcaStudents> GetStudentList()

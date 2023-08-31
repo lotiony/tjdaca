@@ -38,6 +38,10 @@ namespace tjdaca.Services
         {
             return _dbContext.AcaRawdata.Where(x=> x.TIdx.Equals(tid)).OrderByDescending(x=> x.RIdx).ToList();
         }
+        public List<AcaRawdata> GetRawdatasBySid(int stuid)
+        {
+            return _dbContext.AcaRawdata.Where(x => x.StuIdx.Equals(stuid)).ToList();
+        }
         public AcaRawdata GetLastRawdataBySid(int sid)
         {
             var rawdata = _dbContext.AcaRawdata.Where(x => x.StuIdx.Equals(sid)).OrderByDescending(x => x.RIdx).FirstOrDefault();
