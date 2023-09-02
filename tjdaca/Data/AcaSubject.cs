@@ -11,5 +11,6 @@ namespace tjdaca.Data
         public string Subject { get; set; }
         public string Grade { get; set; }
         public string Value { get; set; }
+        public int SbjOrder { get; set; }
     }
 }

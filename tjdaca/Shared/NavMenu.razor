@@ -1,127 +1,37 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">특자단 학원관리</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+﻿
+<MudPaper Width="250px" Class="pa-3 sidebar" Elevation="0">
+    <MudNavMenu Class="mud-width-full" Dense="true" Color="Color.Success" Bordered="true">
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="students">
-                <span class="oi oi-people" aria-hidden="true"></span> 학원생등록
-            </NavLink>
-        </div>
+        <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">HOME</MudNavLink>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link dropdown-toggle" href="search">
-                <span class="oi oi-document" aria-hidden="true"></span>학생성적/통계
-            </NavLink>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="search">
-                    <span class="oi oi-people" aria-hidden="true"></span> 학생성적등록
-                </NavLink>
-            </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="statistics">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> 성적현황
-                </NavLink>
-            </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="cliniqlist">
-                    <span class="oi oi-circle-check" aria-hidden="true"></span> 클리닉대상자
-                </NavLink>
-            </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="studentreport">
-                    <span class="oi oi-bar-chart" aria-hidden="true"></span> 개별학습분석
-                </NavLink>
-            </div>
-        </div>
+        <MudNavLink Href="/students" Icon="@Icons.Material.Filled.People">학원생 목록</MudNavLink>
 
+        <MudNavGroup Title="학생성적 / 통계" Icon="@Icons.Material.Filled.Analytics" Expanded="true">
+            <MudNavLink Href="/search" Icon="@Icons.Material.Filled.AppRegistration">학생성적등록</MudNavLink>
+            <MudNavLink Href="/statistics" Icon="@Icons.Material.Filled.ListAlt">성적현황</MudNavLink>
+            <MudNavLink Href="/cliniqlist" Icon="@Icons.Material.Filled.AdsClick">클리닉대상자</MudNavLink>
+            <MudNavLink Href="/studentreport" Icon="@Icons.Material.Filled.Leaderboard">개별학습분석</MudNavLink>
+        </MudNavGroup>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link dropdown-toggle" @onclick="()=>expandSubNav=!expandSubNav">
-                <span class="oi oi-document" aria-hidden="true"></span>상담일지 RawData
-            </NavLink>
-        @if (expandSubNav)
-        {
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="rawdata/1">
-                        <span class="oi oi-arrow-circle-right"></span>김태구 선생님
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="rawdata/2">
-                        <span class="oi oi-arrow-circle-right"></span>조용진 선생님
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="rawdata/3">
-                        <span class="oi oi-arrow-circle-right"></span>조성배 선생님
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="rawdata/4">
-                        <span class="oi oi-arrow-circle-right"></span>김지홍 선생님
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="rawdata/5">
-                        <span class="oi oi-arrow-circle-right"></span>강춘기 선생님
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="rawdata/6">
-                        <span class="oi oi-arrow-circle-right"></span>송광재 선생님
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="rawdata/7">
-                        <span class="oi oi-arrow-circle-right"></span>박대영 선생님
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="rawdata/8">
-                        <span class="oi oi-arrow-circle-right"></span>김경지 선생님
-                    </NavLink>
-                </div>
-            }
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link dropdown-toggle" href="questions">
-                <span class="oi oi-task" aria-hidden="true"></span>학생질문Q&A
-            </NavLink>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="questions/i/0">
-                    <span class="oi oi-arrow-circle-right"></span>새 질문 등록
-                </NavLink>
-            </div>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="option">
-                <span class="oi oi-cog" aria-hidden="true"></span> 선택항목관리
-            </NavLink>
-        </div>
-    </nav>
-</div>
+        <MudNavGroup Title="상담일지 RawData" Icon="@Icons.Material.Filled.Assignment" Expanded="true">
+            <MudNavLink Href="/rawdata/1" Icon="@Icons.Material.Filled.SupervisedUserCircle">김태구 선생님</MudNavLink>
+            <MudNavLink Href="/rawdata/2" Icon="@Icons.Material.Filled.SupervisedUserCircle">조용진 선생님</MudNavLink>
+            <MudNavLink Href="/rawdata/3" Icon="@Icons.Material.Filled.SupervisedUserCircle">조성배 선생님</MudNavLink>
+            <MudNavLink Href="/rawdata/4" Icon="@Icons.Material.Filled.SupervisedUserCircle">김지홍 선생님</MudNavLink>
+            <MudNavLink Href="/rawdata/5" Icon="@Icons.Material.Filled.SupervisedUserCircle">강춘기 선생님</MudNavLink>
+            <MudNavLink Href="/rawdata/6" Icon="@Icons.Material.Filled.SupervisedUserCircle">송광재 선생님</MudNavLink>
+            <MudNavLink Href="/rawdata/7" Icon="@Icons.Material.Filled.SupervisedUserCircle">박대영 선생님</MudNavLink>
+            <MudNavLink Href="/rawdata/8" Icon="@Icons.Material.Filled.SupervisedUserCircle">김경지 선생님</MudNavLink>
+            <MudNavLink Href="/rawdata/9" Icon="@Icons.Material.Filled.SupervisedUserCircle">이경남 선생님</MudNavLink>
+        </MudNavGroup>
 
-@code {
-    private bool collapseNavMenu = true;
+        <MudNavGroup Title="학생질문 / Q&A" Icon="@Icons.Material.Filled.QuestionAnswer" Expanded="true">
+            <MudNavLink Href="/questions" Icon="@Icons.Material.Filled.ChecklistRtl">학생질문목록</MudNavLink>
+            <MudNavLink Href="/questions/i/0" Icon="@Icons.Material.Filled.AddCircle">새 질문 등록</MudNavLink>
+        </MudNavGroup>
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+        <MudNavLink Href="/option" Icon="@Icons.Material.Filled.AppSettingsAlt">선택항목 관리</MudNavLink>
 
-    private bool expandSubNav = true;
+    </MudNavMenu>
 
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-}
+</MudPaper>

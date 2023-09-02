@@ -1,6 +1,38 @@
 ﻿@inherits LayoutComponentBase
 
-<PageTitle>tjdaca</PageTitle>
+<MudThemeProvider />
+<MudSnackbarProvider/>
+<MudDialogProvider />
+
+<PageTitle>특자단 학원관리</PageTitle>
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h5" Class="ml-3">특자단 학원관리</MudText>
+        <MudSpacer />
+        @*<MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />*@
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+        <NavMenu/>
+    </MudDrawer>
+    <MudMainContent Class="pa-8 mt-16">
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    bool _drawerOpen = true;
+    MudTheme _theme = new MudTheme();
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
+
+@*
+
 
 <div class="page">
     <div class="sidebar">
@@ -17,7 +49,4 @@
         </article>
     </main>
 </div>
-
-<MudThemeProvider/>
-<MudSnackbarProvider/>
-<MudDialogProvider />
+*@

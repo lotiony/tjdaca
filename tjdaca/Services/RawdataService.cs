@@ -69,7 +69,7 @@ namespace tjdaca.Services
             var gradeList = _dbContext.AcaSubject
                             .Where(s => s.Subject.Equals(subject))
                             .GroupBy(s => s.Grade)
-                            .OrderBy(g => g.Min(s => s.MIdx))
+                            .OrderBy(g => g.Min(s => s.SbjOrder))
                             .Select(g => g.Key).ToList();
 
             return gradeList;

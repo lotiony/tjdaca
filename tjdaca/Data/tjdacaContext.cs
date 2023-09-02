@@ -586,6 +586,10 @@ namespace tjdaca.Data
                     .IsRequired()
                     .HasMaxLength(200)
                     .HasColumnName("value");
+
+                entity.Property(e => e.SbjOrder)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("sbj_order");
             });
 
             modelBuilder.Entity<AcaTeachers>(entity =>

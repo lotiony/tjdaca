@@ -1,17 +1,112 @@
 ﻿@page "/"
 
-<PageTitle>특자단학원 수강생 관리자</PageTitle>
 
-<h1>특자단학원 수강생 관리자</h1>
 
-학생관리용 웹사이트입니다.
+<MudGrid Class="mt-8 align-center" Spacing="3">
+    <MudItem xs="3"></MudItem>
+    <MudItem xs="6">
+        <MudText Typo="Typo.h3" Class="pb-3">특자단 학원관리 매니저</MudText>
+        <MudPaper Class="d-flex justify-content-center pa-4" Elevation="25">
+            <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.OpenInNew" Href="/new" Target="_self" FullWidth="true" Style="background-color: yellowgreen; color: white; height: 80px; font-weight:900; font-size:18px;">
+                신규회원가입 페이지 바로가기
+            </MudButton>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="3"></MudItem>
+</MudGrid>
 
-<div>
-    <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.OpenInNew" Style="background-color: yellowgreen; color: white; width: 300px; height: 100px;" Href="/new" Target="_self">
-        신규회원가입 페이지
-    </MudButton>
-</div>
+<br />
 
-@*<SurveyPrompt Title="How is Blazor working for you?" />*@
 
-@*<Counter IncrementAmount="10" />*@
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h4">학생성적 / 통계</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+
+    <MudCardContent>
+        <MudGrid Spacing="2" Justify="Justify.FlexStart">
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Primary" Href="/search" StartIcon="@Icons.Material.Filled.AppRegistration">학생성적등록</MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Primary" Href="/statistics" StartIcon="@Icons.Material.Filled.ListAlt">성적현황</MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Primary" Href="/cliniqlist" StartIcon="@Icons.Material.Filled.AdsClick">클리닉대상자</MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Primary" Href="/studentreport" StartIcon="@Icons.Material.Filled.AppRegistration">개별학습분석</MudButton>
+            </MudItem>
+
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+<br />
+
+
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h4">상담일지 RawData</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+
+    <MudCardContent>
+        <MudGrid Spacing="2" Justify="Justify.FlexStart">
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/1" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">김태구 선생님</MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/2" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">조용진 선생님</MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/3" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">조성배 선생님</MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/4" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">김지홍 선생님</MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/5" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">강춘기 선생님</MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/6" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">송광재 선생님</MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/7" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">박대영 선생님</MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/8" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">김경지 선생님</MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/9" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">이경남 선생님</MudButton>
+            </MudItem>
+
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
+
+
+<br />
+
+
+<MudCard Elevation="25">
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h4">학생질문 / Q&A</MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+
+    <MudCardContent>
+        <MudGrid Spacing="2" Justify="Justify.FlexStart">
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Warning" Href="/questions" StartIcon="@Icons.Material.Filled.ChecklistRtl">학생질문목록</MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Warning" Href="/questions/i/0" StartIcon="@Icons.Material.Filled.AddCircle">새 질문 등록</MudButton>
+            </MudItem>
+
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
