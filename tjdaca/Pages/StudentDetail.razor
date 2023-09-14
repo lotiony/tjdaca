@@ -21,19 +21,19 @@
     <MudCardContent>
         <MudGrid Spacing="2">
                 <MudItem xs="6">
-                    <MudTextField @bind-Value="student.StuName" For="@(() => student.StuName)" Label="학생 이름" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.StuName" For="@(() => student.StuName)" Label="학생 이름" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="6">
-                    <MudTextField @bind-Value="student.StudentPhone" For="@(() => student.StudentPhone)" Label="학생 연락처" Variant="Variant.Text" Margin="Margin.Normal" Placeholder="01088886666 (숫자를 다 붙여 쓰시면 됩니다)"></MudTextField>
+                    <MudTextField @bind-Value="student.StudentPhone" For="@(() => student.StudentPhone)" Label="학생 연락처" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal" Placeholder="01088886666 (숫자를 다 붙여 쓰시면 됩니다)"></MudTextField>
                 </MudItem>
                 <MudItem xs="6">
-                    <MudTextField @bind-Value="student.Parent" For="@(() => student.Parent)" Label="학부모 이름" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.Parent" For="@(() => student.Parent)" Label="학부모 이름" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="6">
-                    <MudTextField @bind-Value="student.ParentPhone" For="@(() => student.ParentPhone)" Label="학부모 연락처" Variant="Variant.Text" Margin="Margin.Normal" Placeholder="01088886666 (숫자를 다 붙여 쓰시면 됩니다)"></MudTextField>
+                    <MudTextField @bind-Value="student.ParentPhone" For="@(() => student.ParentPhone)" Label="학부모 연락처" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal" Placeholder="01088886666 (숫자를 다 붙여 쓰시면 됩니다)"></MudTextField>
                 </MudItem>
                 <MudItem xs="3">
-                    <MudSelect @bind-Value="student.SchType" For="@(() => student.SchType)" Label="학교구분" Variant="Variant.Text" Margin="Margin.Normal">
+                    <MudSelect @bind-Value="student.SchType" For="@(() => student.SchType)" Label="학교구분" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                         @foreach (var type in schTypeList)
                         {
                             <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
@@ -41,10 +41,10 @@
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="6">
-                    <MudTextField @bind-Value="student.School" For="@(() => student.School)" Label="학교" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.School" For="@(() => student.School)" Label="학교" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="3">
-                    <MudSelect @bind-Value="student.SchGrade" For="@(() => student.SchGrade)" Label="학년" Variant="Variant.Text" Margin="Margin.Normal">
+                    <MudSelect @bind-Value="student.SchGrade" For="@(() => student.SchGrade)" Label="학년" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                         @foreach (var type in schGradeList)
                         {
                             <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
@@ -53,23 +53,23 @@
                 </MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField @bind-Value="student.Zipcode" For="@(() => student.Zipcode)" Label="우편번호" id="zipcode" Variant="Variant.Text" Margin="Margin.Normal" ReadOnly="true" onclick="@execDaumPostcode"></MudTextField>
+                    <MudTextField @bind-Value="student.Zipcode" For="@(() => student.Zipcode)" Label="우편번호" id="zipcode" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal" ReadOnly="true" onclick="@execDaumPostcode"></MudTextField>
                 </MudItem>
                 <MudItem xs="5">
-                    <MudTextField @bind-Value="student.Address1" For="@(() => student.Address1)" Label="도로명주소" id="roadAddress" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.Address1" For="@(() => student.Address1)" Label="도로명주소" id="roadAddress" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="5">
-                    <MudTextField @bind-Value="student.Address2" For="@(() => student.Address2)" Label="상세주소" id="detailAddress" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.Address2" For="@(() => student.Address2)" Label="상세주소" id="detailAddress" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
 
                 <MudItem xs="6">
-                    <MudTextField @bind-Value="student.HopeHighschool" Label="희망고등학교" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.HopeHighschool" Label="희망고등학교" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="6">
-                    <MudTextField @bind-Value="student.HopeUniversity" Label="희망대학교" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.HopeUniversity" Label="희망대학교" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="6">
-                    <MudSelect @bind-Value="student.CognitivePathway" For="@(() => student.CognitivePathway)" Label="학원 인지경로" Variant="Variant.Text" Margin="Margin.Normal">
+                    <MudSelect @bind-Value="student.CognitivePathway" For="@(() => student.CognitivePathway)" Label="학원 인지경로" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                         @foreach (var type in cognitivePathwayList)
                         {
                             <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
@@ -77,7 +77,7 @@
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="3">
-                    <MudSelect @bind-Value="student.Subject" For="@(() => student.Subject)" Label="수강희망과목" Variant="Variant.Text" Margin="Margin.Normal">
+                    <MudSelect @bind-Value="student.Subject" For="@(() => student.Subject)" Label="수강희망과목" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                         @foreach (var type in subjectList)
                         {
                             <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
@@ -85,7 +85,7 @@
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="3">
-                    <MudSelect @bind-Value="student.SubjectOption" For="@(() => student.SubjectOption)" Label="과정선택" Variant="Variant.Text" Margin="Margin.Normal">
+                    <MudSelect @bind-Value="student.SubjectOption" For="@(() => student.SubjectOption)" Label="과정선택" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                         @foreach (var type in schTypeList)
                         {
                             <MudSelectItem Value="@type.OptValue">@type.OptValue</MudSelectItem>
@@ -94,7 +94,7 @@
                 </MudItem>
 
                 <MudItem xs="6">
-                    <MudTextField @bind-Value="student.MathProgress" For="@(() => student.MathProgress)" Label="현재수학진도현황" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.MathProgress" For="@(() => student.MathProgress)" Label="현재수학진도현황" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="12">
                     <MudCheckBox @bind-Checked="@student.Agree" Label="개인정보수집 활용에 동의합니다." For="@(() => student.Agree)"></MudCheckBox>
@@ -110,7 +110,7 @@
                     <MudTextField @bind-Value="student.AcaOutdate" Label="학원퇴원일" InputType="InputType.Date" Format="yyyy-MM-dd" Margin="Margin.Normal" />
                 </MudItem>
                 <MudItem xs="4">
-                    <MudSelect @bind-Value="student.Teacher" Label="담당선생님" Variant="Variant.Text" Margin="Margin.Normal">
+                    <MudSelect @bind-Value="student.Teacher" Label="담당선생님" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                         @foreach (var type in teacherList)
                         {
                             <MudSelectItem Value="@type">@type</MudSelectItem>
@@ -121,26 +121,26 @@
                     <MudTextField @bind-Value="student.TestDate" Label="테스트날짜" InputType="InputType.Date" Format="yyyy-MM-dd" Margin="Margin.Normal" />
                 </MudItem>
                 <MudItem xs="3">
-                    <MudTextField @bind-Value="student.TestArea" Label="테스트범위" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.TestArea" Label="테스트범위" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="2">
-                    <MudTextField @bind-Value="student.TestScore" Label="점수" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.TestScore" Label="점수" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="4">
-                    <MudTextField @bind-Value="student.TestResult" Label="결과" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.TestResult" Label="결과" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="2">
-                    <MudTextField @bind-Value="student.Class" Label="상담실예정반배정" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.Class" Label="상담실예정반배정" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="10">
-                    <MudTextField @bind-Value="student.Etc1" Label="선생님의견" Variant="Variant.Text" MaxLength="500" Margin="Margin.Normal"></MudTextField>
+                    <MudTextField @bind-Value="student.Etc1" Label="선생님의견" Variant="MudBlazor.Variant.Text" MaxLength="500" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
 
             }
         </MudGrid>
         <br />
-        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Size="Size.Large" Color="Color.Info" StartIcon="@Icons.Material.Filled.Save">학생 정보 저장</MudButton>
-        <MudButton Variant="Variant.Filled" Size="Size.Small" OnClick="Cancel">취소</MudButton>
+        <MudButton ButtonType="MudBlazor.ButtonType.Submit" Variant="MudBlazor.Variant.Filled" Size="Size.Large" Color="Color.Info" StartIcon="@Icons.Material.Filled.Save">학생 정보 저장</MudButton>
+        <MudButton Variant="MudBlazor.Variant.Filled" Size="Size.Small" OnClick="Cancel">취소</MudButton>
     </MudCardContent>
 
     </EditForm>

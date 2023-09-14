@@ -21,8 +21,8 @@ else
     @if (isAdministrator)
     {
         <MudStack Justify="Justify.SpaceBetween" Row="true">
-            <MudButton Variant="Variant.Filled" IconSize="Size.Large" Color="Color.Success" OnClick="AddStudent">신규학생 등록</MudButton>
-            <MudButton Disabled="@_processing" OnClick="DownloadExcel" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download">
+            <MudButton Variant="MudBlazor.Variant.Filled" IconSize="Size.Large" Color="Color.Success" OnClick="AddStudent">신규학생 등록</MudButton>
+            <MudButton Disabled="@_processing" OnClick="DownloadExcel" Variant="MudBlazor.Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download">
                 @if (_processing)
                 {
                     <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />

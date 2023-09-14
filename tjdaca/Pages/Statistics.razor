@@ -23,7 +23,7 @@
     <MudCardContent>
         <MudGrid Spacing="2" Justify="Justify.Center">
             <MudItem xs="3">
-                <MudSelect T="string" @bind-Value="_schTeacher" Label="강사명" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" Margin="Margin.Normal">
+                <MudSelect T="string" @bind-Value="_schTeacher" Label="강사명" Variant="MudBlazor.Variant.Outlined" AnchorOrigin="Origin.BottomCenter" Margin="Margin.Normal">
                     <MudSelectItem Value="@("0")">전체</MudSelectItem>
                     @foreach (var type in teacherList)
                     {
@@ -33,14 +33,14 @@
 
             </MudItem>
             <MudItem xs="2">
-                <MudSelect T="string" @bind-Value="_schSchType" Label="학교구분" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect T="string" @bind-Value="_schSchType" Label="학교구분" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                     <MudSelectItem Value="@("0")">전체</MudSelectItem>
                     <MudSelectItem Value="@("중등")">중등</MudSelectItem>
                     <MudSelectItem Value="@("고등")">고등</MudSelectItem>
                 </MudSelect>
             </MudItem>
             <MudItem xs="2">
-                <MudSelect T="string" @bind-Value="_schSchGrade" Label="학년" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect T="string" @bind-Value="_schSchGrade" Label="학년" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                     <MudSelectItem Value="@("0")">전체</MudSelectItem>
                     <MudSelectItem Value="@("1")">1학년</MudSelectItem>
                     <MudSelectItem Value="@("2")">2학년</MudSelectItem>
@@ -48,10 +48,10 @@
                 </MudSelect>
             </MudItem>
             <MudItem xs="3">
-                <MudTextField @bind-Value="_schName" Label="학생이름" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
+                <MudTextField @bind-Value="_schName" Label="학생이름" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
             </MudItem>
             <MudItem xs="2">
-                @*<MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="GetStudentList" Size="Size.Large">검색</MudButton>*@
+                @*<MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Success" OnClick="GetStudentList" Size="Size.Large">검색</MudButton>*@
             </MudItem>
 
         </MudGrid>
@@ -70,7 +70,7 @@
         <MudStack Justify="Justify.SpaceBetween" Row="true">
             <MudText Class="mud-secondary-text">
             </MudText>
-            <MudButton Disabled="@_processing" OnClick="DownloadExcel" Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download">
+            <MudButton Disabled="@_processing" OnClick="DownloadExcel" Variant="MudBlazor.Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download">
                 @if (_processing)
                 {
                     <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />

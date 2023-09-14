@@ -14,8 +14,8 @@
 
 
 <MudStack Justify="Justify.SpaceBetween" Row="true">
-    <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddRawdata"> 상담일지 등록</MudButton>
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="DownloadExcel"  StartIcon="@Icons.Material.Filled.Download"> Excel 다운로드</MudButton>
+    <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Success" OnClick="AddRawdata"> 상담일지 등록</MudButton>
+    <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Primary" OnClick="DownloadExcel"  StartIcon="@Icons.Material.Filled.Download"> Excel 다운로드</MudButton>
 </MudStack>
 
 <MudTable Elevation="25" Dense="true" Striped="true" Items="GetRawdataList()" Filter="new Func<AcaRawdata, bool>(Search)" RowsPerPage="20" HorizontalScrollbar="true" FixedHeader="true">

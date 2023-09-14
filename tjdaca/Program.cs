@@ -3,6 +3,8 @@ using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor.Services;
+using Radzen;
+using Radzen.Blazor;
 using tjdaca.Data;
 using tjdaca.Services;
 
@@ -13,6 +15,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddDatabaseContext();
 builder.Services.AddMudServices();
+builder.Services.AddRadzenComponents();
 //builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IOptionService, OptionService>();

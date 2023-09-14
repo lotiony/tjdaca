@@ -21,7 +21,7 @@
     <MudCardContent>
         <MudGrid Spacing="2" Justify="Justify.Center">
             <MudItem xs="1">
-                <MudSelect T="int" @bind-Value="schDays" Label="기간" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect T="int" @bind-Value="schDays" Label="기간" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                     <MudSelectItem Value="@(0)">직접선택</MudSelectItem>
                     <MudSelectItem Value="@(7)">7일</MudSelectItem>
                     <MudSelectItem Value="@(15)">15일</MudSelectItem>
@@ -32,7 +32,7 @@
             </MudItem>
 
             <MudItem xs="1">
-                <MudSelect T="string" @bind-Value="_schSchGrade" Label="학년" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect T="string" @bind-Value="_schSchGrade" Label="학년" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                     <MudSelectItem Value="@("0")">전체</MudSelectItem>
                     <MudSelectItem Value="@("초4")">초4</MudSelectItem>
                     <MudSelectItem Value="@("초5")">초5</MudSelectItem>
@@ -46,7 +46,7 @@
             </MudItem>
 
             <MudItem xs="2">
-                <MudSelect T="string" @bind-Value="_schTeacher" Label="강사명" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" Margin="Margin.Normal">
+                <MudSelect T="string" @bind-Value="_schTeacher" Label="강사명" Variant="MudBlazor.Variant.Outlined" AnchorOrigin="Origin.BottomCenter" Margin="Margin.Normal">
                     <MudSelectItem Value="@("0")">전체</MudSelectItem>
                     @foreach (var type in teacherList)
                     {
@@ -56,7 +56,7 @@
             </MudItem>
 
             <MudItem xs="2">
-                <MudSelect T="string" @bind-Value="_schScore" Label="일일테스트점수" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect T="string" @bind-Value="_schScore" Label="일일테스트점수" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                     <MudSelectItem Value="@("0")">전체</MudSelectItem>
                     <MudSelectItem Value="@("1")">100~90점</MudSelectItem>
                     <MudSelectItem Value="@("2")">90~80점</MudSelectItem>
@@ -66,7 +66,7 @@
             </MudItem>
 
             <MudItem xs="2">
-                <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="Search" Size="Size.Large">검색</MudButton>
+                <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Success" OnClick="Search" Size="Size.Large">검색</MudButton>
             </MudItem>
 
         </MudGrid>
@@ -85,7 +85,7 @@
 @*        <MudStack Justify="Justify.SpaceBetween" Row="true">
             <MudText Class="mud-secondary-text">
             </MudText>
-            <MudButton Variant="Variant.Filled" IconSize="Size.Large" Color="Color.Success" Disabled="true">엑셀 다운로드</MudButton>
+            <MudButton Variant="MudBlazor.Variant.Filled" IconSize="Size.Large" Color="Color.Success" Disabled="true">엑셀 다운로드</MudButton>
         </MudStack>
         <br />*@
         <MudTable Elevation="25" Dense="true" Striped="true" Items="@_cliniqList" Filter="new Func<StuCliniq, bool>(Filtering)" RowsPerPage="10" Virtualize="true">

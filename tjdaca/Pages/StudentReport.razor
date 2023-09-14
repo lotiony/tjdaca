@@ -28,7 +28,7 @@
         <MudText Typo="Typo.h6">학생 검색</MudText>
         <MudSpacer />
         <MudTextField @bind-Value="_schString" Placeholder="학생번호 또는 이름으로 검색하세요." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-        <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="Search" Size="Size.Large">검색</MudButton>
+        <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Success" OnClick="Search" Size="Size.Large">검색</MudButton>
     </ToolBarContent>
     <HeaderContent>
         <MudTh>학생번호</MudTh>
@@ -66,7 +66,7 @@
                 </MudPaper>
                 
                 <MudSpacer />
-                <MudSelect T="int" @bind-Value="setDataCount" Label="분석대상수업차수" Variant="Variant.Text" Margin="Margin.Normal" Style="width:200px;">
+                <MudSelect T="int" @bind-Value="setDataCount" Label="분석대상수업차수" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal" Style="width:200px;">
                     <MudSelectItem Value="@(10)">10일</MudSelectItem>
                     <MudSelectItem Value="@(20)">20일</MudSelectItem>
                     <MudSelectItem Value="@(30)">30일</MudSelectItem>
@@ -82,7 +82,20 @@
                     </MudPaper>
                 </MudPaper>
                 <br >
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@_series" XAxisLabels="@_xaxisLabels" Width="100%" Height="500px" ChartOptions="@_chartOption"></MudChart>
+                @*<MudChart ChartType="ChartType.Bar" ChartSeries="@_series" XAxisLabels="@_xaxisLabels" Width="100%" Height="500px" ChartOptions="@_chartOption"></MudChart>*@
+
+                <RadzenChart @ref="chart0">
+                    <RadzenColumnSeries Data="@radzenChartData" CategoryProperty="XaxisLabel" LineType="LineType.Dashed" ValueProperty="DataValue">
+                        <RadzenSeriesDataLabels Visible="true" />
+                    </RadzenColumnSeries>
+                    <RadzenLegend Visible="false" />
+                    <RadzenColumnOptions Radius="5" />
+                    <RadzenValueAxis>
+                        <RadzenGridLines Visible="true" />
+                        <RadzenAxisTitle Text="테스트단원" />
+                    </RadzenValueAxis>
+                </RadzenChart>
+
             </MudPaper>
 
 
@@ -150,40 +163,40 @@
                 <br>
                 <MudText Typo="Typo.subtitle1">중학교 성적</MudText>
                 <MudGrid Spacing="1">
-                    <MudItem xs="2"><MudField Label="1-1 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M111</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="1-1 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M112</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="1-1 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M113</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="1-2 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M121</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="1-2 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M122</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="1-2 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M123</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="2-1 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M211</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="2-1 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M212</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="2-1 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M213</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="2-2 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M221</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="2-2 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M222</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="2-2 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M223</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="3-1 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M311</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="3-1 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M312</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="3-1 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M313</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="3-2 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M321</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="3-2 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M322</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="3-2 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M323</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-1 중간" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M111</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-1 기말" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M112</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-1 종합" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M113</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-2 중간" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M121</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-2 기말" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M122</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-2 종합" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M123</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-1 중간" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M211</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-1 기말" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M212</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-1 종합" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M213</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-2 중간" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M221</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-2 기말" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M222</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-2 종합" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M223</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="3-1 중간" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M311</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="3-1 기말" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M312</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="3-1 종합" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M313</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="3-2 중간" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M321</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="3-2 기말" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M322</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="3-2 종합" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.M323</MudField></MudItem>
                 </MudGrid>
                 <br>
                 <MudText Typo="Typo.subtitle1">고등학교 성적</MudText>
                 <MudGrid Spacing="1">
-                    <MudItem xs="2"><MudField Label="1-1 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H111</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="1-1 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H112</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="1-1 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H113</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="1-2 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H121</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="1-2 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H122</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="1-2 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H123</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="2-1 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H211</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="2-1 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H212</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="2-1 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H213</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="2-2 중간" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H221</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="2-2 기말" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H222</MudField></MudItem>
-                    <MudItem xs="2"><MudField Label="2-2 종합" Variant="Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H223</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-1 중간" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H111</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-1 기말" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H112</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-1 종합" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H113</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-2 중간" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H121</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-2 기말" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H122</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="1-2 종합" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H123</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-1 중간" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H211</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-1 기말" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H212</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-1 종합" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H213</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-2 중간" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H221</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-2 기말" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H222</MudField></MudItem>
+                    <MudItem xs="2"><MudField Label="2-2 종합" Variant="MudBlazor.Variant.Outlined" Margin="Margin.Dense">@_schoolScore.H223</MudField></MudItem>
                 </MudGrid>
 
             </MudPaper>

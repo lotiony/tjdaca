@@ -366,7 +366,7 @@ namespace tjdaca.Pages
         private List<string> GetClassGradeList()
         {
             List<string> rtn = new List<string>();
-            string[] g1 = new string[] { "초4", "초5", "초6", "중1", "중2", "중3", "고1", "고2", "고3" };
+            string[] g1 = new string[] { "초3", "초4", "초5", "초6", "중1", "중2", "중3", "고1", "고2", "고3" };
             foreach (string g in g1)
             {
                 rtn.Add($"{g}-1");

@@ -14,7 +14,7 @@
 
 <h3>자기주도학습Q&A</h3>
 
-<MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="AddQuestion"> 등록</MudButton>
+<MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Success" OnClick="AddQuestion"> 등록</MudButton>
 
 <MudTable Elevation="25" Items="GetQuestionList()" Filter="new Func<AcaQuestions, bool>(Search)" RowsPerPage="20" HorizontalScrollbar="true" FixedHeader="true">
     <ToolBarContent>

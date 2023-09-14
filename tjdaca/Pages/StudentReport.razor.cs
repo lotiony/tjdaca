@@ -11,6 +11,7 @@ using tjdaca.Class;
 using System.ComponentModel.DataAnnotations;
 using tjdaca.Services;
 using tjdaca.Models;
+using Radzen.Blazor;
 
 namespace tjdaca.Pages
 {
@@ -33,6 +34,8 @@ namespace tjdaca.Pages
         private List<ChartSeries> _series = new List<ChartSeries>();
         private string[] _xaxisLabels;
         private ChartOptions _chartOption;
+        RadzenChart chart0;
+        public List<ReportChartData> radzenChartData = new List<ReportChartData>();
 
         #region ss 
         private AcaStudents _ss; // selectedStudent
@@ -130,27 +133,45 @@ namespace tjdaca.Pages
 
 
                 /// 차트용 데이터
-                _series.Clear();
-                double[] _chartData = new double[_setDataCount];
-                _xaxisLabels = new string[_setDataCount];
+                //_series.Clear();
+                //double[] _chartData = new double[_setDataCount];
+                //_xaxisLabels = new string[_setDataCount];
 
-                for (int i = 0; i < _setDataCount; i++)
+                //for (int i = 0; i < _setDataCount; i++)
+                //{
+                //    _xaxisLabels[i] = string.Empty;
+                //    if (_dailyList.Count >= (i+1))
+                //    {
+                //        _chartData[i] = Convert.ToDouble(_dailyList[i]?.DailyScore ?? 0);
+                //        _xaxisLabels[i] = _dailyList[i]?.TestSubject ?? "";
+                //    }
+                //}
+                //ChartSeries chartSeries = new ChartSeries()
+                //{
+                //    Name = "일일테스트점수",
+                //    Data = _chartData
+                //};
+                //_series.Add(chartSeries);
+
+                radzenChartData = new List<ReportChartData>();
+                if (chart0 != null) chart0.Reload();
+
+                InvokeAsync(async () =>
                 {
-                    _xaxisLabels[i] = string.Empty;
-                    if (_dailyList.Count >= (i+1))
+
+                    for (int i = 0; i < _setDataCount; i++)
                     {
-                        _chartData[i] = Convert.ToDouble(_dailyList[i]?.DailyScore ?? 0);
-                        _xaxisLabels[i] = _dailyList[i]?.TestSubject ?? "";
+                        if (_dailyList.Count >= (i + 1))
+                        {
+                            ReportChartData d = new ReportChartData() { XaxisLabel = $"{(i + 1)}.{_dailyList[i]?.TestSubject ?? ""}", DataValue = Convert.ToDouble(_dailyList[i]?.DailyScore ?? 0) };
+                            radzenChartData.Add(d);
+                        }
                     }
-                }
-                ChartSeries chartSeries = new ChartSeries()
-                {
-                    Name = "일일테스트점수",
-                    Data = _chartData
-                };
-                _series.Add(chartSeries);
 
-                
+                    radzenChartData = radzenChartData.ToList();
+
+                    if (chart0 != null) await chart0.Reload();
+                });
             }
             else
             {

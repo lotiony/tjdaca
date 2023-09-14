@@ -15,11 +15,11 @@
         </CardHeaderContent>
     </MudCardHeader>
     <MudCardContent>
-        <MudTextField @bind-Value="option.OptType" Label="옵션구분" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-        <MudTextField @bind-Value="option.OptValue" Label="옵션값" Variant="Variant.Text" Margin="Margin.Normal"></MudTextField>
-        <MudNumericField @bind-Value="option.OptOrder" Label="정렬순서" Variant="Variant.Text" Margin="Margin.Normal"></MudNumericField>
+        <MudTextField @bind-Value="option.OptType" Label="옵션구분" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
+        <MudTextField @bind-Value="option.OptValue" Label="옵션값" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
+        <MudNumericField @bind-Value="option.OptOrder" Label="정렬순서" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudNumericField>
         <br />
-        <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="Save">저장</MudButton>
+        <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Success" OnClick="Save">저장</MudButton>
     </MudCardContent>
 </MudCard>
 <br />

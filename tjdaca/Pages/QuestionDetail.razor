@@ -20,7 +20,7 @@
             </MudItem>
 
             <MudItem xs="2">
-                <MudSelect @bind-Value="selectedTeacher" T="AcaTeachers" Label="담당선생님" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect @bind-Value="selectedTeacher" T="AcaTeachers" Label="담당선생님" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in teacherList)
                     {
                         <MudSelectItem Value="@type">@type.TName</MudSelectItem>
@@ -28,7 +28,7 @@
                 </MudSelect>
             </MudItem>
             <MudItem xs="2">
-                <MudSelect @bind-Value="selectedStudent" Label="학생이름" Variant="Variant.Text" Margin="Margin.Normal">
+                <MudSelect @bind-Value="selectedStudent" Label="학생이름" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal">
                     @foreach (var type in studentList)
                     {
                         <MudSelectItem Value="@type">@type.StuName</MudSelectItem>
@@ -44,8 +44,8 @@
 
         </MudGrid>
         <br />
-        <MudButton Variant="Variant.Filled" Color="Color.Info" StartIcon="@Icons.Material.Filled.Save" OnClick="Save">학생 질문 저장</MudButton>
-        <MudButton Variant="Variant.Filled" Size="Size.Small" OnClick="Cancel">취소</MudButton>
+        <MudButton Variant="MudBlazor.Variant.Filled" Color="Color.Info" StartIcon="@Icons.Material.Filled.Save" OnClick="Save">학생 질문 저장</MudButton>
+        <MudButton Variant="MudBlazor.Variant.Filled" Size="Size.Small" OnClick="Cancel">취소</MudButton>
     </MudCardContent>
 </MudCard>
 
