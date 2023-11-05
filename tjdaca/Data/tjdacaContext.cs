@@ -27,6 +27,8 @@ namespace tjdaca.Data
         public virtual DbSet<AcaStudents> AcaStudents { get; set; }
         public virtual DbSet<AcaSubject> AcaSubject { get; set; }
         public virtual DbSet<AcaTeachers> AcaTeachers { get; set; }
+        public virtual DbSet<AcaMembers> AcaMembers { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -611,6 +613,43 @@ namespace tjdaca.Data
                 entity.Property(e => e.TName)
                     .HasMaxLength(20)
                     .HasColumnName("t_name");
+            });
+
+            modelBuilder.Entity<AcaMembers>(entity =>
+            {
+                entity.HasKey(e => e.MemIdx)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("aca_members");
+
+                entity.Property(e => e.MemIdx)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("mem_idx");
+
+                entity.Property(e => e.Regdate)
+                    .HasColumnType("datetime")
+                    .HasColumnName("regdate")
+                    .HasDefaultValueSql("current_timestamp()");
+
+                entity.Property(e => e.UserId)
+                    .HasMaxLength(50)
+                    .HasColumnName("user_id");
+
+                entity.Property(e => e.UserPw)
+                    .HasMaxLength(200)
+                    .HasColumnName("user_pw");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.Level)
+                    .HasColumnType("tinyint(4)")
+                    .HasColumnName("level");
+
+                entity.Property(e => e.UseYn)
+                    .HasColumnType("bit(1)")
+                    .HasColumnName("use_yn");
             });
 
             OnModelCreatingPartial(modelBuilder);

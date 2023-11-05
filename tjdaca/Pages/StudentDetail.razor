@@ -117,10 +117,10 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem xs="3">
+                <MudItem xs="2">
                     <MudTextField @bind-Value="student.TestDate" Label="테스트날짜" InputType="InputType.Date" Format="yyyy-MM-dd" Margin="Margin.Normal" />
                 </MudItem>
-                <MudItem xs="3">
+                <MudItem xs="2">
                     <MudTextField @bind-Value="student.TestArea" Label="테스트범위" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
                 <MudItem xs="2">
@@ -132,8 +132,8 @@
                 <MudItem xs="2">
                     <MudTextField @bind-Value="student.Class" Label="상담실예정반배정" Variant="MudBlazor.Variant.Text" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
-                <MudItem xs="10">
-                    <MudTextField @bind-Value="student.Etc1" Label="선생님의견" Variant="MudBlazor.Variant.Text" MaxLength="500" Margin="Margin.Normal"></MudTextField>
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="student.Etc1" Label="선생님의견" Variant="MudBlazor.Variant.Text" MaxLength="500" Lines="5" Margin="Margin.Normal"></MudTextField>
                 </MudItem>
 
             }
