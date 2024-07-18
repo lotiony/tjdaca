@@ -47,6 +47,12 @@ namespace tjdaca.Services
         {
             return _dbContext.AcaTeachers.Select(x=> x.TName).ToList();
         }
-     
+
+        public List<AcaTeachers> GetTeachersList()
+        {
+            return _dbContext.AcaTeachers.OrderBy(x => x.TIdx).ToList();
+        }
+
+
     }
 }

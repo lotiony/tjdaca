@@ -1,6 +1,6 @@
 ﻿@page "/"
-
-
+@using tjdaca.Services
+@inject tjdaca.Services.IOptionService optionService
 
 <MudGrid Class="mt-8 align-center" Spacing="3">
     <MudItem xs="3"></MudItem>
@@ -55,39 +55,13 @@
 
     <MudCardContent>
         <MudGrid Spacing="2" Justify="Justify.FlexStart">
-            <MudItem xs="2">
-                <MudButton Variant="MudBlazor.Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/1" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">김태구 선생님</MudButton>
-            </MudItem>
-            <MudItem xs="2">
-                <MudButton Variant="MudBlazor.Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/2" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">조용진 선생님</MudButton>
-            </MudItem>
-            <MudItem xs="2">
-                <MudButton Variant="MudBlazor.Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/3" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">조성배 선생님</MudButton>
-            </MudItem>
-            <MudItem xs="2">
-                <MudButton Variant="MudBlazor.Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/4" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">김지홍 선생님</MudButton>
-            </MudItem>
-            <MudItem xs="2">
-                <MudButton Variant="MudBlazor.Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/5" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">강춘기 선생님</MudButton>
-            </MudItem>
-            <MudItem xs="2">
-                <MudButton Variant="MudBlazor.Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/6" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">송광재 선생님</MudButton>
-            </MudItem>
-            <MudItem xs="2">
-                <MudButton Variant="MudBlazor.Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/7" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">박대영 선생님</MudButton>
-            </MudItem>
-            <MudItem xs="2">
-                <MudButton Variant="MudBlazor.Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/8" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">김경지 선생님</MudButton>
-            </MudItem>
-            <MudItem xs="2">
-                <MudButton Variant="MudBlazor.Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/9" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">이경남 선생님</MudButton>
-            </MudItem>
-            <MudItem xs="2">
-                <MudButton Variant="MudBlazor.Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/10" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">이규영 선생님</MudButton>
-            </MudItem>
-            <MudItem xs="2">
-                <MudButton Variant="MudBlazor.Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href="/rawdata/11" StartIcon="@Icons.Material.Filled.SupervisedUserCircle">김형일 선생님</MudButton>
-            </MudItem>
+            @foreach(var teacher in _teacherList)
+            {
+                <MudItem xs="2">
+                    <MudButton Variant="MudBlazor.Variant.Filled" FullWidth="true" Style="height:150px;" Color="Color.Tertiary" Href=@($"/rawdata/{teacher.TIdx}") StartIcon="@Icons.Material.Filled.SupervisedUserCircle">@teacher.TName 선생님</MudButton>
+                </MudItem>
+            }
+          
 
         </MudGrid>
     </MudCardContent>
@@ -116,3 +90,18 @@
         </MudGrid>
     </MudCardContent>
 </MudCard>
+
+
+
+@code {
+
+    List<AcaTeachers> _teacherList = new List<AcaTeachers>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _teacherList = optionService.GetTeachersList();
+    }
+
+
+    
+}

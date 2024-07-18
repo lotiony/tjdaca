@@ -6,6 +6,7 @@ namespace tjdaca.Services
     {
         List<AcaOptions> GetOptions();
         List<string> GetTeachers();
+        List<AcaTeachers> GetTeachersList();
         List<AcaOptions> GetOptions(string optType);
         AcaOptions GetOptionById(int id);
         void SaveOption(AcaOptions option);

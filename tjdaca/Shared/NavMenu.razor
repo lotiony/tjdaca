@@ -1,4 +1,5 @@
-﻿
+﻿@inject tjdaca.Services.IOptionService optionService
+
 <MudPaper Width="250px" Class="pa-3 sidebar" Elevation="0">
     <MudNavMenu Class="mud-width-full" Dense="true" Color="Color.Success" Bordered="true">
 
@@ -14,10 +15,15 @@
         </MudNavGroup>
 
         <MudNavGroup Title="상담일지 RawData" Icon="@Icons.Material.Filled.Assignment" Expanded="true">
-            <MudNavLink Href="/rawdata/1" Icon="@Icons.Material.Filled.SupervisedUserCircle">김태구 선생님</MudNavLink>
+            @foreach (var teacher in _teacherList)
+            {
+                <MudNavLink Href=@($"/rawdata/{teacher.TIdx}") Icon="@Icons.Material.Filled.SupervisedUserCircle">@teacher.TName 선생님</MudNavLink>
+            }
+
+@*             
             <MudNavLink Href="/rawdata/2" Icon="@Icons.Material.Filled.SupervisedUserCircle">조용진 선생님</MudNavLink>
-            <MudNavLink Href="/rawdata/3" Icon="@Icons.Material.Filled.SupervisedUserCircle">조성배 선생님</MudNavLink>
-            <MudNavLink Href="/rawdata/4" Icon="@Icons.Material.Filled.SupervisedUserCircle">김지홍 선생님</MudNavLink>
+            <MudNavLink Href="/rawdata/3" Icon="@Icons.Material.Filled.SupervisedUserCircle">박민경 선생님</MudNavLink>
+            <MudNavLink Href="/rawdata/4" Icon="@Icons.Material.Filled.SupervisedUserCircle">홍길동 선생님</MudNavLink>
             <MudNavLink Href="/rawdata/5" Icon="@Icons.Material.Filled.SupervisedUserCircle">강춘기 선생님</MudNavLink>
             <MudNavLink Href="/rawdata/6" Icon="@Icons.Material.Filled.SupervisedUserCircle">송광재 선생님</MudNavLink>
             <MudNavLink Href="/rawdata/7" Icon="@Icons.Material.Filled.SupervisedUserCircle">박대영 선생님</MudNavLink>
@@ -25,7 +31,7 @@
             <MudNavLink Href="/rawdata/9" Icon="@Icons.Material.Filled.SupervisedUserCircle">이경남 선생님</MudNavLink>
             <MudNavLink Href="/rawdata/10" Icon="@Icons.Material.Filled.SupervisedUserCircle">이규영 선생님</MudNavLink>
             <MudNavLink Href="/rawdata/11" Icon="@Icons.Material.Filled.SupervisedUserCircle">김형일 선생님</MudNavLink>
-        </MudNavGroup>
+ *@        </MudNavGroup>
 
         <MudNavGroup Title="학생질문 / Q&A" Icon="@Icons.Material.Filled.QuestionAnswer" Expanded="true">
             <MudNavLink Href="/questions" Icon="@Icons.Material.Filled.ChecklistRtl">학생질문목록</MudNavLink>
@@ -37,3 +43,17 @@
     </MudNavMenu>
 
 </MudPaper>
+
+
+@code {
+
+    List<AcaTeachers> _teacherList = new List<AcaTeachers>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _teacherList = optionService.GetTeachersList();
+    }
+
+
+
+}
